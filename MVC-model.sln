@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC-model", "MVC-model\MVC-model.csproj", "{77034F52-145C-4ABA-A93D-F742A420892C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC-model", "MVC-model\MVC-model.csproj", "{77034F52-145C-4ABA-A93D-F742A420892C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "Entity\Entity.csproj", "{31E83798-2A62-473E-83AE-313F7155528B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entity", "Entity\Entity.csproj", "{31E83798-2A62-473E-83AE-313F7155528B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{21632015-51CE-4FC5-8C40-8CB2189FA78E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{31E83798-2A62-473E-83AE-313F7155528B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31E83798-2A62-473E-83AE-313F7155528B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31E83798-2A62-473E-83AE-313F7155528B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21632015-51CE-4FC5-8C40-8CB2189FA78E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21632015-51CE-4FC5-8C40-8CB2189FA78E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21632015-51CE-4FC5-8C40-8CB2189FA78E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21632015-51CE-4FC5-8C40-8CB2189FA78E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
