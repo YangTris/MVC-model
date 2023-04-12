@@ -15,6 +15,5 @@ namespace Entity
         public int nem3 { get; set;}
         public int nem4 { get; set;}
         public int nem5 { get; set;}
-        public DateTime dayOfBirth { get; set; }
     }
 }
