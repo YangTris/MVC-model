@@ -10,9 +10,6 @@ namespace Entity
     {
         public int nem { get; set; }
         public int nem2 { get; set;}
-
-        public DateTime dateOfBirth { get; set; }
-        public string gmail { get; set; }
-        public string phoneNumber { get; set; }
+        public DateTime date { get; set; }
     }
 }
