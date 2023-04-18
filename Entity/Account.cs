@@ -11,7 +11,9 @@ namespace Entity
     {
         [Key]
         public string id { get; set; }
-        public string userName { get; set; }
-        public string password { get; set; }
+        public string billingAddress { get; set; }
+        public Boolean isClosed { get; set; }
+        public DateTime open { get;set; }
+        public DateTime closed { get;set; }
     }
 }
