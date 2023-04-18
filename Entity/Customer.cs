@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace Entity
 {
     public class Customer
-    { 
+    {
+        [Key] 
         public string id { get; set; }
         [Required, MaxLength(50)]
         public string fullName { get; set; }
