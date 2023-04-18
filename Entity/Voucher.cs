@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    internal class Class234
+    public class Voucher
     {
         public int nem { get; set; }
         public int nem2 { get; set;}
