@@ -15,5 +15,7 @@ namespace Entity
         public Boolean isClosed { get; set; }
         public DateTime open { get;set; }
         public DateTime closed { get;set; }
+        public string customerID { get; set; }
+        public string orderID { get; set; }
     }
 }
