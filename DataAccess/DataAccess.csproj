@@ -17,8 +17,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Entity\Entity.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migration\" />
-  </ItemGroup>
 </Project>
