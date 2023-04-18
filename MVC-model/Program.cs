@@ -1,7 +1,7 @@
-/*using DataAccess;
+using DataAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Service.Implementation;
+/*using Service.Implementation;
 using Service;*/
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 //    options.UseSqlServer(connectionString));
 //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-/*builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
@@ -20,7 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IEmployeeService, EmployeeService>();*/
+/*builder.Services.AddScoped<IEmployeeService, EmployeeService>();*/
 
 
 var app = builder.Build();
