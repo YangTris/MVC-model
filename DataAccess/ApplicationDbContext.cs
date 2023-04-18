@@ -16,6 +16,9 @@ namespace DataAccess
         public DbSet<Account> account { get; set; }
         public DbSet<Customer> customer { get; set; }
         public DbSet<Order> order { get; set; }
+        public DbSet<OrderLine> orderLine { get; set; }
         public DbSet<Product> product { get; set; }
+        public DbSet<Payment> payment { get; set; }
+        public DbSet<WebUser> webUser { get; set; }
     }
 }
