@@ -9,7 +9,7 @@ namespace Entity
 {
     public class Customer
     { 
-        public int Id { get; set; }
+        public string id { get; set; }
         [Required, MaxLength(50)]
         public string fullName { get; set; }
         public string? gender { get; set; }

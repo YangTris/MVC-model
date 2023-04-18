@@ -12,6 +12,6 @@ namespace Entity
         Hold,
         Shipped,
         Delivered,
-        Closed
+        Finished
     }
 }
