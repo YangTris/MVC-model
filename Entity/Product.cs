@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,8 @@ namespace Entity
 {
     public class Product
     {
-        public string id { get; set; }
+        [Key]
+        public string productID { get; set; }
         public int name { get; set; }
         public string brand { get; set; }
         public string description { get; set; }
