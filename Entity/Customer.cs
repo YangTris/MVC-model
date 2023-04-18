@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class DetailAccount
+    public class Customer
     { 
+        public int Id { get; set; }
         [Required, MaxLength(50)]
         public string fullName { get; set; }
         public string? gender { get; set; }

@@ -9,11 +9,11 @@ namespace Entity
 {
     public class Order
     {
-        [Key]
-        public string orderId { get; set; }
-        public string accountId { get; set; }
-        public string productID { get; set; }
-        public string productName { get; set; }
-        public int quantity { get; set; }
+        public string orderID { get; set; }
+        public DateTime ordered { get; set; }
+        public DateTime shipped { get; set; }
+        public string orderAddress { get; set; }
+        public OrderStatus status { get; set; }
+        public double totalPrice { get; set; }
     }
 }
