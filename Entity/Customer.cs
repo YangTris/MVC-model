@@ -8,7 +8,7 @@ namespace Entity
         public int id { get; set; }
         [Required, MaxLength(50)]
         public string fullName { get; set; }
-        public string? gender { get; set; }
+        public string? brand { get; set; }
         [Required]
         public string phoneNumber { get; set; }
         public string address { get; set; }

@@ -139,7 +139,7 @@ namespace DataAccess.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     fullName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     phoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     address = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
