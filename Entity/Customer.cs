@@ -5,7 +5,7 @@ namespace Entity
     public class Customer
     {
         [Key] 
-        public string id { get; set; }
+        public int id { get; set; }
         [Required, MaxLength(50)]
         public string fullName { get; set; }
         public string? gender { get; set; }

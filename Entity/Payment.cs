@@ -10,7 +10,7 @@ namespace Entity
     public class Payment
     {
         [Key]
-        public string paymentID { get; set; }
+        public int paymentID { get; set; }
         public DateTime paidDate { get; set; }
         public double totalPrice { get; set; }
         public string detail { get; set; }

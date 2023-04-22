@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Entity
+namespace MVC_model.Models
 {
-    public class Product
+    public class DetailProductViewModel
     {
         [Key]
         public int productID { get; set; }
