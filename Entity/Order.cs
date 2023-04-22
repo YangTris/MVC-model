@@ -10,7 +10,7 @@ namespace Entity
     public class Order
     {
         [Key]
-        public string orderID { get; set; }
+        public int orderID { get; set; }
         public DateTime ordered { get; set; }
         public DateTime shipped { get; set; }
         public string orderAddress { get; set; }

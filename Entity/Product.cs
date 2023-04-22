@@ -10,7 +10,7 @@ namespace Entity
     public class Product
     {
         [Key]
-        public string productID { get; set; }
+        public int productID { get; set; }
         public int name { get; set; }
         public string brand { get; set; }
         public string description { get; set; }

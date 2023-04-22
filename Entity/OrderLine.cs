@@ -10,9 +10,9 @@ namespace Entity
     public class OrderLine
     {
         [Key]
-        public string orderLineID {  get; set; }
-        public string orderID { get; set; }
-        public string productID { get; set; }
+        public int orderLineID {  get; set; }
+        public int orderID { get; set; }
+        public int productID { get; set; }
         public double price { get; set; }
         public int quantity { get; set; }
 

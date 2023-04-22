@@ -10,7 +10,7 @@ namespace Entity
     public class Account
     {
         [Key]
-        public string id { get; set; }
+        public int id { get; set; }
         public string billingAddress { get; set; }
         public Boolean isClosed { get; set; }
         public DateTime open { get;set; }
