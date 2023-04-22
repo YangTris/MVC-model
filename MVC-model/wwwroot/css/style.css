@@ -8975,7 +8975,6 @@
 }
 
 @keyframes hinge {
-
     0% {
         -webkit-transform: rotate(0);
         -moz-transform: rotate(0);
@@ -15815,7 +15814,7 @@ a.close.disabled {
     }
 }
 
-@media (min-width: 1200 px) {
+@media (min-width: 1200px) {
     .modal-xl {
         max-width: 1140px;
     }
@@ -25479,8 +25478,7 @@ dl {
     border-bottom: 1px solid #313452;
 }
 
-    .preview-list
-    .bordered .preview-item:last-child {
+    .preview-list.bordered .preview-item:last-child {
         border-bottom: 0;
     }
 
