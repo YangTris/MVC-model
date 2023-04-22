@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
 </head>
 <body>
-@*    <header>
+    <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DCT1205</a>
@@ -32,32 +32,56 @@
                 </div>
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    </header>*@
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - DCT1205 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    @*<nav class="navbar navbar-dark fixed-top bg-primary flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Duomly Dashboard</a>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <i class="fa-thin fa-cart-shopping"></i>
+            <partial name="_LoginPartial" />
         </div>
-    </footer>*@
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">Logout</a>
+            </li>
+        </ul>
+    </nav>*@
+    <nav class="navbar bg-body-tertiary bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="~/img/Dotabg.jpg" alt="logo" width="30" height="24">
+            </a>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <i class="fa-thin fa-cart-shopping"></i>
+            <partial name="_LoginPartial" />
+        </div>
+    </nav>
 
-    <div class="container-scroller">
+    @*<div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo"><img src="~/images/Paycompute2.gif" alt="logo" /></a>
+                <a class="navbar-brand brand-logo"><img src="~/img/Dotabg.jpg" alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <i class="fa-thin fa-cart-shopping"></i>
                 <partial name="_LoginPartial" />
             </div>
-        </nav>
+        </nav>*@
+
         <div class="container-fluid page-body-wrapper">
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                   
                     <div class="nav-item">
                         <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-users fa-lg text-primary" style="margin-right:0.7em"></i>
@@ -66,8 +90,8 @@
                         </a>
 
                         <ul class="dropdown-menu nav flex-column sub-menu" aria-labelledby="dropdownMenuLink">
-                            <li class="nav-item"><a class="nav-link" asp-controller="Product" asp-action="Create"> New Employee</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Product" asp-action="Index"> All Employees</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Employee" asp-action="Create"> New Employee</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Employee" asp-action="Index"> All Employees</a></li>
                         </ul>
                     </div>
 
@@ -83,22 +107,39 @@
                             <li class="nav-item"><a class="nav-link" asp-controller="Pay" asp-action="Index"> Payment Records</a></li>
                         </ul>
                     </div>
-                    
-
                 </ul>
             </nav>
+
             <div class="main-panel">
                 @*<partial name="_CookieConsentPartial" />*@
                 <div class="content-wrapper">
                     @RenderBody()
                 </div>
                 <footer class="footer">
-                    <p> &copy; @DateTime.UtcNow.Year - Paycompute - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
+                    <p> &copy; @DateTime.UtcNow.Year - MVC_model - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
                 </footer>
             </div>
         </div>
     </div>
+    
+    
 
+
+    <div class="content-wrapper">
+        @RenderBody()
+    </div>
+
+    @*<div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - MVC_model - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
