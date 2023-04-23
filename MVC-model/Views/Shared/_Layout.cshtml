@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/MVC_model.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" />
+    <link href="~/css/sidebars.css" rel="stylesheet">
 </head>
 <body>
     @*<header>
@@ -33,106 +34,92 @@
         </nav>
     </header>*@
 
-    @*<nav class="navbar navbar-dark fixed-top bg-primary flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Duomly Dashboard</a>
-        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            <i class="fa-thin fa-cart-shopping"></i>
-            <partial name="_LoginPartial" />
-        </div>
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Logout</a>
-            </li>
-        </ul>
-    </nav>*@
-    <nav class="navbar bg-body-tertiary bg-dark" data-bs-theme="dark">
+    <nav class="navbar bg-body-tertiary bg-info" data-bs-theme="info">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="~/img/Dotabg.jpg" alt="logo" width="30" height="24">
+                <img src="~/images/Dotabg.jpg" alt="logo" width="30" height="24">
             </a>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            <i class="fa-thin fa-cart-shopping"></i>
-            <partial name="_LoginPartial" />
-        </div>
-    </nav>
-
-    @*<div class="container-scroller">
-        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo"><img src="~/img/Dotabg.jpg" alt="logo" /></a>
-            </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+            <div class="navbar-menu-wrapper bg-info d-flex align-items-center justify-content-end">
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn btn-outline-success" type="submit"><i class="fa-thin fa-cart-shopping"></i></button>
                 </form>
+                <i class="bi bi-cart"></i>
                 <i class="fa-thin fa-cart-shopping"></i>
                 <partial name="_LoginPartial" />
             </div>
-        </nav>*@
+        </div>
+    </nav>
 
-        <div class="container-fluid page-body-wrapper">
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <ul class="nav">
-                    <div class="nav-item">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-users fa-lg text-primary" style="margin-right:0.7em"></i>
-                            <span class="menu-title">Employee</span>
-                            <i class="menu-arrow text-primary"></i>
-                        </a>
-
-                        <ul class="dropdown-menu nav flex-column sub-menu" aria-labelledby="dropdownMenuLink">
-                            <li class="nav-item"><a class="nav-link" asp-controller="Employee" asp-action="Create"> New Employee</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Employee" asp-action="Index"> All Employees</a></li>
+    <div class="container-fluid page-body-wrapper">
+        <div class="flex-shrink-0 p-3" style="width: 280px;  border-right: 1px solid #d3d3d3;">
+            <ul class="list-unstyled ps-0">
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                        Home
+                    </button>
+                    <div class="collapse show" id="home-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a></li>
                         </ul>
                     </div>
-
-                    <div class="nav-item">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-pound-sign fa-lg text-primary" style="margin-right:0.7em"></i>
-                            <span class="menu-title">Payroll</span>
-                            <i class="menu-arrow text-primary"></i>
-                        </a>
-
-                        <ul class="dropdown-menu nav flex-column sub-menu" aria-labelledby="dropdownMenuLink">
-                            <li class="nav-item"><a class="nav-link" asp-controller="Pay" asp-action="Create"> New Pay</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Pay" asp-action="Index"> Payment Records</a></li>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                        Dashboard
+                    </button>
+                    <div class="collapse" id="dashboard-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
                         </ul>
                     </div>
-                </ul>
-            </nav>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                        Orders
+                    </button>
+                    <div class="collapse" id="orders-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="border-top my-3"></li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">        
+                            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                            <strong>mdo</strong>
+                    </button>
+                    
+                    <div class="collapse" id="account-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
+                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
-            <div class="main-panel">
-                @*<partial name="_CookieConsentPartial" />*@
-                <div class="content-wrapper">
-                    @RenderBody()
-                </div>
-                <footer class="footer">
-                    <p> &copy; @DateTime.UtcNow.Year - MVC_model - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
-                </footer>
+        <div class="main-panel">
+            <div class="content-wrapper" style="background: white;">
+                @RenderBody()
             </div>
+            <footer class="footer" style="background: white;">
+                <p> &copy; @DateTime.UtcNow.Year - MVC_model - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
+            </footer>
         </div>
     </div>
-    
-    
-
-
-    <div class="content-wrapper">
-        @RenderBody()
-    </div>
-
-    @*<div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>*@
 
     
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

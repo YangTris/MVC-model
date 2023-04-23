@@ -20142,7 +20142,8 @@ a.text-dark:hover, a.text-dark:focus {
     color: #090a0e !important;
 }
 
-.text-body {
+.text-
+{
     color: #b1b1b5 !important;
 }
 
@@ -29254,7 +29255,7 @@ div.tagsinput {
     flex-direction: row;
     padding-left: 0;
     padding-right: 0;
-    padding-top: 64px;
+   /* padding-top: 64px;*/
 }
 
     .page-body-wrapper.full-page-wrapper {
@@ -29297,7 +29298,8 @@ div.tagsinput {
 /* Sidebar */
 .sidebar {
     min-height: calc(100vh - 64px);
-    background: #27293d;
+    /*background: #27293d;*/
+    background: #e6e6e6
     font-family: "Roboto", sans-serif;
     font-weight: 300;
     padding: 0;
