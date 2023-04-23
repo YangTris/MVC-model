@@ -76,7 +76,7 @@ namespace DataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("gender")
+                    b.Property<string>("brand")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("phoneNumber")
