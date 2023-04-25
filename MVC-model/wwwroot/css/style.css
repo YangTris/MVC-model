@@ -11168,15 +11168,15 @@ pre {
 .jsgrid .jsgrid-table .jsgrid-filter-row select, .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number], .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead,
 .tt-query,
 .tt-hint {
-    display: block;
+        display: block;
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
     padding: 0.875rem 1.375rem;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1;
-    color: #e9e6e6;
-    background-color: #2b2e4c;
+    color: #060606;
+    background-color: #ffffff;
     background-clip: padding-box;
     border: 1px solid #ced4da;
     border-radius: 2px;
@@ -11205,7 +11205,7 @@ pre {
 .tt-query:focus,
 .tt-hint:focus {
     color: #e9e6e6;
-    background-color: #2b2e4c;
+    background-color: #ededed;
     border-color: #80bdff;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
