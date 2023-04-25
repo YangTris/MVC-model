@@ -11,7 +11,7 @@ namespace Entity
     {
         [Key]
         public int productID { get; set; }
-        public string name { get; set; }
+        public string productName { get; set; }
         public string brand { get; set; }
         public int price { get; set; }
         public Category category { get; set; }

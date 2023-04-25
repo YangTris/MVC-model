@@ -11,7 +11,7 @@ namespace Entity
     {
         [Key]
         public int orderID { get; set; }
-        public string username { get; set; }
+        public string userName { get; set; }
         public DateTime created_date { get; set; }
         public Status status { get; set; }
         public double total { get; set; }
