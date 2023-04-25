@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-    public class OrderLine
+    public class OrderDetail
     {
         [Key]
-        public int orderLineID {  get; set; }
         public int orderID { get; set; }
         public int productID { get; set; }
-        public double price { get; set; }
         public int quantity { get; set; }
+        public double subTotal { get; set; }
 
     }
 }

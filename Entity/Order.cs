@@ -11,10 +11,10 @@ namespace Entity
     {
         [Key]
         public int orderID { get; set; }
-        public DateTime ordered { get; set; }
-        public DateTime shipped { get; set; }
-        public string orderAddress { get; set; }
-        public OrderStatus status { get; set; }
-        public double totalPrice { get; set; }
+        public string username { get; set; }
+        public DateTime created_date { get; set; }
+        public Status status { get; set; }
+        public double total { get; set; }
+        public string confirmed_by { get; set; }
     }
 }
