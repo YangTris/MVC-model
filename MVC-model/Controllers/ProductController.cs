@@ -23,11 +23,14 @@ namespace MVC_model.Controllers
                 productID = product.productID,
                 name = product.name,
                 brand = product.brand,
-                description = product.description,
                 price = product.price,
-                quantity = product.quantity,
+                category = product.category,
                 imgURL = product.imgURL,
-                inDate = product.inDate,
+                discountPercentage = product.discountPercentage,
+                created_at = product.created_at,
+                modified_at = product.modified_at,
+                deleted_at = product.deleted_at,
+                create_by = product.create_by,
             }).ToList();
             return View(model);
         }
@@ -48,10 +51,13 @@ namespace MVC_model.Controllers
                     productID=model.productID,
                     name = model.name,
                     brand = model.brand,
-                    description = model.description,
                     price = model.price,
-                    quantity = model.quantity,
-                    inDate = model.inDate,
+                    category = model.category,
+                    discountPercentage =model.discountPercentage,
+                    created_at = model.created_at,
+                    modified_at = model.modified_at,
+                    deleted_at = model.deleted_at,
+                    create_by = model.create_by,
                 };
                 if (model.imgURL != null && model.imgURL.Length > 0)
                 {
@@ -83,11 +89,14 @@ namespace MVC_model.Controllers
                 productID = product.productID,
                 name = product.name,
                 brand = product.brand,
-                description = product.description,
                 price = product.price,
-                quantity = product.quantity,
+                category = product.category,
                 imgURL = product.imgURL,
-                inDate = product.inDate,
+                discountPercentage = product.discountPercentage,
+                created_at = product.created_at,
+                modified_at = product.modified_at,
+                deleted_at = product.deleted_at,
+                create_by = product.create_by,
             };
             return View(model);
         }

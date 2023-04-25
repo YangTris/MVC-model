@@ -11,7 +11,7 @@ namespace MVC_model.Models
         public string brand { get; set; }
         public int price { get; set; }
         public Category category { get; set; }
-        public string imgURL { get; set; }
+        public IFormFile imgURL { get; set; }
         public int discountPercentage { get; set; }
         public DateTime created_at { get; set; }
         public DateTime modified_at { get; set; }
