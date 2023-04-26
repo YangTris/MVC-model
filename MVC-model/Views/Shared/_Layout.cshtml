@@ -14,7 +14,8 @@
 <body>
     <nav class="navbar bg-body-tertiary bg-info" data-bs-theme="info">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            @*<a class="navbar-brand" href="#">*@
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
                 <img src="~/images/Dotabg.jpg" alt="logo" width="30" height="24">
             </a>
             <div class="navbar-menu-wrapper bg-info d-flex align-items-center justify-content-end">
@@ -33,10 +34,32 @@
         <div class="flex-shrink-0 p-3" style="width: 280px;  border-right: 1px solid #d3d3d3;">
             <ul class="list-unstyled ps-0">
                 <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#product-collapse" aria-expanded="false">
+                        Product
+                    </button>
+                    <div class="collapse" id="product-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li class="nav-item"><a class="nav-link" asp-controller="Product" asp-action="Create"> New Product</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Product" asp-action="Index"> All Produt</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#payment-collapse" aria-expanded="false">
+                        Payment
+                    </button>
+                    <div class="collapse" id="payment-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li class="nav-item"><a class="nav-link" asp-controller="Payment" asp-action="Create"> New Employee</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="Payment" asp-action="Index"> All Employees</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
                         Home
                     </button>
-                    <div class="collapse show" id="home-collapse">
+                    <div class="collapse" id="home-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
                             <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a></li>

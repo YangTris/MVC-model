@@ -1,57 +1,44 @@
 ﻿@model CreateProductViewModel
 
 <div class="card">
-    <div class="card-body">
+    <div class="card-body" style="background: white">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-controller="Employee" asp-action="Index">All Employees</a></li>
-                <li class="breadcrumb-item active" aria-current="page">New Employee</li>
+                <li class="breadcrumb-item"><a asp-controller="Product" asp-action="Index">All Product</a></li>
+                <li class="breadcrumb-item active" aria-current="page">New Product</li>
             </ol>
         </nav>
         <div class="row">
             <form method="post" asp-action="Create" enctype="multipart/form-data">
 
                 <div class="col-md-12 table-responsive-md">
+                    
                     <div class="form-row">
+                        
+                        
                         <div class="col-2 form-group">
-                            <label asp-for="@Model.productID" class="form-label"></label>
+                            <label asp-for="@Model.productName" class="form-label"></label>
                         </div>
                         <div class="col-3 form-group">
-                            <input asp-for="@Model.productID" class="form-control"/>
-                            <span asp-validation-for="@Model.productID" class="text-danger"></span>
+                            <input asp-for="@Model.productName" class="form-control" />
+                            <span asp-validation-for="@Model.productName" class="text-danger"></span>
                         </div>
                         <div class="col-2 form-group"></div>
-                        <div class="col-2 form-group">
-                            <label asp-for="@Model.name" class="form-label"></label>
+                        
+                        <div class="col-2 form-group" ;>
+                            <label asp-for="@Model.brand" class="form-label text-transform: uppercase"></label>
                         </div>
-                        <div class="col-3 form-group">
-                            <input asp-for="@Model.name"class="form-control"/>
-                            <span asp-validation-for="@Model.name" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-2 form-group">
-                            <label asp-for="@Model.brand" class="form-label"></label>
-                        </div>
-                        <div class="form-check col-md-3">
+                        <div class="form-check col-md-3" text-transform: uppercase;>
                             <select class="form-control" asp-for="@Model.brand">
                                 <option>Male</option>
                                 <option>Female</option>
                             </select>
                             <span asp-validation-for="brand" class="text-danger"></span>
                         </div>
-                        <div class="col-2 form-group"></div>
-                        <div class="col-2 form-group">
-                            <label asp-for="@Model.inDate" class="form-label"></label>
-                        </div>
-                        <div class="col-3 form-group">
-                            <input asp-for="@Model.inDate" class="form-control" />
-                            <span asp-validation-for="@Model.inDate" class="text-danger"></span>
-                        </div>
                     </div>
 
                     <div class="form-row">
-                        <div class="col-2 form-group">
+                        <div class="col-2 form-group" text-transform: uppercase;>
                             <label asp-for="@Model.price" class="form-label"></label>
                         </div>
                         <div class="col-3 form-group">
@@ -60,15 +47,17 @@
                         </div>
                         <div class="col-2 form-group"></div>
                         <div class="col-2 form-group">
-                            <label asp-for="@Model.description" class="form-label"></label>
+                            <label asp-for="@Model.category" class="form-label"></label>
                         </div>
                         <div class="col-3 form-group">
-                            <input asp-for="@Model.description" class="form-control" />
-                            <span asp-validation-for="@Model.description" class="text-danger"></span>
+                            <input asp-for="@Model.category" class="form-control" />
+                            <span asp-validation-for="@Model.category" class="text-danger"></span>
                         </div>
+                        
                     </div>
-                    <div class="form-row">                   
-                        <div class="col-md-2"></div>
+
+                    <div class="form-row">
+                        @*<div class="col-md-2"></div>*@
                         <div class="form-group col-md-1">
                             <label asp-for="@Model.imgURL"></label>
                         </div>
@@ -78,6 +67,32 @@
                                 <input asp-for="@Model.imgURL" type="file" value="Upload" />
                                 <span asp-validation-for="@Model.imgURL" class="text-danger"></span>
                             </div>
+                        </div>
+                        <div class="col-2 form-group"></div>
+                        <div class="col-2 form-group">
+                            <label asp-for="@Model.discountPercentage" class="form-label"></label>
+                        </div>
+                        <div class="col-3 form-group">
+                            <input asp-for="@Model.discountPercentage" class="form-control" />
+                            <span asp-validation-for="@Model.discountPercentage" class="text-danger"></span>
+                        </div>
+                        
+                    </div>
+                    <div class="form-row">                   
+                        <div class="col-2 form-group">
+                            <label asp-for="@Model.created_at" class="form-label"></label>
+                        </div>
+                        <div class="col-3 form-group">
+                            <input asp-for="@Model.created_at" class="form-control" />
+                            <span asp-validation-for="@Model.created_at" class="text-danger"></span>
+                        </div>
+                        <div class="col-2 form-group"></div>
+                        <div class="col-2 form-group">
+                            <label asp-for="@Model.create_by" class="form-label"></label>
+                        </div>
+                        <div class="col-3 form-group">
+                            <input asp-for="@Model.create_by" class="form-control" />
+                            <span asp-validation-for="@Model.create_by" class="text-danger"></span>
                         </div>
                     </div>        
                     

@@ -4,6 +4,6 @@
     {
         Credit,
         Cash,
-        Check
+        Visa
     }
 }
