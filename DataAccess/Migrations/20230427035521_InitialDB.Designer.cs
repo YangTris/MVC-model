@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230426143356_fix_Entity")]
-    partial class fix_Entity
+    [Migration("20230427035521_InitialDB")]
+    partial class InitialDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,69 +24,6 @@ namespace DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Entity.Account", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<string>("billingAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("closed")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("customerID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isClosed")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("open")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("orderID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("account");
-                });
-
-            modelBuilder.Entity("Entity.Customer", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<string>("address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("brand")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("fullName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("phoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("customer");
-                });
 
             modelBuilder.Entity("Entity.Order", b =>
                 {
@@ -115,18 +52,15 @@ namespace DataAccess.Migrations
 
                     b.HasKey("orderID");
 
-                    b.ToTable("order");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("Entity.OrderDetail", b =>
                 {
-                    b.Property<int>("orderID")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("productID")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("orderID"));
-
-                    b.Property<int>("productID")
+                    b.Property<int>("orderID")
                         .HasColumnType("int");
 
                     b.Property<int>("quantity")
@@ -135,9 +69,11 @@ namespace DataAccess.Migrations
                     b.Property<double>("subTotal")
                         .HasColumnType("float");
 
-                    b.HasKey("orderID");
+                    b.HasKey("productID", "orderID");
 
-                    b.ToTable("orderLine");
+                    b.HasIndex("orderID");
+
+                    b.ToTable("OrderDetail");
                 });
 
             modelBuilder.Entity("Entity.Payment", b =>
@@ -165,7 +101,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("paymentID");
 
-                    b.ToTable("payment");
+                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("Entity.Product", b =>
@@ -212,24 +148,26 @@ namespace DataAccess.Migrations
 
                     b.HasKey("productID");
 
-                    b.ToTable("product");
+                    b.ToTable("Product");
                 });
 
-            modelBuilder.Entity("Entity.WebUser", b =>
+            modelBuilder.Entity("Entity.OrderDetail", b =>
                 {
-                    b.Property<string>("loginID")
-                        .HasColumnType("nvarchar(450)");
+                    b.HasOne("Entity.Order", "order")
+                        .WithMany()
+                        .HasForeignKey("orderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasOne("Entity.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("productID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("state")
-                        .HasColumnType("int");
+                    b.Navigation("order");
 
-                    b.HasKey("loginID");
-
-                    b.ToTable("webUser");
+                    b.Navigation("product");
                 });
 #pragma warning restore 612, 618
         }

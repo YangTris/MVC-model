@@ -34,24 +34,24 @@ namespace Service.Implementation
 
         public IEnumerable<Product> GetAll()
         {
-            return _context.product.ToList();
+            return _context.Product.ToList();
         }
 
         public Product GetById(int id)
         {
-            return _context.product.Where(x => x.productID == id).FirstOrDefault();
+            return _context.Product.Where(x => x.productID == id).FirstOrDefault();
         }
 
         public async Task UpdateAsSync(Product product)
         {
-            _context.product.Update(product);
+            _context.Product.Update(product);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateById(int id)
         {
             var product = GetById(id);
-            _context.product.Update(product);
+            _context.Product.Update(product);
             await _context.SaveChangesAsync();
         }
     }
