@@ -34,6 +34,7 @@ namespace MVC_model.Controllers
             }).ToList();
             return View(model);
         }
+
         [HttpGet]
         public IActionResult Create()
         {
