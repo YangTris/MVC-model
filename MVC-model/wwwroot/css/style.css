@@ -23486,7 +23486,8 @@ code {
         padding: .4375rem .75rem;
         border: 0;
         outline: 0;
-        color: #aaa7a7;
+        color: #060606;
+        border: 1px solid #313452;
     }
 
         select.form-control:focus, select.asColorPicker-input:focus, .dataTables_wrapper select:focus,

@@ -1,50 +1,50 @@
 ﻿@model IEnumerable<IndexProductViewModel>
 
 <div class="card">
-    <div class="card-body">
+    <div class="card-body" style="background: white">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">All Employees</li>
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">All Product</li>
             </ol>
         </nav>
         <div class="row">
             <div class="col-md-12 table-responsive-md">
-                <a class="btn btn-xs btn-outline-success float-md-right" asp-action="Create"> New Employee</a>
+                @*<a class="btn btn-xs btn-outline-success float-md-right" asp-action="Create"> New Employee</a>*@
             <table class="table table-strip table-dark">
                 <thead>
-                    <th>Employee No</th>
-                    <th>Full Name</th>
-                    <th>brand</th>
-                    <th>Date Joined</th>
-                    <th>Designation</th>
-                    <th>City</th>
+                    <th>Product Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Category</th>
                     <th>Image</th>
                     <th class="text-warning">Action</th>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <td>@item.productID</td>
-                        <td>@item.productName</td>
-                        <td>@item.brand</td>
-                        @*<td>@item.inDate.ToShortDateString()</td>*@
-                        <td>@item.price</td>
-                        @*<td>@item.quantity</td>*@
-                        <td>
-                            <img alt="image" src="@Url.Content(item.imgURL)" />
-                        </td>
-                        <td>
-                            <a class="text-primary" asp-action="Edit" asp-route-id="@item.productID">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a class="text-success" asp-action="Detail" asp-route-id="@item.productID">
-                                <i class="fas fa-bars"></i> Detail
-                            </a>
-                            <a class="text-danger" asp-action="Delete" asp-route-id="@item.productID">
-                                <i class="far fa-trash-alt"></i> Delete
-                            </a>
-                        </td>
+                        <tr>
+                            <td>@item.productName</td>
+                            <td>@item.brand</td>
+                            @*<td>@item.inDate.ToShortDateString()</td>*@
+                            <td>$@item.price</td>
+                            <td>@item.category</td>
+                            @*<td>@item.quantity</td>*@
+                            <td>
+                                <img alt="image" src="@Url.Content(item.imgURL)" />
+                            </td>
+                            <td>
+                                <a class="text-primary" asp-action="Edit" asp-route-id="@item.productID">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a class="text-success" asp-action="Detail" asp-route-id="@item.productID">
+                                    <i class="fas fa-bars"></i> Detail
+                                </a>
+                                <a class="text-danger" asp-action="Delete" asp-route-id="@item.productID">
+                                    <i class="far fa-trash-alt"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>

@@ -9,8 +9,8 @@ namespace Entity
     public enum Category
     {
         Shoes,
-        Shirts,
-        Pants,
-        Hats
+        Shirt,
+        Pant,
+        Hat
     }
 }
