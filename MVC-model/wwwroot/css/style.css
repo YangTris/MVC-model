@@ -17817,6 +17817,9 @@ button.bg-dark:focus {
 
 .mb-1,
 .my-1 {
+    background: transparent;
+    color: #fff;
+    padding: 10px 0;
     margin-bottom: 0.25rem !important;
 }
 
