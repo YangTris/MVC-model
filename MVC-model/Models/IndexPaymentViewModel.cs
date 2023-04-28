@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Entity;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Entity
+namespace MVC_model.Models
 {
-    public class Payment
+    public class IndexPaymentViewModel
     {
         [Key]
         public int paymentID { get; set; }
-        public int userID { get; set; }     
+        public int userID { get; set; }
         public PaymentMethod method { get; set; }
         public string nameOnCard { get; set; }
         public int cardNumber { get; set; }

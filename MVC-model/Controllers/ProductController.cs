@@ -55,10 +55,10 @@ namespace MVC_model.Controllers
                     price = model.price,
                     category = model.category,
                     discountPercentage =model.discountPercentage,
-                    created_at = model.created_at,
+                    /*created_at = model.created_at,
                     modified_at = model.modified_at,
                     deleted_at = model.deleted_at,
-                    create_by = model.create_by,
+                    create_by = model.create_by,*/
                 };
                 if (model.imgURL != null && model.imgURL.Length > 0)
                 {
@@ -94,10 +94,10 @@ namespace MVC_model.Controllers
                 category = product.category,
                 imgURL = product.imgURL,
                 discountPercentage = product.discountPercentage,
-                created_at = product.created_at,
+                /*created_at = product.created_at,
                 modified_at = product.modified_at,
                 deleted_at = product.deleted_at,
-                create_by = product.create_by,
+                create_by = product.create_by,*/
             };
             return View(model);
         }
