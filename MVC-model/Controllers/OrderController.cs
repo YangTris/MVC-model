@@ -8,11 +8,9 @@ namespace MVC_model.Controllers
     public class OrderController : Controller
     {
         private IOrderService _orderService;
-        private IWebHostEnvironment _webHostEnvironment;
-        public OrderController(IOrderService _orderService, IWebHostEnvironment webHostEnvironment)
+        public OrderController(IOrderService orderService)
         {
-            _orderService = _orderService;
-            _webHostEnvironment = webHostEnvironment;
+            _orderService = orderService;
         }
 
         [HttpGet]
@@ -42,15 +40,15 @@ namespace MVC_model.Controllers
         {
             if (ModelState.IsValid)
             {
-                var order = new Order 
-                { 
+                var order = new Order
+                {
                     orderID = model.orderID,
                     userName = model.userName,
                     created_date = model.created_date,
                     status = model.status,
                     total = model.total,
                     confirmed_by = model.confirmed_by,
-                };              
+                };
             }
             return View();
         }
