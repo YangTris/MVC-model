@@ -17,9 +17,9 @@ namespace Entity
         public Category category { get; set; }
         public string imgURL { get; set; }
         public int discountPercentage { get; set; }
-        public DateTime created_at { get; set; }
-        public DateTime modified_at { get; set; }
-        public DateTime deleted_at { get; set; }
-        public string create_by { get; set; }
+        //public DateTime created_at { get; set; }
+        //public DateTime modified_at { get; set; }
+        //public DateTime deleted_at { get; set; }
+        //public string create_by { get; set; }
     }
 }
