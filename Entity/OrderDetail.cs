@@ -10,14 +10,15 @@ namespace Entity
 {
     public class OrderDetail
     {
+        public int OrderDetailId { get; set; }
         [ForeignKey("Order")]
         public int orderID { get; set; }
         public Order? order { get; set; }
         [ForeignKey("Product")]
         public int productID { get; set; }
         public Product? product { get; set; }
-        public int quantity { get; set; }
-        public double subTotal { get; set; }
+        public int Quantity { get; set; }
+        public double UnitPrice { get; set; }
 
     }
 }

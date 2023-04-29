@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230429115233_fixDB")]
+    partial class fixDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,18 +81,22 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<decimal>("Total")
-                        .HasColumnType("money");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("paymentID")
+                    b.Property<string>("paymentID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("paymentID1")
                         .HasColumnType("int");
 
                     b.HasKey("orderID");
 
-                    b.HasIndex("paymentID");
+                    b.HasIndex("paymentID1");
 
                     b.ToTable("Order");
                 });
@@ -108,7 +115,7 @@ namespace DataAccess.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<double>("UnitPrice")
+                    b.Property<double?>("UnitPrice")
                         .HasColumnType("float");
 
                     b.HasKey("productID", "orderID");
@@ -323,15 +330,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2e0ee7d0-1af2-4a28-a374-8df1d7021a7b",
+                            ConcurrencyStamp = "a502daf5-9b88-4bf8-90f0-df3984391aa5",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPnu1MxKcBhN+nNoj0hzmr9mZ+posqSKp545iQ4RVlI/MIZK+RtyVfslDBDFCFywAg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELs3/Z3FzNCMuir/ar83Nh0GFpXINdXu5Zhdn1M6vllnQPWJE2E3+hc4+3tvVhYFpw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ca6b973c-97aa-4d9e-b527-1f0c280e116b",
+                            SecurityStamp = "ca8127ca-4e6a-45c4-af4c-49ec447b4a65",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin"
                         });
@@ -438,9 +445,7 @@ namespace DataAccess.Migrations
                 {
                     b.HasOne("Entity.Payment", "payment")
                         .WithMany()
-                        .HasForeignKey("paymentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("paymentID1");
 
                     b.Navigation("payment");
                 });
@@ -448,7 +453,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entity.OrderDetail", b =>
                 {
                     b.HasOne("Entity.Order", "order")
-                        .WithMany("OrderDetails")
+                        .WithMany()
                         .HasForeignKey("orderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -524,11 +529,6 @@ namespace DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Entity.Order", b =>
-                {
-                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }

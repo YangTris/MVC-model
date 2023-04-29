@@ -15,5 +15,6 @@ namespace Service
         Task UpdateAsSync(Order order);
         Task UpdateById(int id);
         Task DeleteAsSync(int id);
+        decimal Total(List<OrderDetail> orderDetails);
     }
 }

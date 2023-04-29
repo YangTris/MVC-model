@@ -19,11 +19,20 @@ namespace MVC_model.Controllers
             var model = _orderService.GetAll().Select(order => new IndexOrderViewModel
             {
                 orderID = order.orderID,
-                userName = order.userName,
-                created_date = order.created_date,
-                status = order.status,
-                total = order.total,
-                confirmed_by = order.confirmed_by,
+                OrderDate = order.OrderDate,
+                Username = order.Username,
+                FirstName = order.FirstName,
+                LastName = order.LastName,
+                Address = order.Address,
+                City = order.City,
+                State = order.State,
+                PostalCode = order.PostalCode,
+                Country = order.Country,
+                Phone = order.Phone,
+                Email = order.Email,
+                Total = order.Total,
+                paymentID = order.paymentID,
+                OrderDetails = order.OrderDetails,
             }).ToList();
             return View(model);
         }
@@ -43,11 +52,20 @@ namespace MVC_model.Controllers
                 var order = new Order
                 {
                     orderID = model.orderID,
-                    userName = model.userName,
-                    created_date = model.created_date,
-                    status = model.status,
-                    total = model.total,
-                    confirmed_by = model.confirmed_by,
+                    OrderDate = model.OrderDate,
+                    Username = model.Username,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Address = model.Address,
+                    City = model.City,
+                    State = model.State,
+                    PostalCode = model.PostalCode,
+                    Country = model.Country,
+                    Phone = model.Phone,
+                    Email = model.Email,
+                    Total = model.Total,
+                    paymentID = model.paymentID,
+                    OrderDetails = model.OrderDetails
                 };
             }
             return View();
@@ -63,11 +81,20 @@ namespace MVC_model.Controllers
             var model = new DetailOrderViewModel
             {
                 orderID = order.orderID,
-                userName = order.userName,
-                created_date = order.created_date,
-                status = order.status,
-                total = order.total,
-                confirmed_by = order.confirmed_by,
+                OrderDate = order.OrderDate,
+                Username = order.Username,
+                FirstName = order.FirstName,
+                LastName = order.LastName,
+                Address = order.Address,
+                City = order.City,
+                State = order.State,
+                PostalCode = order.PostalCode,
+                Country = order.Country,
+                Phone = order.Phone,
+                Email = order.Email,
+                Total = order.Total,
+                paymentID = order.paymentID,
+                OrderDetails = order.OrderDetails
             };
             return View(model);
         }

@@ -10,6 +10,7 @@ namespace Service.Implementation
 {
     public class OrderService : IOrderService
     {
+        private decimal total;
         private ApplicationDbContext _context;
         public OrderService(ApplicationDbContext context)
         {
@@ -53,6 +54,16 @@ namespace Service.Implementation
             var order = GetById(id);
             _context.Order.Update(order);
             await _context.SaveChangesAsync();
+        }
+
+        public decimal Total(List<OrderDetail> orderDetails)
+        {
+            double sum = 0;
+            foreach (var order in orderDetails)
+            {
+                sum += order.UnitPrice * order.Quantity;
+            }
+            return (decimal)sum;
         }
     }
 }
