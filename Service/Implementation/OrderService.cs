@@ -12,6 +12,7 @@ namespace Service.Implementation
     {
         private decimal total;
         private ApplicationDbContext _context;
+        private ProductService productService;
         public OrderService(ApplicationDbContext context)
         {
             _context = context;
@@ -59,9 +60,9 @@ namespace Service.Implementation
         public decimal Total(List<OrderDetail> orderDetails)
         {
             double sum = 0;
-            foreach (var order in orderDetails)
+            foreach (OrderDetail detail in orderDetails)
             {
-                sum += order.UnitPrice * order.Quantity;
+                sum += productService.GetById(detail.productID).price * detail.Quantity;
             }
             return (decimal)sum;
         }

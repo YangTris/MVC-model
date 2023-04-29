@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Entity
 {
     public class OrderDetail
-    {
+    {       
         public int OrderDetailId { get; set; }
         [ForeignKey("Order")]
         public int orderID { get; set; }
@@ -18,7 +18,5 @@ namespace Entity
         public int productID { get; set; }
         public Product? product { get; set; }
         public int Quantity { get; set; }
-        public double UnitPrice { get; set; }
-
     }
 }
