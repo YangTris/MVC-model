@@ -43,8 +43,8 @@ namespace MVC_model.Controllers
         {
             if (ModelState.IsValid)
             {
-                var payment = new Payment 
-                { 
+                var payment = new Payment
+                {
                     paymentID = model.paymentID,
                     userID = model.userID,
                     method = model.method,
@@ -53,6 +53,8 @@ namespace MVC_model.Controllers
                     expiration = model.expiration,
                     CVV = model.CVV,
                 };              
+                await _paymentService.CreateAsSync(payment);
+                return RedirectToAction("Index");
             }
             return View();
         }

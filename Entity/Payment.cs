@@ -11,6 +11,7 @@ namespace Entity
 {
     public class Payment
     {
+        [Key]
         public int paymentID { get; set; }
         [ForeignKey("IdentityUser")]
         public string userID { get; set; }
