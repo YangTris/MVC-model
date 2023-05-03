@@ -1,9 +1,12 @@
-﻿using Entity;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MVC_model.Models
+namespace Entity
 {
-    public class TransactionViewModel
+    public class Transaction
     {
         public string firstName { get; set; }
         public string lastName { get; set; }
@@ -21,6 +24,5 @@ namespace MVC_model.Models
         public System.DateTime DateCreated { get; set; }
         public int? ProductId { get; set; }
         public Product Product { get; set; }
-
     }
 }
