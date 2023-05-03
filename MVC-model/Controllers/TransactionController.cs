@@ -1,6 +1,6 @@
 ﻿namespace MVC_model.Controllers
 {
-    public class UserController 
+    public class TransactionController 
     {
         
     }

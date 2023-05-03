@@ -12,9 +12,9 @@ namespace Entity
     public class CartItem
     {
         [Key]
-        public string cartID { get; set; }
+        public int cartID { get; set; }
         [ForeignKey("IdentityUser")]
-        public string userID { get; set; }
+        public int userID { get; set; }
         public IdentityUser? user {  get; set; }
         public int Quantity { get; set; }
 
