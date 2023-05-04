@@ -1,4 +1,5 @@
 ﻿using Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MVC_model.Models;
@@ -6,17 +7,20 @@ using Service;
 
 namespace MVC_model.Controllers
 {
+    [Authorize]
     public class TransactionController : Controller
     {
         private readonly ICartService _cartService;
         private readonly IPaymentService _paymentService;
         private readonly IProductService _productService;
+        private readonly UserManager<IdentityUser> userManager;
 
-        public TransactionController(ICartService cartService, IPaymentService paymentService, IProductService productService)
+        public TransactionController(ICartService cartService, IPaymentService paymentService, IProductService productService, UserManager<IdentityUser> userManager)
         {
             _cartService = cartService;
             _paymentService = paymentService;
             _productService = productService;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
@@ -37,23 +41,29 @@ namespace MVC_model.Controllers
         {
             if (ModelState.IsValid)
             {
+                var user = await userManager.GetUserAsync(User);
                 var transaction = new Transaction
                 {
-                    firstName = model.firstName,
+                    userID = user.Id,
+                    firstName = model.firstName, 
                     lastName = model.lastName,
-                    userID = model.userID,
-                    email = model.email,
+                    /*userName = user.UserName,*/
+                    email = user.Email,
                     address = model.address,
+                
+                    /*ItemId = model.CartId,
+                    CartId = model.CartId,
+                    Quantity = model.Quantity,
+                    DateCreated = model.DateCreated,
+                    ProductId = model.ProductId,*/
+                };
+                var payment = new Payment
+                {
                     method = model.method,
                     nameOnCard = model.nameOnCard,
                     cardNumber = model.cardNumber,
                     expiration = model.expiration,
                     CVV = model.CVV,
-                    ItemId = model.CartId,
-                    CartId = model.CartId,
-                    Quantity = model.Quantity,
-                    DateCreated = model.DateCreated,
-                    ProductId = model.ProductId,
                 };
             }
             return View(model);

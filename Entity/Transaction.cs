@@ -8,6 +8,8 @@ namespace Entity
 {
     public class Transaction
     {
+        public string? userName;
+
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string userID { get; set; }
