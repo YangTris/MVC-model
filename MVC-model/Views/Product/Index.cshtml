@@ -1,4 +1,7 @@
-﻿@model IEnumerable<IndexProductViewModel>
+﻿@{
+    Layout = "_Layout";
+}
+@model IEnumerable<IndexProductViewModel>
 
 <div class="card">
     <div class="card-body" style="background: white">
@@ -13,12 +16,14 @@
                 @*<a class="btn btn-xs btn-outline-success float-md-right" asp-action="Create"> New Employee</a>*@
             <table class="table table-strip table-dark">
                 <thead>
-                    <th>Product Name</th>
-                    <th>Brand</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th>Image</th>
-                    <th class="text-warning">Action</th>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Image</th>
+                        <th class="text-warning">Action</th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)

@@ -1,15 +1,16 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
 }
 @model IEnumerable<IndexProductViewModel>
 
 <div class="container">
     <div class="row row-cols-1 row-cols-md-4 g-4">
-        @*@foreach (var item in Model)
+        @foreach (var item in Model)
         {
             <div class="col">
                 <div class="card h-100">
-                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">@item.discountPercentage</div>
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">@item.discountPercentage%</div>
                     <img alt="image" src="@Url.Content(item.imgURL)">
                     <div class="card-body p-4">
                         <div class="text-center">
@@ -27,7 +28,7 @@
                     </div>
                 </div>
             </div>
-        }*@
+        }
         <div class="col">
             <div class="card h-100">
                 <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">50%</div>

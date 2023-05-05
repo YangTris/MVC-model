@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<IndexPaymentViewModel>
 
+@{
+    Layout = "_Layout";
+}
+
 <div class="card">
     <div class="card-body" style="background: white">
         <nav aria-label="breadcrumb">
@@ -12,13 +16,16 @@
             <div class="col-md-12 table-responsive-md">
                 @*<a class="btn btn-xs btn-outline-success float-md-right" asp-action="Create"> New Employee</a>*@
                 <table class="table table-strip table-dark">
+                    
                     <thead>
-                    <th>Payment Id</th>
-                    <th>User Id</th>
-                    <th>Method</th>
-                    <th>Name on Card</th>
-                    <th>Card Number</th>
-                    <th class="text-warning">Action</th>
+                        <tr>
+                            <th>Payment Id</th>
+                            <th>User Id</th>
+                            <th>Method</th>
+                            <th>Name on Card</th>
+                            <th>Card Number</th>
+                            <th class="text-warning">Action</th>
+                        </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)

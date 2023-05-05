@@ -1,0 +1,96 @@
+﻿@{
+    Layout = null;
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/carousel.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+    <header class="p-3 text-bg-dark" style="background-color: #2b80ff !important;">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <img src="~/images/Dotabg.jpg" alt="logo" width="120" height="60">
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 text-white">Home</a></li>
+                    <li><a href="#carouselExampleInterval" class="nav-link px-2 text-white">Introduce</a></li>
+                    <li><a href="#about" class="nav-link px-2 text-white">About</a></li>
+                    <li><a href="#" class="nav-link px-2 text-white">Product</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li><a class="nav-link px-2 text-white" asp-controller="Home" asp-action="Index">Admin</a></li>
+                    }
+                </ul>
+                
+
+                <div class="text-end">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <button type="button" class="btn btn-outline-light me-2">
+                            @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>*@
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i></a>
+                        </button>
+                        
+                        <a class="btn btn-warning btn-outline-light me-2">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Home", "User", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-link text-dark"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i></button>
+                            </form>
+                        </a>
+                        @*<button type="submit" class="btn btn-warning btn-outline-light me-2">
+                            <a class="nav-link text-dark">
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Home", "User", new { area = "" })">
+                                    <i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i>
+                                </form>
+                            </a>
+                        </button>*@
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-outline-light me-2">
+                            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                        </button>
+                        <button type="button" class="btn btn-warning">
+                            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </button>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+
+        <footer class="container">
+            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                <p> &copy; @DateTime.UtcNow.Year - MVC_model - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
+                <ul class="list-unstyled d-flex">
+                    <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="fa-brands fa-facebook fa-xl" style="color: #000000;"></i></a></li>
+                    <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="fa-brands fa-github fa-xl" style="color: #000000;"></i></a></li>
+                    <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook" /></svg></a></li>
+                </ul>
+            </div>
+        </footer>
+    </main>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
