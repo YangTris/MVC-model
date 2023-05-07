@@ -129,5 +129,55 @@ namespace MVC_model.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id) {
+            var product = _productService.GetById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            var model = new EditProductViewModel
+            {
+                productID = product.productID,
+                productName = product.productName,
+                brand = product.brand,
+                price = product.price,
+                category = product.category,
+                discountPercentage = product.discountPercentage,
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit (EditProductViewModel model)
+        {
+            var product= _productService.GetById(model.productID);
+            if(product== null)
+            {
+                return NotFound();
+            }
+            product.productID = model.productID;
+            product.productName = model.productName;
+            product.brand = model.brand;
+            product.price = model.price;
+            product.category = model.category;
+            product.discountPercentage = model.discountPercentage;
+            if (model.imgURL != null && model.imgURL.Length > 0)
+            {
+
+                var uploadDir = @"images/products";
+                var fileName = Path.GetFileNameWithoutExtension(model.imgURL.FileName);
+                var extension = Path.GetExtension(model.imgURL.FileName);
+                var webRootPath = _webHostEnvironment.WebRootPath;
+                fileName = DateTime.UtcNow.ToString("yymmssfff") + fileName + extension;
+                var path = Path.Combine(webRootPath, uploadDir, fileName);
+                await model.imgURL.CopyToAsync(new FileStream(path, FileMode.Create));
+                product.imgURL = "/" + uploadDir + "/" + fileName;
+                await _productService.CreateAsSync(product);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
     }
 }
