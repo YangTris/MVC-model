@@ -14,7 +14,7 @@ namespace Entity
         [Key]
         public int cartID { get; set; }
         [ForeignKey("IdentityUser")]
-        public int userID { get; set; }
+        public string userId { get; set; }
         public IdentityUser? user {  get; set; }
         public int Quantity { get; set; }
 

@@ -39,10 +39,8 @@ namespace DataAccess.Migrations
                     b.Property<int>("productId")
                         .HasColumnType("int");
 
-                    b.Property<int>("userID")
-                        .HasColumnType("int");
-
                     b.Property<string>("userId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("cartID");
@@ -352,15 +350,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9c656f98-d128-47ec-9460-44d2b0d3cd1a",
+                            ConcurrencyStamp = "d8e0786d-d111-4664-9b5a-20296e8458b7",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELU09o+F5WqkbwF1CB/ZNiUFdeez1RzfSfMePK6Ou06D6kN7A6Zq2YGlEhD3MEK5EA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI7Fs7b4cnZzjSBLftJrEe1tCM+b7RT9sgRdXX+S7arRc8YEDj9oHUeT7J8IcBskxQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e03c3d3d-d43c-4824-9789-8908409c5c96",
+                            SecurityStamp = "97895c17-0fe1-434e-a66d-7c4053f18f31",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin"
                         });
@@ -473,7 +471,9 @@ namespace DataAccess.Migrations
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "user")
                         .WithMany()
-                        .HasForeignKey("userId");
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("product");
 

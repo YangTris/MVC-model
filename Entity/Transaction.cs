@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +11,14 @@ namespace Entity
 {
     public class Transaction
     {
+        [Key]
+        public int transactionId { get; set; }
         public string? userName;
-
+        [ForeignKey("IdentityUser")]
+        public string userID { get; set; }
+        public IdentityUser? user { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public string userID { get; set; }
         public string email { get; set; }
         public string address { get; set; }
         public PaymentMethod method { get; set; }

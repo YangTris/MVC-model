@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class updateDB : Migration
+    public partial class cart : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,8 +31,7 @@ namespace DataAccess.Migrations
                 {
                     cartID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    userID = table.Column<int>(type: "int", nullable: false),
-                    userId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    userId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     productId = table.Column<int>(type: "int", nullable: false)
@@ -44,7 +43,8 @@ namespace DataAccess.Migrations
                         name: "FK_CartItems_AspNetUsers_userId",
                         column: x => x.userId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CartItems_Product_productId",
                         column: x => x.productId,
@@ -58,7 +58,7 @@ namespace DataAccess.Migrations
                 keyColumn: "Id",
                 keyValue: "c28305c3-93f5-4490-ae59-05d0401bcee3",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "9c656f98-d128-47ec-9460-44d2b0d3cd1a", "AQAAAAIAAYagAAAAELU09o+F5WqkbwF1CB/ZNiUFdeez1RzfSfMePK6Ou06D6kN7A6Zq2YGlEhD3MEK5EA==", "e03c3d3d-d43c-4824-9789-8908409c5c96" });
+                values: new object[] { "d8e0786d-d111-4664-9b5a-20296e8458b7", "AQAAAAIAAYagAAAAEI7Fs7b4cnZzjSBLftJrEe1tCM+b7RT9sgRdXX+S7arRc8YEDj9oHUeT7J8IcBskxQ==", "97895c17-0fe1-434e-a66d-7c4053f18f31" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CartItems_productId",
