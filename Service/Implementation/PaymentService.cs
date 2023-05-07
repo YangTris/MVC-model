@@ -54,5 +54,9 @@ namespace Service.Implementation
             _context.Payment.Update(payment);
             await _context.SaveChangesAsync();
         }
+        public Payment GetByUserID(string userId)
+        {
+            return _context.Payment.Where(x => x.userID.Equals(userId)).FirstOrDefault();
+        }
     }
 }

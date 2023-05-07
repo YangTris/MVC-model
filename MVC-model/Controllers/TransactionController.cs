@@ -10,17 +10,19 @@ namespace MVC_model.Controllers
     [Authorize]
     public class TransactionController : Controller
     {
-        private readonly ICartService _cartService;
         private readonly IPaymentService _paymentService;
         private readonly IProductService _productService;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly ICartService _cartService;
+        private readonly IItemService _itemService;
 
-        public TransactionController(ICartService cartService, IPaymentService paymentService, IProductService productService, UserManager<IdentityUser> userManager)
+        public TransactionController(IPaymentService paymentService, IProductService productService, UserManager<IdentityUser> userManager, ICartService cartService, IItemService itemService)
         {
-            _cartService = cartService;
             _paymentService = paymentService;
             _productService = productService;
             this.userManager = userManager;
+            _cartService = cartService;
+            _itemService = itemService; 
         }
 
         public IActionResult Index()
@@ -41,30 +43,23 @@ namespace MVC_model.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await userManager.GetUserAsync(User);
                 var transaction = new Transaction
                 {
-                    userID = user.Id,
-                    firstName = model.firstName, 
+                    firstName = model.firstName,
                     lastName = model.lastName,
-                    /*userName = user.UserName,*/
-                    email = user.Email,
+                    userID = model.userID,
+                    email = model.email,
                     address = model.address,
+                    paymentID = _paymentService.GetByUserID(model.userID).paymentID,
+                    method = _paymentService.GetByUserID(model.userID).method,
+                    nameOnCard = _paymentService.GetByUserID(model.userID).nameOnCard,
+                    cardNumber = _paymentService.GetByUserID(model.userID).cardNumber,
+                    expiration = _paymentService.GetByUserID(model.userID).expiration,
+                    CVV = _paymentService.GetByUserID(model.userID).CVV,
+                    CartId = _cartService.GetByUserId(model.userID).shoppingCartID,
+                    items = _itemService.GetCart(_cartService.GetByUserId(model.userID).shoppingCartID),
+                };
                 
-                    /*ItemId = model.CartId,
-                    CartId = model.CartId,
-                    Quantity = model.Quantity,
-                    DateCreated = model.DateCreated,
-                    ProductId = model.ProductId,*/
-                };
-                var payment = new Payment
-                {
-                    method = model.method,
-                    nameOnCard = model.nameOnCard,
-                    cardNumber = model.cardNumber,
-                    expiration = model.expiration,
-                    CVV = model.CVV,
-                };
             }
             return View(model);
         }

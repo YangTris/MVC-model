@@ -20,15 +20,15 @@ namespace DataAccess
         public DbSet<OrderDetail> OrderDetail { get; set; }
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Product> Product { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
-
+        public DbSet<Item> Item { get; set; }
+        public DbSet<ShoppingCart> ShoppingCart { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+   
             modelBuilder.Entity<OrderDetail>().HasKey(x => new {x.productID, x.orderID});
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.UserId, x.RoleId });
-
+  
             modelBuilder.Entity<IdentityRole>().HasData(
             new IdentityRole
             {

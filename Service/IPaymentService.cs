@@ -15,5 +15,6 @@ namespace Service
         Task UpdateAsSync(Payment payment);
         Task UpdateById(int id);
         Task DeleteAsSync(int id);
+        Payment GetByUserID(string userId);
     }
 }

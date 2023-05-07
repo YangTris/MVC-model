@@ -54,9 +54,9 @@ namespace Service.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<OrderDetail> GetByOrderId(int id)
+        /*public IEnumerable<OrderDetail> GetByOrderId(int id)
         {
             return _context.OrderDetail.Where(x=>x.orderID==id).ToList();
-        }
+        }*/
     }
 }

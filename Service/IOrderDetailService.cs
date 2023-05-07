@@ -11,7 +11,7 @@ namespace Service
     {
         IEnumerable<OrderDetail> GetAll();
         OrderDetail GetById(int id);
-        IEnumerable<OrderDetail> GetByOrderId(int id);
+        //IEnumerable<OrderDetail> GetByOrderId(int id);
         Task CreateAsSync(OrderDetail order);
         Task UpdateAsSync(OrderDetail order);
         Task UpdateById(int id);
