@@ -101,5 +101,33 @@ namespace MVC_model.Controllers
             };
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var product = _productService.GetById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            var model = new DeleteProductViewModel
+            {
+                productID = product.productID,
+                productName = product.productName,
+                
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(DeleteProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _productService.DeleteAsSync(model.productID);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
     }
 }
