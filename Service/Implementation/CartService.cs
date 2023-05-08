@@ -16,10 +16,10 @@ namespace Service.Implementation
             _context = context;
         }
 
-        public async Task CreateAsSync(CartItem cart)
+        public Task CreateAsSync(ShoppingCart cart)
         {
             _context.Add(cart);
-            await _context.SaveChangesAsync();
+            return _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsSync(int id)
@@ -32,27 +32,26 @@ namespace Service.Implementation
             }
         }
 
-        public IEnumerable<CartItem> GetAll()
+        public ShoppingCart GetById(int id)
         {
-            return _context.CartItems.ToList();
+            return _context.ShoppingCart.Where(x => x.shoppingCartID == id).FirstOrDefault();
         }
 
-        public CartItem GetById(int id)
+        public async Task UpdateAsSync(ShoppingCart cart)
         {
-            return _context.CartItems.Where(x => x.cartID == id).FirstOrDefault();
-        }
-
-        public async Task UpdateAsSync(CartItem cart)
-        {
-            _context.CartItems.Update(cart);
+            _context.ShoppingCart.Update(cart);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateById(int id)
         {
             var cart = GetById(id);
-            _context.CartItems.Update(cart);
+            _context.ShoppingCart.Update(cart);
             await _context.SaveChangesAsync();
+        }
+        public ShoppingCart GetByUserId(string id)
+        {
+            return _context.ShoppingCart.Where(x => x.userID.Equals(id)).FirstOrDefault();
         }
     }
 }

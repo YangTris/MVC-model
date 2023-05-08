@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230507041218_cart")]
-    partial class cart
+    [Migration("20230507084041_dbcart")]
+    partial class dbcart
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,34 +25,40 @@ namespace DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Entity.CartItem", b =>
+            modelBuilder.Entity("Entity.Cart_Item", b =>
                 {
-                    b.Property<int>("cartID")
+                    b.Property<int>("shoppingCartID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("itemID")
+                        .HasColumnType("int");
+
+                    b.HasKey("shoppingCartID", "itemID");
+
+                    b.HasIndex("itemID");
+
+                    b.ToTable("Cart_Item");
+                });
+
+            modelBuilder.Entity("Entity.Item", b =>
+                {
+                    b.Property<int>("itemID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cartID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("itemID"));
 
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Quantity")
+                    b.Property<int>("productID")
                         .HasColumnType("int");
 
-                    b.Property<int>("productId")
+                    b.Property<int>("quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("userId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.HasKey("itemID");
 
-                    b.HasKey("cartID");
+                    b.HasIndex("productID");
 
-                    b.HasIndex("productId");
-
-                    b.HasIndex("userId");
-
-                    b.ToTable("CartItems");
+                    b.ToTable("Item");
                 });
 
             modelBuilder.Entity("Entity.Order", b =>
@@ -218,6 +224,34 @@ namespace DataAccess.Migrations
                     b.ToTable("Product");
                 });
 
+            modelBuilder.Entity("Entity.ShoppingCart", b =>
+                {
+                    b.Property<int>("shoppingCartID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("shoppingCartID"));
+
+                    b.HasKey("shoppingCartID");
+
+                    b.ToTable("ShoppingCart");
+                });
+
+            modelBuilder.Entity("ItemShoppingCart", b =>
+                {
+                    b.Property<int>("ItemsitemID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("shoppingCartsshoppingCartID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ItemsitemID", "shoppingCartsshoppingCartID");
+
+                    b.HasIndex("shoppingCartsshoppingCartID");
+
+                    b.ToTable("ItemShoppingCart");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -353,15 +387,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d8e0786d-d111-4664-9b5a-20296e8458b7",
+                            ConcurrencyStamp = "12b7633d-ab74-403a-bf37-08a19b1a9554",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEI7Fs7b4cnZzjSBLftJrEe1tCM+b7RT9sgRdXX+S7arRc8YEDj9oHUeT7J8IcBskxQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN12IusODVNHILETgC+0MBeJq+010vtVN4By9tCmzrloHIDGQvrX6Wb5om3QBbCmeg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "97895c17-0fe1-434e-a66d-7c4053f18f31",
+                            SecurityStamp = "b9ac83d0-54c2-426b-85c2-52e207ba49da",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin"
                         });
@@ -464,23 +498,34 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Entity.CartItem", b =>
+            modelBuilder.Entity("Entity.Cart_Item", b =>
                 {
-                    b.HasOne("Entity.Product", "product")
+                    b.HasOne("Entity.Item", "item")
                         .WithMany()
-                        .HasForeignKey("productId")
+                        .HasForeignKey("itemID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "user")
+                    b.HasOne("Entity.ShoppingCart", "shoppingCart")
                         .WithMany()
-                        .HasForeignKey("userId")
+                        .HasForeignKey("shoppingCartID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("item");
+
+                    b.Navigation("shoppingCart");
+                });
+
+            modelBuilder.Entity("Entity.Item", b =>
+                {
+                    b.HasOne("Entity.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("productID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("product");
-
-                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Entity.Order", b =>
@@ -522,6 +567,21 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("IdentityUser");
+                });
+
+            modelBuilder.Entity("ItemShoppingCart", b =>
+                {
+                    b.HasOne("Entity.Item", null)
+                        .WithMany()
+                        .HasForeignKey("ItemsitemID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.ShoppingCart", null)
+                        .WithMany()
+                        .HasForeignKey("shoppingCartsshoppingCartID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
