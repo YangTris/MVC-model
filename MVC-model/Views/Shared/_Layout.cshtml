@@ -27,8 +27,8 @@
                         </svg>
                     </button>
                 </form>
-                <i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i>
-                <partial name="_LoginPartial" />
+                @*<i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i>*@
+                @*<partial name="_LoginPartial" />*@
             </div>
         </div>
     </nav>
@@ -70,20 +70,7 @@
                         </ul>
                     </div>
                 </li>
-                
-                <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                        Dashboard
-                    </button>
-                    <div class="collapse" id="dashboard-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
-                        </ul>
-                    </div>
-                </li>
+     
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
                         Orders
@@ -105,10 +92,15 @@
                     
                     <div class="collapse" id="account-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                            <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                            @*<li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>*@
+                            <li><a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
+                            <li>
+                                <a class="btn btn-warning btn-outline-light me-2" href="#userHomePage">
+                                    <form class="form-inline"  asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Home", "User", new { area = "" })">
+                                        <button type="submit" class="nav-link btn btn-link text-dark">Sign out</button>
+                                    </form>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>

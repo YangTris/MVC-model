@@ -1,6 +1,6 @@
-﻿@{
+﻿@*@{
     Layout = null;
-}
+}*@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -16,17 +16,17 @@
 </head>
 <body>
     <header class="p-3 text-bg-dark" style="background-color: #2b80ff !important;">
-        <div class="container">
+        <div id="userHomePage" class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                     <img src="~/images/Dotabg.jpg" alt="logo" width="120" height="60">
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-white">Home</a></li>
+                    <li><a asp-controller="User" asp-action="Home" class="nav-link px-2 text-white">Home</a></li>
                     <li><a href="#carouselExampleInterval" class="nav-link px-2 text-white">Introduce</a></li>
                     <li><a href="#about" class="nav-link px-2 text-white">About</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Product</a></li>
+                    <li><a asp-controller="User" asp-action="Product" class="nav-link px-2 text-white">Product</a></li>
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li><a class="nav-link px-2 text-white" asp-controller="Home" asp-action="Index">Admin</a></li>
@@ -35,6 +35,53 @@
                 
 
                 <div class="text-end">
+                    <button class="btn btn-outline-light me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-cart-shopping fa-xl" style="color: #000000;"></i></button>
+
+                    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+                        <div class="offcanvas-header">
+                            <h5>Shopping Cart</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <table class="table table-strip table-dark">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>                             
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @*@foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.paymentID</td>
+                                            <td>@item.userID</td>
+                                            <td>@item.method</td>
+                                            <td>$@item.nameOnCard</td>
+                                            <td>@item.cardNumber</td>
+                                            <td>
+                                                <a class="text-primary" asp-action="Edit" asp-route-id="@item.paymentID">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
+                                                <a class="text-success" asp-action="Detail" asp-route-id="@item.paymentID">
+                                                    <i class="fas fa-bars"></i> Detail
+                                                </a>
+                                                <a class="text-danger" asp-action="Delete" asp-route-id="@item.paymentID">
+                                                    <i class="far fa-trash-alt"></i> Delete
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }*@
+                                    <tr>
+                                        <td>Nike T-shirt</td>
+                                        <td>2</td>
+                                        <td>200$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <button type="button" class="btn btn-outline-light me-2">
@@ -70,7 +117,7 @@
         </div>
     </header>
     <main>
-        <div class="content-wrapper">
+        <div class="content-wra pper">
             @RenderBody()
         </div>
 
