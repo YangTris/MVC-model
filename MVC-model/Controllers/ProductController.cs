@@ -272,7 +272,7 @@ namespace MVC_model.Controllers
             return RedirectToAction(nameof(Cart));
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public IActionResult CartIndex()
         {
             var model = _productService.GetAll().Select(product => new CartIndexProductViewModel
@@ -287,10 +287,10 @@ namespace MVC_model.Controllers
                 /*created_at = product.created_at,
                 modified_at = product.modified_at,
                 deleted_at = product.deleted_at,
-                create_by = product.create_by,*/
+                create_by = product.create_by,
             }).ToList();
             return View(model);
-        }
+        }*/
 
     }
 }

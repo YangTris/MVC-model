@@ -1,4 +1,4 @@
-﻿@model List<mvcblog.Models.CartItem>
+﻿@model List<CartIndexProductViewModel>
 
 <h2>GIỎ HÀNG</h2>
 
@@ -18,21 +18,21 @@
         </tr>
         @foreach (var cartitem in Model)
         {
-            var thanhtien = cartitem.quantity * cartitem.product.Price;
+            var thanhtien = cartitem.quantity * cartitem.product.price;
             total += thanhtien;
 
             <tr>
                 <td>@(stt++)</td>
-                <td>@cartitem.product.Name</td>
-                <td>@(cartitem.product.Price.ToString("n0"))</td>
-                <td><input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.product.ProductId}")" /></td>
+                <td>@cartitem.product.productName</td>
+                <td>@(cartitem.product.price.ToString("n0"))</td>
+                <td><input asp-for="@cartitem.quantity" id="@($"quantity-{cartitem.product.productID}")" /></td>
                 <td>@(thanhtien.ToString("n0"))</td>
                 <td>
                     <button class="btn btn-success updatecartitem"
-                            data-productid="@cartitem.product.ProductId">
+                            data-productid="@cartitem.product.productID">
                         Cập nhật
                     </button>
-                    <a asp-route="removecart" asp-route-productid="@cartitem.product.ProductId"
+                    <a asp-route="removecart" asp-route-productid="@cartitem.product.productID"
                        class="btn btn-danger">Xóa</a>
                 </td>
             </tr>
