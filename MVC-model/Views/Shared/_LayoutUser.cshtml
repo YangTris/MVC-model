@@ -4,6 +4,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@model IEnumerable<IndexProductViewModel>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,12 +45,12 @@
                         </div>
                         <div class="offcanvas-body">
                                 <ul class="list-group mb-3">
-                                <li class="list-group-item d-flex justify-content-between lh-sm" style="text-align: justify;">
-                                        <div>
-                                            <h6 class="my-0">Nike T-shirt</h6>
-                                            <small class="text-body-secondary">2</small>
-                                        </div>
-                                        <span class="text-body-secondary">$12</span>
+                                    <li class="list-group-item d-flex justify-content-between lh-sm" style="text-align: justify;">
+                                            <div>
+                                                <h6 class="my-0">Nike T-shirt</h6>
+                                                <small class="text-body-secondary">Quantity: 2</small>
+                                            </div>
+                                            <span class="text-body-secondary">$12</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between lh-sm" style="text-align: justify;">
                                         <div>
@@ -69,7 +70,23 @@
                                         <span>Total (USD)</span>
                                         <strong>$20</strong>
                                     </li>
-                                </ul>
+                                    
+                                @foreach (var product in Model)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between lh-sm" style="text-align: justify;">
+                                        <div>
+                                            <h6 class="my-0">@product.productName</h6>
+                                            <small class="text-body-secondary">Quantity: @product.quantity</small>
+                                        </div>
+                                        <span class="text-body-secondary">@product.price</span>
+                                    </li>
+                                   
+                                    <li class="list-group-item d-flex justify-content-between" style="text-align: justify;">
+                                        <span>Total (USD)</span>
+                                        <strong>$20</strong>
+                                    </li>
+                                }
+                            </ul>
                             <button class="w-100 btn btn-primary btn-lg" type="submit">
                                 <a class="nav-link" asp-controller="Payment" asp-action="Create" style="color: white">Continue to checkout</a>      
                             </button>  
