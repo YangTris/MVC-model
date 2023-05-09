@@ -118,7 +118,7 @@ namespace MVC_model.Controllers
                 return NotFound();
             }
             var user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var model = new IndexProductViewModel
+            var model = new CartIndexProductViewModel
             {
                 itemID = Guid.NewGuid().ToString(),
                 productID = id,
@@ -130,7 +130,7 @@ namespace MVC_model.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToCart(IndexProductViewModel model)
+        public async Task<IActionResult> AddToCart(CartIndexProductViewModel model)
         {
             if (ModelState.IsValid)
             {
