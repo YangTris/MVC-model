@@ -1,0 +1,23 @@
+﻿@model List<UserIndexProductViewModel>
+@{
+    ViewData["Title"] = "Các sản phẩm";
+}
+
+<div class="card-columns">
+    @foreach (var product in Model)
+    {
+        <div class=card>
+            <h3 class="card-header">@product.product.productName</h3>
+            <div class="card-body" style="height: 150px;">
+                @product.product.brand
+            </div>
+            <div class="card-footer">
+                <span class="text-muted">@(product.product.price.ToString("n0")) $</span>
+                <a asp-route="addcart"
+               asp-route-productid="@product.product.productID"
+                   class="btn btn-secondary btn-sm float-right">Đặt hàng</a>
+            </div>
+        </div>
+    }
+
+</div>
