@@ -34,7 +34,7 @@ namespace Service.Implementation
 
         public Item GetById(int id)
         {
-            return _context.Item.Where(x => x.itemID == id).FirstOrDefault();
+            return _context.Item.Where(x => x.itemID.Equals(id)).FirstOrDefault();
         }
 
         public async Task UpdateAsSync(Item item)
@@ -50,8 +50,16 @@ namespace Service.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<Item> GetCart(int id) => _context.Item
+        /*public IEnumerable<Item> GetCart(int id) => _context.Item
                 .Where(a => a.cartID == id)
-                .ToList();
+                .ToList();*/
+        public bool CheckItem(string userID, int productID)
+        {
+            var item = _context.Item.SingleOrDefault(c => c.userID == userID && c.product.productID == productID);
+            if (item == null) return true;
+            item.quantity++;
+            UpdateAsSync(item);
+            return false;
+        }
     }
 }

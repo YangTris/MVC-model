@@ -12,11 +12,11 @@ namespace Entity
     public class Item
     {
         [Key]
-        public int itemID { get; set; }
+        public string itemID { get; set; }
         public Product product { get; set; }
         public int quantity { get; set; }
-        [ForeignKey("ShoppingCart")]
-        public int cartID { get; set; }
-        public virtual ShoppingCart ShoppingCart { get; set; }
+        [ForeignKey("IdentityUser")]
+        public string userID { get; set; }
+        public virtual IdentityUser user { get; set; }
     }
 }

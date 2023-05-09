@@ -1,5 +1,6 @@
 ﻿using Entity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVC_model.Models
 {
@@ -16,5 +17,8 @@ namespace MVC_model.Models
         public DateTime modified_at { get; set; }
         public DateTime deleted_at { get; set; }
         public string create_by { get; set; }*/
+        public string itemID { get; set; }
+        public int quantity { get; set; }
+        public string userID { get; set; }
     }
 }

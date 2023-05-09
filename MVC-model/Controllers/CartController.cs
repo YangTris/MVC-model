@@ -21,7 +21,7 @@ namespace MVC_model.Controllers
             _itemService = itemService;
             _webHostEnvironment = webHostEnvironment;
         }
-        [HttpGet]
+       /* [HttpGet]
         public IActionResult Index()
         {
             var user = User.FindFirst(ClaimTypes.NameIdentifier).Value;

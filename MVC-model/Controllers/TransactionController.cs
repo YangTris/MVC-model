@@ -57,7 +57,7 @@ namespace MVC_model.Controllers
                     expiration = _paymentService.GetByUserID(model.userID).expiration,
                     CVV = _paymentService.GetByUserID(model.userID).CVV,
                     CartId = _cartService.GetByUserId(model.userID).shoppingCartID,
-                    items = _itemService.GetCart(_cartService.GetByUserId(model.userID).shoppingCartID),
+                    //items = _itemService.GetCart(_cartService.GetByUserId(model.userID).shoppingCartID),
                 };
                 
             }

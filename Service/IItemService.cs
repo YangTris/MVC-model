@@ -14,6 +14,7 @@ namespace Service
         Task UpdateAsSync(Item item);
         Task UpdateById(int id);
         Task DeleteAsSync(int id);
-        IEnumerable<Item> GetCart(int id);
+        // IEnumerable<Item> GetCart(int id);
+        bool CheckItem(string userID, int productID);
     }
 }

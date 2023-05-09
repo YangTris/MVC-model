@@ -14,10 +14,13 @@ namespace MVC_model.Controllers
         private IProductService _productService;
         private IWebHostEnvironment _webHostEnvironment;
         public const string CARTKEY = "cart";
-        public ProductController(IProductService productService, IWebHostEnvironment webHostEnvironment)
+        private IItemService _itemService;
+
+        public ProductController(IProductService productService, IWebHostEnvironment webHostEnvironment, IItemService itemService)
         {
             _productService = productService;
             _webHostEnvironment = webHostEnvironment;
+            _itemService = itemService;
         }
 
         [HttpGet]
@@ -106,6 +109,46 @@ namespace MVC_model.Controllers
             };
             return View(model);
         }
+        [HttpGet]
+        public IActionResult AddToCart(int id)
+        {
+            var productTemp = _productService.GetById(id);
+            if (productTemp == null)
+            {
+                return NotFound();
+            }
+            var user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var model = new IndexProductViewModel
+            {
+                itemID = Guid.NewGuid().ToString(),
+                productID = id,
+                quantity = 1,
+                userID = user,
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddToCart(IndexProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if(_itemService.CheckItem(model.userID,model.productID) == true)
+                {
+                    Item item = new Item
+                    {
+                        itemID = model.itemID,
+                        product = _productService.GetById(model.productID),
+                        quantity = model.quantity,
+                        userID=model.userID,
+                    };
+                    await _itemService.CreateAsSync(item);
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(model);
+        }
 
         [HttpGet]
         public IActionResult Delete(int id)
@@ -184,7 +227,7 @@ namespace MVC_model.Controllers
             }
             return View(model);
         }
-        List<CartItem> GetCartItems()
+        /*List<CartItem> GetCartItems()
         {
 
             var session = HttpContext.Session;
