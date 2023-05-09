@@ -89,93 +89,45 @@ namespace MVC_model.Controllers
             return View();
         }*/
 
-        public const string CARTKEY = "cart";
-        List<CartItem> GetCartItems()
+        [HttpGet]
+        public IActionResult AddToCart(int id)
         {
-
-            var session = HttpContext.Session;
-            string jsoncart = session.GetString(CARTKEY);
-            if (jsoncart != null)
+            var productTemp = _productService.GetById(id);
+            if (productTemp == null)
             {
-                return JsonConvert.DeserializeObject<List<CartItem>>(jsoncart);
+                return NotFound();
             }
-            return new List<CartItem>();
-        }
-        void ClearCart()
-        {
-            var session = HttpContext.Session;
-            session.Remove(CARTKEY);
-        }
-        void SaveCartSession(List<CartItem> ls)
-        {
-            var session = HttpContext.Session;
-            string jsoncart = JsonConvert.SerializeObject(ls);
-            session.SetString(CARTKEY, jsoncart);
-        }
-
-        [Route("addcart/{productid:int}", Name = "addcart")]
-        public IActionResult AddToCart([FromRoute] int productid)
-        {
-
-            var product = _productService.GetById(productid);
-            if (product == null)
-                return NotFound("Không có sản phẩm");
-
-            // Xử lý đưa vào Cart ...
-            var cart = GetCartItems();
-            var cartitem = cart.Find(p => p.product.productID == productid);
-            if (cartitem != null)
+            var user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var model = new IndexProductViewModel
             {
-                // Đã tồn tại, tăng thêm 1
-                cartitem.quantity++;
-            }
-            else
-            {
-                //  Thêm mới
-                cart.Add(new CartItem() { quantity = 1, product = product });
-            }
-
-            // Lưu cart vào Session
-            SaveCartSession(cart);
-            // Chuyển đến trang hiện thị Cart
-            return RedirectToAction(nameof(Cart));
+                itemID = Guid.NewGuid().ToString(),
+                productID = id,
+                quantity = 1,
+                userID = user,
+            };
+            return View(model);
         }
 
-        [Route("/cart", Name = "cart")]
-        public IActionResult Cart()
-        {
-            return View(GetCartItems());
-        }
-
-        [Route("/updatecart", Name = "updatecart")]
         [HttpPost]
-        public IActionResult UpdateCart([FromForm] int productid, [FromForm] int quantity)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddToCart(IndexProductViewModel model)
         {
-            // Cập nhật Cart thay đổi số lượng quantity ...
-            var cart = GetCartItems();
-            var cartitem = cart.Find(p => p.product.productID == productid);
-            if (cartitem != null)
+            if (ModelState.IsValid)
             {
-                // Đã tồn tại, tăng thêm 1
-                cartitem.quantity = quantity;
+                if (_itemService.CheckItem(model.userID, model.productID) == true)
+                {
+                    Item item = new Item
+                    {
+                        itemID = model.itemID,
+                        product = _productService.GetById(model.productID),
+                        quantity = model.quantity,
+                        userID = model.userID,
+                    };
+                    await _itemService.CreateAsSync(item);
+                    return RedirectToAction("Index");
+                }
             }
-            SaveCartSession(cart);
-            // Trả về mã thành công (không có nội dung gì - chỉ để Ajax gọi)
-            return Ok();
-        }
-        [Route("/removecart/{productid:int}", Name = "removecart")]
-        public IActionResult RemoveCart([FromRoute] int productid)
-        {
-            var cart = GetCartItems();
-            var cartitem = cart.Find(p => p.product.productID == productid);
-            if (cartitem != null)
-            {
-                // Đã tồn tại, tăng thêm 1
-                cart.Remove(cartitem);
-            }
-
-            SaveCartSession(cart);
-            return RedirectToAction(nameof(Cart));
+            return View(model);
         }
     }
 }
