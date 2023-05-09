@@ -24,14 +24,8 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Item", b =>
                 {
-                    b.Property<int>("itemID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("itemID"));
-
-                    b.Property<int>("cartID")
-                        .HasColumnType("int");
+                    b.Property<string>("itemID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("productID")
                         .HasColumnType("int");
@@ -39,11 +33,15 @@ namespace DataAccess.Migrations
                     b.Property<int>("quantity")
                         .HasColumnType("int");
 
+                    b.Property<string>("userID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("itemID");
 
-                    b.HasIndex("cartID");
-
                     b.HasIndex("productID");
+
+                    b.HasIndex("userID");
 
                     b.ToTable("Item");
                 });
@@ -365,15 +363,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "73b4d4d8-a9a6-4d31-bb87-0e5db629ecad",
+                            ConcurrencyStamp = "afee8836-fc10-4488-aca2-4a66cc9cbe3d",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDIrBtT6AFftKBHpQbjGhaKsR1jn44KHxl1CmKEi4WYPWZLrC4MeL7+qrVz00mOvCA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENbXCnxos32SXAo1ogQMeUKCKbfW5Vg4ETRW/Knx3MlPLbfLcq/dR54coFULlZiCWw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4b6a4ec3-52f1-44c1-b4c6-f298069156cd",
+                            SecurityStamp = "490416be-f48d-44ae-9020-8e8b91288e36",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin"
                         });
@@ -478,21 +476,21 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Item", b =>
                 {
-                    b.HasOne("Entity.ShoppingCart", "ShoppingCart")
-                        .WithMany()
-                        .HasForeignKey("cartID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entity.Product", "product")
                         .WithMany()
                         .HasForeignKey("productID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ShoppingCart");
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "user")
+                        .WithMany()
+                        .HasForeignKey("userID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("product");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Entity.Order", b =>
