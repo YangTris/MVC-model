@@ -61,5 +61,29 @@ namespace MVC_model.Controllers
             }
             return View();
         }
+        /*[HttpGet]
+        public IActionResult AddToCart(int id)
+        {
+            //get cart id
+
+            var model = new CreateCartViewModel
+            {
+                itemID = model.itemID,
+                productID = productId,
+
+            };
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddToCart(DeleteProductViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _productService.DeleteAsSync(model.productID);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }*/
     }
 }

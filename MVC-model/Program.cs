@@ -25,6 +25,13 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(cfg =>
+{
+    cfg.Cookie.Name = "Cart";
+    cfg.IdleTimeout = new TimeSpan(0,30,0);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,7 +50,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 /*app.MapControllerRoute(
