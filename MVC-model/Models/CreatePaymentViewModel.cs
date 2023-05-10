@@ -5,7 +5,6 @@ namespace MVC_model.Models
 {
     public class CreatePaymentViewModel
     {
-        [Key]
         public int paymentID { get; set; }
         public string userID { get; set; }
         public PaymentMethod method { get; set; }

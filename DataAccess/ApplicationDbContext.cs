@@ -25,6 +25,28 @@ namespace DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Product>().HasData(
+                new Product()
+                {
+                    productID = 1,
+                    productName= "Test",
+                    price=200,
+                    brand="Adidas",
+                    category=Category.Shirt,
+                    discountPercentage=20,
+                    imgURL= "~/images/Dotabg.jpg",
+                },
+                new Product()
+                {
+                    productID = 2,
+                    productName = "Test2",
+                    price = 100,
+                    brand = "Nike",
+                    category = Category.Shoes,
+                    discountPercentage = 30,
+                    imgURL = "~/images/nike_carousel.jpg",
+                }
+            );
    
             modelBuilder.Entity<OrderDetail>().HasKey(x => new {x.productID, x.orderID});
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.UserId, x.RoleId });

@@ -15,6 +15,33 @@ namespace MVC_model.Controllers
         {
             return View();
         }
+        /*public ViewResult Index(string sortOrder, string searchString)
+        {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.CategorySortParm = String.IsNullOrEmpty(sortOrder) ? "category_desc" : "";
+            var product = from s in db.Produt
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                product = product.Where(s => s.productName.Contains(searchString)
+                                       || s.FirstMidName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    product = product.OrderByDescending(s => s.productName);
+                    break;
+                case "category_desc":
+                    product = product.OrderByDescending(s => s.EnrollmentDate);
+                    break;
+                default:
+                    product = product.OrderBy(s => s.productName);
+                    break;
+            }
+
+            return View(product.ToList());
+        }*/
+
 
         private ICartService _cartService;
         private IItemService _itemService;

@@ -56,7 +56,7 @@ namespace MVC_model.Controllers
                 await _paymentService.CreateAsSync(payment);
                 return RedirectToAction("Index");
             }
-            return View();
+            return View(model);
         }
         [HttpGet]
         public IActionResult Details(int id)
