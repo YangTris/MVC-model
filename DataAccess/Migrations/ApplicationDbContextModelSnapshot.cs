@@ -157,8 +157,9 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("expiration")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("method")
-                        .HasColumnType("int");
+                    b.Property<string>("method")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nameOnCard")
                         .IsRequired()
@@ -207,6 +208,28 @@ namespace DataAccess.Migrations
                     b.HasKey("productID");
 
                     b.ToTable("Product");
+
+                    b.HasData(
+                        new
+                        {
+                            productID = 1,
+                            brand = "Adidas",
+                            category = 1,
+                            discountPercentage = 20,
+                            imgURL = "~/images/Dotabg.jpg",
+                            price = 200.0,
+                            productName = "Test"
+                        },
+                        new
+                        {
+                            productID = 2,
+                            brand = "Nike",
+                            category = 0,
+                            discountPercentage = 30,
+                            imgURL = "~/images/nike_carousel.jpg",
+                            price = 100.0,
+                            productName = "Test2"
+                        });
                 });
 
             modelBuilder.Entity("Entity.ShoppingCart", b =>
@@ -363,15 +386,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "afee8836-fc10-4488-aca2-4a66cc9cbe3d",
+                            ConcurrencyStamp = "e61d386a-5548-453d-848f-9334c00f66b1",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAENbXCnxos32SXAo1ogQMeUKCKbfW5Vg4ETRW/Knx3MlPLbfLcq/dR54coFULlZiCWw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG8fgOlyjOo8w/B8VaqjnLDhc5IaM/KTZfL6NLv0ZxRd45F0VKyu/DgEQ76sRnZ0rg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "490416be-f48d-44ae-9020-8e8b91288e36",
+                            SecurityStamp = "c6a13dd9-da6f-4848-8fef-d7a938a3197f",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin"
                         });

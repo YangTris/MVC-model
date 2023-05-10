@@ -11,7 +11,7 @@ namespace MVC_model.Models
         public string email { get; set; }
         public string address { get; set; }
         public int paymentID { get; set; }
-        public PaymentMethod method { get; set; }
+        public string method { get; set; }
         public string nameOnCard { get; set; }
         public int cardNumber { get; set; }
         public DateTime expiration { get; set; }

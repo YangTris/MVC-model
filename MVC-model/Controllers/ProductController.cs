@@ -42,6 +42,25 @@ namespace MVC_model.Controllers
             }).ToList();
             return View(model);
         }
+        [HttpGet]
+        public IActionResult Product()
+        {
+            var model = _productService.GetAll().Select(product => new IndexProductViewModel
+            {
+                productID = product.productID,
+                productName = product.productName,
+                brand = product.brand,
+                price = product.price,
+                category = product.category,
+                imgURL = product.imgURL,
+                discountPercentage = product.discountPercentage,
+                /*created_at = product.created_at,
+                modified_at = product.modified_at,
+                deleted_at = product.deleted_at,
+                create_by = product.create_by,*/
+            }).ToList();
+            return View(model);
+        }
 
         [HttpGet]
         public IActionResult Create()
@@ -121,7 +140,7 @@ namespace MVC_model.Controllers
             var model = new CartIndexProductViewModel
             {
                 itemID = Guid.NewGuid().ToString(),
-                productID = id,
+                productID = productTemp.productID,
                 quantity = 1,
                 userID = user,
             };
@@ -130,7 +149,7 @@ namespace MVC_model.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToCart(CartIndexProductViewModel model)
+        public async Task<IActionResult> AddToCart(IndexProductViewModel model)
         {
             if (ModelState.IsValid)
             {

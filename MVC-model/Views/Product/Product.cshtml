@@ -16,8 +16,11 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <h5 class="card-title">@item.productName</h5>
-                                    <p>@item.brand</p>
-                                    <p>$@item.price</p>
+                                    <input asp-for="@item.productID">
+                                    <input asp-for="@item.productName">
+                                    <input asp-for="@item.price">
+                                    <input asp-for="@item.brand">
+
                                     @*<div class="col-3 form-group">
                                     </div>*@
                                     <div class="buttons_added">
@@ -25,30 +28,17 @@
                                         <input aria-label="quantity" class="input-qty" type="number" min="0" max="99" name="" value="1" style=" width: 3rem; text-align: center;">
                                         <input class="plus is-form" type="button" value="+">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center">
-                                    <form asp-action="AddToCart" asp-route-id="@item.productID" method="post">
-                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                        <div class="form-group">
-                                            <input type="submit" value="Add To Cart" class="btn btn-primary" />
-                                        </div>
-                                    </form>
-                                    @*<button type="submit" class="btn btn-rounded btn-primary float-left" style="background-color: white; border-color: white;">
-                                        <a class="btn btn-outline-white mt-auto" asp-action="AddToCart" asp-route-id="@item.productID">Add to cart</a>
-                                        <a class="btn btn-outline-white mt-auto" asp-route="AddToCart" asp-action="AddToCart" asp-route-productid="@item.productID">Add to cart</a>
-                                    </button>
-                                    <button type="submit" class="btn btn-rounded btn-primary float-left" style="background-color: white; border-color: white;">
-                                        <a class="btn btn-outline-white mt-auto" asp-action="AddToCart" asp-route-id="@item.productID">Add to cart</a>
-                                        <a class="btn btn-outline-white mt-auto" asp-action="AddToCart" 1">Add to cart</a>
-                                        <a class="btn btn-outline-white mt-auto" asp-route="AddToCart" asp-action="AddToCart" asp-route-productid="@item.productID">Add to cart</a>
-                                    </button> *@
+                                 
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @*</form>*@
+                        </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a asp-action="AddToCart" asp-controller="Product" asp-route-id="@item.productID" class="btn btn-primary">Add To Cart</a>
+                                 </div>
+                             </div>
+                                   
                 }
                 <div class="col mb-5 ">
                     <div class="card h-100">

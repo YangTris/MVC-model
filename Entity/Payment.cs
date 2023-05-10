@@ -16,7 +16,7 @@ namespace Entity
         [ForeignKey("IdentityUser")]
         public string userID { get; set; }
         public IdentityUser? IdentityUser { get; set; }
-        public PaymentMethod method { get; set; }
+        public string method { get; set; }
         public string nameOnCard { get; set; }
         public int cardNumber { get; set; }
         public DateTime expiration { get; set; }

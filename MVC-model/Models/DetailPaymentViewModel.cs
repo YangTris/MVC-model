@@ -8,7 +8,7 @@ namespace MVC_model.Models
         [Key]
         public int paymentID { get; set; }
         public string userID { get; set; }
-        public PaymentMethod method { get; set; }
+        public string method { get; set; }
         public string nameOnCard { get; set; }
         public int cardNumber { get; set; }
         public DateTime expiration { get; set; }
