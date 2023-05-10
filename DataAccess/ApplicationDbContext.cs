@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,7 +33,7 @@ namespace DataAccess
                     productName= "Test",
                     price=200,
                     brand="Adidas",
-                    category=Category.Shirt,
+                    category= Category.Shirt,
                     discountPercentage=20,
                     imgURL= "~/images/Dotabg.jpg",
                 },
@@ -45,6 +46,16 @@ namespace DataAccess
                     category = Category.Shoes,
                     discountPercentage = 30,
                     imgURL = "~/images/nike_carousel.jpg",
+                },
+                new Product()
+                {
+                    productID = 3,
+                    productName = "ABC",
+                    price = 150,
+                    brand = "Nike",
+                    category = Category.Pant,
+                    discountPercentage = 30,
+                    imgURL = "~/images/male_avt.jpg",
                 }
             );
    
