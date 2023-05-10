@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar bg-body-tertiary bg-info" data-bs-theme="info">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+            <a class="navbar-brand" asp-controller="User" asp-action="Home">
                 <img src="~/images/Dotabg.jpg" alt="logo" width="120" height="60">
             </a>
             <div class="navbar-menu-wrapper bg-info d-flex align-items-center justify-content-end">
@@ -84,15 +84,16 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item"><a class="nav-link" asp-controller="AppRoles" asp-action="Index">Role</a></li>
+
                 <li class="border-top my-3"></li>
                 <li class="mb-1">
                     <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">        
                             <strong>Admin</strong>
                     </button>
-                    
                     <div class="collapse" id="account-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            @*<li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>*@
                             <li><a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
                             <li>
                                 <a class="btn btn-warning btn-outline-light me-2" href="#userHomePage">
