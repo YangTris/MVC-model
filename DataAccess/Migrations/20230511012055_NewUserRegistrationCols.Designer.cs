@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230511012055_NewUserRegistrationCols")]
+    partial class NewUserRegistrationCols
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -396,15 +399,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba1ab1fb-b357-4ce7-9161-24353da53b70",
+                            ConcurrencyStamp = "4e9d961b-07a1-4cef-aa82-42655f1ec43f",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKATk+QUUm++qOiP1LCh+2AMpNG50ZPkzv6HVxhjYWLnkj9qqqSYOcUMqseaSBRGLQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFgERxqJhfdFukyCRs1P+qe8KDFnGi12K5PpS/ZlJxxksvapcap574CUjMmg+LG36g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "64ca8279-f517-4ff3-a997-c790917c63c9",
+                            SecurityStamp = "64fced26-52b8-46cd-8aba-144392dfb3c0",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin"
                         });
