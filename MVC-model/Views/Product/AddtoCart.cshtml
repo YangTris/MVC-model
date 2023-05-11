@@ -1,8 +1,23 @@
 ﻿@model CartIndexProductViewModel
 
-<form method="post" asp-action="AddToCart" enctype="multipart/form-data">
+<form method="post" asp-action="AddToCart" asp-controller="Product" enctype="multipart/form-data">
 <div class="form-group">
-
+        <div class="col-3 form-group">
+            <input type="hidden" asp-for="@Model.itemID" class="form-control" />
+            <span asp-validation-for="@Model.itemID" class="text-danger"></span>
+        </div>
+        <div class="col-3 form-group">
+            <input type="hidden" asp-for="@Model.userID" class="form-control" />
+            <span asp-validation-for="@Model.userID" class="text-danger"></span>
+        </div>
+        <div class="col-3 form-group">
+            <input type="hidden" asp-for="@Model.productID" class="form-control" />
+            <span asp-validation-for="@Model.productID" class="text-danger"></span>
+        </div>
+        <div class="col-3 form-group">
+            <input asp-for="@Model.quantity" class="form-control" />
+            <span asp-validation-for="@Model.quantity" class="text-danger"></span>
+        </div>
     <button type="submit" class="btn btn-rounded btn-primary float-left"><i class="fas fa-plus-square" style="margin-right:0.7em"></i>Save</button>
     <a asp-action="index" class="btn btn-rounded btn-success float-right"><i class="fas fa-caret-square-left" style="margin-right:0.7em"></i>Back</a>
     <br />
