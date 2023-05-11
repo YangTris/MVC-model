@@ -20,7 +20,7 @@ namespace MVC_model.Controllers
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.CategorySortParm = String.IsNullOrEmpty(sortOrder) ? "category_desc" : "";
             var product = from s in db.Produt
-                           select s;
+                          select s;
             if (!String.IsNullOrEmpty(searchString))
             {
                 product = product.Where(s => s.productName.Contains(searchString)
