@@ -111,7 +111,6 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <button type="button" class="btn btn-outline-light me-2">
-                            @*<a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>*@
                             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i></a>
                         </button>
                         
@@ -119,14 +118,7 @@
                             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Home", "User", new { area = "" })">
                                 <button type="submit" class="nav-link btn btn-link text-dark"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i></button>
                             </form>
-                        </a>
-                        @*<button type="submit" class="btn btn-warning btn-outline-light me-2">
-                            <a class="nav-link text-dark">
-                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Home", "User", new { area = "" })">
-                                    <i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i>
-                                </form>
-                            </a>
-                        </button>*@
+                        </a>  
                     }
                     else
                     {
