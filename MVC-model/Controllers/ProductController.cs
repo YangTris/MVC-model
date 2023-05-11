@@ -13,7 +13,6 @@ namespace MVC_model.Controllers
     {
         private IProductService _productService;
         private IWebHostEnvironment _webHostEnvironment;
-        public const string CARTKEY = "cart";
         private IItemService _itemService;
 
         public ProductController(IProductService productService, IWebHostEnvironment webHostEnvironment, IItemService itemService)
@@ -149,7 +148,7 @@ namespace MVC_model.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToCart(IndexProductViewModel model)
+        public async Task<IActionResult> AddToCart(CartIndexProductViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -163,9 +162,9 @@ namespace MVC_model.Controllers
                         userID=model.userID,
                     };
                     await _itemService.CreateAsSync(item);
-                    return RedirectToAction("Index");
                 }
-            }
+                return RedirectToAction("Product");
+            }       
             return View(model);
         }
 
