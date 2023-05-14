@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class updateRegistrationColums : Migration
+    public partial class addApplicationUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,7 +44,12 @@ namespace DataAccess.Migrations
                 keyColumn: "Id",
                 keyValue: "c28305c3-93f5-4490-ae59-05d0401bcee3",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "3448b15b-cf79-45ae-b9e7-8e6a34325dbe", "AQAAAAIAAYagAAAAEO+uXgVLQ3DJl7iGLNR9a0TWSharfEvOFsUbrNSS/Ktq9gqhmly/FyGQqBF56sRmrQ==", "e9af39af-b647-4017-bab1-f5d281e44635" });
+                values: new object[] { "8c873c34-0dd4-4c15-80e4-7a557187be47", "AQAAAAIAAYagAAAAEEUK65E4R6Xju7/oQuBIcd2ctqZsXDJxI34CwQG54wRM3BnBoqUMiSPFedPo0ZFH5w==", "227a3758-0a08-4b83-89fd-afc3d4b67150" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "productID", "brand", "category", "discountPercentage", "imgURL", "price", "productName" },
+                values: new object[] { 3, "Nike", 2, 30, "~/images/male_avt.jpg", 150.0, "ABC" });
         }
 
         /// <inheritdoc />
@@ -53,12 +58,17 @@ namespace DataAccess.Migrations
             migrationBuilder.DropTable(
                 name: "ApplicationUsers");
 
+            migrationBuilder.DeleteData(
+                table: "Product",
+                keyColumn: "productID",
+                keyValue: 3);
+
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "c28305c3-93f5-4490-ae59-05d0401bcee3",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "ba1ab1fb-b357-4ce7-9161-24353da53b70", "AQAAAAIAAYagAAAAEKATk+QUUm++qOiP1LCh+2AMpNG50ZPkzv6HVxhjYWLnkj9qqqSYOcUMqseaSBRGLQ==", "64ca8279-f517-4ff3-a997-c790917c63c9" });
+                values: new object[] { "e61d386a-5548-453d-848f-9334c00f66b1", "AQAAAAIAAYagAAAAEG8fgOlyjOo8w/B8VaqjnLDhc5IaM/KTZfL6NLv0ZxRd45F0VKyu/DgEQ76sRnZ0rg==", "c6a13dd9-da6f-4848-8fef-d7a938a3197f" });
         }
     }
 }

@@ -6,6 +6,7 @@ using MVC_model.Models;
 using Newtonsoft.Json;
 using Service;
 using System.Security.Claims;
+using PagedList;
 
 namespace MVC_model.Controllers
 {
@@ -21,7 +22,11 @@ namespace MVC_model.Controllers
             _webHostEnvironment = webHostEnvironment;
             _itemService = itemService;
         }
+        /*public ViewResult Paging(int? page)
+        {
 
+        }
+*/
         [HttpGet]
         public IActionResult Index()
         {

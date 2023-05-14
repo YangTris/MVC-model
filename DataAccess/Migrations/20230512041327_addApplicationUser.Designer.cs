@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230511012326_updateUserRegistrationCols")]
-    partial class updateUserRegistrationCols
+    [Migration("20230512041327_addApplicationUser")]
+    partial class addApplicationUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,73 @@ namespace DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Entity.ApplicationUser", b =>
+                {
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Fristname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("ApplicationUsers");
+                });
 
             modelBuilder.Entity("Entity.Item", b =>
                 {
@@ -399,15 +466,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ba1ab1fb-b357-4ce7-9161-24353da53b70",
+                            ConcurrencyStamp = "8c873c34-0dd4-4c15-80e4-7a557187be47",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKATk+QUUm++qOiP1LCh+2AMpNG50ZPkzv6HVxhjYWLnkj9qqqSYOcUMqseaSBRGLQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEUK65E4R6Xju7/oQuBIcd2ctqZsXDJxI34CwQG54wRM3BnBoqUMiSPFedPo0ZFH5w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "64ca8279-f517-4ff3-a997-c790917c63c9",
+                            SecurityStamp = "227a3758-0a08-4b83-89fd-afc3d4b67150",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin"
                         });

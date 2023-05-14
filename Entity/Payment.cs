@@ -13,9 +13,11 @@ namespace Entity
     {
         [Key]
         public int paymentID { get; set; }
+        /*[ForeignKey("ApplicationUser")]*/
         [ForeignKey("IdentityUser")]
         public string userID { get; set; }
-        public IdentityUser? IdentityUser { get; set; }
+        public IdentityUser IdentityUser { get; set; }
+        /*public ApplicationUser? ApplicationUser { get; set; }*/
         public string method { get; set; }
         public string nameOnCard { get; set; }
         public int cardNumber { get; set; }

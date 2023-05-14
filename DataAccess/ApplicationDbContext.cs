@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
@@ -24,7 +24,7 @@ namespace DataAccess
         public DbSet<Product> Product { get; set; }
         public DbSet<Item> Item { get; set; }
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<IdentityUser> IdentityUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -60,7 +60,7 @@ namespace DataAccess
                     imgURL = "~/images/male_avt.jpg",
                 }
             );
-   
+            /*modelBuilder.Entity<Payment>()*/
             modelBuilder.Entity<OrderDetail>().HasKey(x => new {x.productID, x.orderID});
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.UserId, x.RoleId });
   
