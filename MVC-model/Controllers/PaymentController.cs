@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MVC_model.Models;
 using Service;
+using System.Security.Claims;
 
 namespace MVC_model.Controllers
 {
@@ -9,10 +10,12 @@ namespace MVC_model.Controllers
     {
         private IPaymentService _paymentService;
         private IWebHostEnvironment _webHostEnvironment;
-        public PaymentController(IPaymentService paymentService, IWebHostEnvironment webHostEnvironment)
+        private IItemService _itemService;
+        public PaymentController(IPaymentService paymentService, IWebHostEnvironment webHostEnvironment, IItemService itemService)
         {
             _paymentService = paymentService;
             _webHostEnvironment = webHostEnvironment;
+            _itemService = itemService;
         }
 
         [HttpGet]
@@ -34,12 +37,18 @@ namespace MVC_model.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var model = new CreatePaymentViewModel();
+            var user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var model = new TransactionViewModel
+            {
+                paymentID = Guid.NewGuid().ToString(),
+                userID = user,
+                //listItem = _itemService.getUserItem(user),
+            };
             return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreatePaymentViewModel model)
+        public async Task<IActionResult> Create(TransactionViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -52,14 +61,15 @@ namespace MVC_model.Controllers
                     cardNumber = model.cardNumber,
                     expiration = model.expiration,
                     CVV = model.CVV,
+                    listItem = model.listItem
                 };              
-                await _paymentService.CreateAsSync(payment);
+                //await _paymentService.CreateAsSync(payment);
                 return RedirectToAction("Index");
             }
             return View(model);
         }
         [HttpGet]
-        public IActionResult Details(int id)
+        public IActionResult Details(string id)
         {
             var payment = _paymentService.GetById(id);
             if (payment == null)

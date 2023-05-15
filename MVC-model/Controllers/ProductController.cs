@@ -6,6 +6,7 @@ using MVC_model.Models;
 using Newtonsoft.Json;
 using Service;
 using System.Security.Claims;
+using PagedList;
 
 namespace MVC_model.Controllers
 {
@@ -21,7 +22,11 @@ namespace MVC_model.Controllers
             _webHostEnvironment = webHostEnvironment;
             _itemService = itemService;
         }
+        /*public ViewResult Paging(int? page)
+        {
 
+        }
+*/
         [HttpGet]
         public IActionResult Index()
         {
@@ -140,13 +145,14 @@ namespace MVC_model.Controllers
             {
                 itemID = Guid.NewGuid().ToString(),
                 productID = productTemp.productID,
-                productName=productTemp.productName,
-                brand = productTemp.brand,
-                price = productTemp.price,
-                category = productTemp.category,
-                imgURL = productTemp.imgURL,
                 quantity = 1,
                 userID = user,
+                productName = productTemp.productName,
+                discountPercentage = productTemp.discountPercentage,
+                brand = productTemp.brand,
+                imgURL = productTemp.imgURL,
+                category = productTemp.category,
+                price = productTemp.price,
             };
             return View(model);
         }

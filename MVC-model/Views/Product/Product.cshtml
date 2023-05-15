@@ -16,9 +16,8 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <h5 class="card-title">@item.productName</h5>
-                                    <input asp-for="@item.productName">
-                                    <input asp-for="@item.brand">
-                                    <input asp-for="@item.price">
+                                    <input asp-for="@item.brand" style="text-align: center; border: 0;">
+                                    <input asp-for="@item.price" style="text-align: center; border: 0;">
                                     <div class="buttons_added">
                                         <input class="minus is-form" type="button" value="-">
                                         <input  asp-for="@item.quantity" aria-label="quantity" class="input-qty" placeholder="1" type="text" min="0" max="99" name="" value="" style=" width: 3rem; text-align: center;">
@@ -34,139 +33,26 @@
                         </div>
                     </div>
                 }
-                <div class="col mb-5 ">
-                    <div class="card h-100">
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">50%</div>
-                        <img src="~/images/Dotabg.jpg" class="card-img-top" alt="...">
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p>Adidas</p>
-                                <p>$20</p>
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
-                                <a class="btn btn-outline-white mt-auto" href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <img src="~/images/Dotabg.jpg" class="card-img-top" alt="...">
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p>Adidas</p>
-                                <p>$20</p>
-                                <div class="buttons_added">
-                                    <input class="minus is-form" type="button" value="-">
-                                    <input aria-label="quantity" class="input-qty" type="number" min="0" max="99" name="" value="1" style=" width: 3rem; text-align: center;">
-                                    <input class="plus is-form" type="button" value="+">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
-                                <a class="btn btn-outline-white mt-auto" href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <img src="~/images/Dotabg.jpg" class="card-img-top" alt="...">
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p>Adidas</p>
-                                <p>$20</p>
-
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
-                                <a class="btn btn-outline-white mt-auto" href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">50%</div>
-                        <img src="~/images/Dotabg.jpg" class="card-img-top" alt="...">
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p>Adidas</p>
-                                <p>$20</p>
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
-                                <a class="btn btn-outline-white mt-auto" href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <img src="~/images/Dotabg.jpg" class="card-img-top" alt="...">
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p>Adidas</p>
-                                <p>$20</p>
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
-                                <a class="btn btn-outline-white mt-auto" href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <img src="~/images/Dotabg.jpg" class="card-img-top" alt="...">
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="card-title">Card title</h5>
-                                <p>Adidas</p>
-                                <p>$20</p>
-
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
-                                <a class="btn btn-outline-white mt-auto" href="#">Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
-            
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center" style="padding-top: 2rem;">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center" style="padding-top: 2rem;">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </section>
 </body>
 

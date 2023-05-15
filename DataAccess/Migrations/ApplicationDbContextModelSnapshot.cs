@@ -22,76 +22,12 @@ namespace DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Entity.ApplicationUser", b =>
-                {
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Fristname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lastname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("ApplicationUsers");
-                });
-
             modelBuilder.Entity("Entity.Item", b =>
                 {
                     b.Property<string>("itemID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("paymentID")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("productID")
@@ -105,6 +41,8 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("itemID");
+
+                    b.HasIndex("paymentID");
 
                     b.HasIndex("productID");
 
@@ -175,8 +113,9 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("paymentID")
-                        .HasColumnType("int");
+                    b.Property<string>("paymentID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("orderID");
 
@@ -208,11 +147,8 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Payment", b =>
                 {
-                    b.Property<int>("paymentID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("paymentID"));
+                    b.Property<string>("paymentID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CVV")
                         .IsRequired()
@@ -281,11 +217,11 @@ namespace DataAccess.Migrations
                         {
                             productID = 1,
                             brand = "Adidas",
-                            category = 1,
+                            category = 0,
                             discountPercentage = 20,
-                            imgURL = "~/images/Dotabg.jpg",
+                            imgURL = "~/images/adidas_shoes.jpg",
                             price = 200.0,
-                            productName = "Test"
+                            productName = "Adidas shoes"
                         },
                         new
                         {
@@ -295,17 +231,57 @@ namespace DataAccess.Migrations
                             discountPercentage = 30,
                             imgURL = "~/images/nike_carousel.jpg",
                             price = 100.0,
-                            productName = "Test2"
+                            productName = "Nike shoes"
                         },
                         new
                         {
                             productID = 3,
-                            brand = "Nike",
+                            brand = "Coolmate",
                             category = 2,
                             discountPercentage = 30,
-                            imgURL = "~/images/male_avt.jpg",
+                            imgURL = "~/images/coolmate_mkt.jpg",
+                            price = 250.0,
+                            productName = "Coolmate Box"
+                        },
+                        new
+                        {
+                            productID = 4,
+                            brand = "Nike",
+                            category = 1,
+                            discountPercentage = 20,
+                            imgURL = "~/images/nike_mkt.jpg",
+                            price = 400.0,
+                            productName = "Nike Combo"
+                        },
+                        new
+                        {
+                            productID = 5,
+                            brand = "Other",
+                            category = 2,
+                            discountPercentage = 30,
+                            imgURL = "~/images/OIP.jpg",
                             price = 150.0,
-                            productName = "ABC"
+                            productName = "No name"
+                        },
+                        new
+                        {
+                            productID = 6,
+                            brand = "Other",
+                            category = 1,
+                            discountPercentage = 20,
+                            imgURL = "~/images/T-shirt.jpg",
+                            price = 200.0,
+                            productName = "1842 T-shirt"
+                        },
+                        new
+                        {
+                            productID = 7,
+                            brand = "Other",
+                            category = 0,
+                            discountPercentage = 30,
+                            imgURL = "~/images/giay.jpg",
+                            price = 100.0,
+                            productName = "Hunter shoes"
                         });
                 });
 
@@ -463,15 +439,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3448b15b-cf79-45ae-b9e7-8e6a34325dbe",
+                            ConcurrencyStamp = "ea5ea69f-8244-416d-b545-9b09e0d68334",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEO+uXgVLQ3DJl7iGLNR9a0TWSharfEvOFsUbrNSS/Ktq9gqhmly/FyGQqBF56sRmrQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK4V7QSL625Qwq5/HCe8eKAQnCnhE49m04IeMN3aCpkpMF3TXoU+zynmgHHQs09LIA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e9af39af-b647-4017-bab1-f5d281e44635",
+                            SecurityStamp = "d47917e2-7816-4978-bfc2-cbaa0a24dfb8",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin"
                         });
@@ -576,6 +552,10 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Item", b =>
                 {
+                    b.HasOne("Entity.Payment", null)
+                        .WithMany("listItem")
+                        .HasForeignKey("paymentID");
+
                     b.HasOne("Entity.Product", "product")
                         .WithMany()
                         .HasForeignKey("productID")
@@ -699,6 +679,11 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entity.Order", b =>
                 {
                     b.Navigation("OrderDetails");
+                });
+
+            modelBuilder.Entity("Entity.Payment", b =>
+                {
+                    b.Navigation("listItem");
                 });
 #pragma warning restore 612, 618
         }

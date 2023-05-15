@@ -61,5 +61,12 @@ namespace Service.Implementation
             UpdateAsSync(item);
             return false;
         }
+
+        public IEnumerable<Item> getUserItem(string userID)
+        {
+            var check = _context.Item.SingleOrDefault(c => c.userID == userID);
+            if(check == null) return Enumerable.Empty<Item>();
+            return _context.Item.Where(x=>x.userID == userID).ToList();
+        }
     }
 }

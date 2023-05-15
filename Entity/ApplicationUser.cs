@@ -16,5 +16,7 @@ namespace Entity
 		public string Lastname { get; set; }
 		public string Address { get; set; }
 		public string Phone { get; set; }
+
+	/*	public ICollection<Payment> Payments { get; set; }*/
 	}
 }

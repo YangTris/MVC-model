@@ -38,17 +38,37 @@
                                 <input type="hidden" asp-for="@Model.itemID" class="form-control" />
                                 <span asp-validation-for="@Model.itemID" class="text-danger"></span>
                             </div>
-                            @*<div class="col-3 form-group">
+                            <div class="col-3 form-group">
+                                <input type="hidden" asp-for="@Model.productID" class="form-control" />
+                                <span asp-validation-for="@Model.productID" class="text-danger"></span>
+                            </div>
+                            <div class="col-3 form-group">
                                 <input type="hidden" asp-for="@Model.userID" class="form-control" />
                                 <span asp-validation-for="@Model.userID" class="text-danger"></span>
                             </div>
                             <div class="col-3 form-group">
-                                <input type="hidden" asp-for="@Model.productID" class="form-control" />
-                                <span asp-validation-for="@Model.productID" class="text-danger"></span>
-                            </div>*@
-                            <div class="col-3 form-group">
                                 <input type="hidden" asp-for="@Model.quantity" class="form-control" />
                                 <span asp-validation-for="@Model.quantity" class="text-danger"></span>
+                            </div>
+                            <div class="col-3 form-group">
+                                <input type="hidden" asp-for="@Model.brand" class="form-control" />
+                                <span asp-validation-for="@Model.brand" class="text-danger"></span>
+                            </div>
+                            <div class="col-3 form-group">
+                                <input type="hidden" asp-for="@Model.category" class="form-control" />
+                                <span asp-validation-for="@Model.category" class="text-danger"></span>
+                            </div>
+                            <div class="col-3 form-group">
+                                <input type="hidden" asp-for="@Model.price" class="form-control" />
+                                <span asp-validation-for="@Model.price" class="text-danger"></span> 
+                            </div>
+                            <div class="col-3 form-group">
+                                <input type="hidden" asp-for="@Model.imgURL" class="form-control" />
+                                <span asp-validation-for="@Model.imgURL" class="text-danger"></span>
+                            </div>
+                            <div class="col-3 form-group">
+                                <input type="hidden" asp-for="@Model.productName" class="form-control" />
+                                <span asp-validation-for="@Model.productName" class="text-danger"></span>
                             </div>
                             <button type="submit" class="btn btn-rounded btn-primary float-left"><i class="fas fa-plus-square" style="margin-right:0.7em"></i>Save</button>
                             <a asp-action="Product" class="btn btn-rounded btn-success float-right"><i class="fas fa-caret-square-left" style="margin-right:0.7em"></i>Back</a>

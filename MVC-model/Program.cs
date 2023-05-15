@@ -1,4 +1,5 @@
 using DataAccess;
+using Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Service;
@@ -17,11 +18,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-/*builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<ApplicationDbContext>();*/
-builder.Services.AddDefaultIdentity<IdentityUser>().AddDefaultTokenProviders()
-    .AddRoles<IdentityRole>()
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+/*builder.Services.AddDefaultIdentity<ApplicationUser>().AddDefaultTokenProviders()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();*/
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProductService, ProductService>();

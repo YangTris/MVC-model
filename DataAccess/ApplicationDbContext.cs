@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -24,7 +26,7 @@ namespace DataAccess
         public DbSet<Product> Product { get; set; }
         public DbSet<Item> Item { get; set; }
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+       /* public DbSet<IdentityUser> IdentityUsers { get; set; }*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -32,17 +34,17 @@ namespace DataAccess
                 new Product()
                 {
                     productID = 1,
-                    productName= "Test",
-                    price=200,
-                    brand="Adidas",
-                    category= Category.Shirt,
-                    discountPercentage=20,
-                    imgURL= "~/images/Dotabg.jpg",
+                    productName = "Adidas shoes",
+                    price = 200,
+                    brand = "Adidas",
+                    category = Category.Shoes,
+                    discountPercentage = 20,
+                    imgURL = "~/images/adidas_shoes.jpg",
                 },
                 new Product()
                 {
                     productID = 2,
-                    productName = "Test2",
+                    productName = "Nike shoes",
                     price = 100,
                     brand = "Nike",
                     category = Category.Shoes,
@@ -52,15 +54,55 @@ namespace DataAccess
                 new Product()
                 {
                     productID = 3,
-                    productName = "ABC",
-                    price = 150,
-                    brand = "Nike",
+                    productName = "Coolmate Box",
+                    price = 250,
+                    brand = "Coolmate",
                     category = Category.Pant,
                     discountPercentage = 30,
-                    imgURL = "~/images/male_avt.jpg",
-                }
-            );
-   
+                    imgURL = "~/images/coolmate_mkt.jpg",
+                },
+                new Product()
+                {
+                    productID = 4,
+                    productName = "Nike Combo",
+                    price = 400,
+                    brand = "Nike",
+                    category = Category.Shirt,
+                    discountPercentage = 20,
+                    imgURL = "~/images/nike_mkt.jpg",
+                },
+                new Product()
+                {
+                    productID = 5,
+                    productName = "No name",
+                    price = 150,
+                    brand = "Other",
+                    category = Category.Pant,
+                    discountPercentage = 30,
+                    imgURL = "~/images/OIP.jpg",
+                },
+                new Product()
+                {
+                    productID = 6,
+                    productName = "1842 T-shirt",
+                    price = 200,
+                    brand = "Other",
+                    category = Category.Shirt,
+                    discountPercentage = 20,
+                    imgURL = "~/images/T-shirt.jpg",
+                },
+                new Product()
+                {
+                    productID = 7,
+                    productName = "Hunter shoes",
+                    price = 100,
+                    brand = "Other",
+                    category = Category.Shoes,
+                    discountPercentage = 30,
+                    imgURL = "~/images/giay.jpg",
+                });
+            
+            /*modelBuilder.Entity<Payment>()*/
             modelBuilder.Entity<OrderDetail>().HasKey(x => new {x.productID, x.orderID});
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.UserId, x.RoleId });
   
