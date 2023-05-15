@@ -16,5 +16,6 @@ namespace Service
         Task DeleteAsSync(int id);
         // IEnumerable<Item> GetCart(int id);
         bool CheckItem(string userID, int productID);
+        public IEnumerable<Item> getUserItem(string userID);
     }
 }

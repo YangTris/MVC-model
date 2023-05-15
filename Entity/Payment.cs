@@ -12,7 +12,7 @@ namespace Entity
     public class Payment
     {
         [Key]
-        public int paymentID { get; set; }
+        public string paymentID { get; set; }
         /*[ForeignKey("ApplicationUser")]*/
         [ForeignKey("IdentityUser")]
         public string userID { get; set; }
@@ -23,5 +23,6 @@ namespace Entity
         public int cardNumber { get; set; }
         public DateTime expiration { get; set; }
         public string CVV { get; set; }
+        public IEnumerable<Item> listItem { get; set; }
     }
 }

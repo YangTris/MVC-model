@@ -10,11 +10,11 @@ namespace Service
     public interface IPaymentService
     {
         IEnumerable<Payment> GetAll();
-        Payment GetById(int id);
+        Payment GetById(string id);
         Task CreateAsSync(Payment payment);
         Task UpdateAsSync(Payment payment);
-        Task UpdateById(int id);
-        Task DeleteAsSync(int id);
+        Task UpdateById(string id);
+        Task DeleteAsSync(string id);
         Payment GetByUserID(string userId);
     }
 }

@@ -22,7 +22,7 @@ namespace Service.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsSync(int id)
+        public async Task DeleteAsSync(string id)
         {
             var payment = GetById(id);
             if (payment != null)
@@ -37,9 +37,9 @@ namespace Service.Implementation
             return _context.Payment.ToList();
         }
 
-        public Payment GetById(int id)
+        public Payment GetById(string id)
         {
-            return _context.Payment.Where(x => x.paymentID == id).FirstOrDefault();
+            return _context.Payment.Where(x => x.paymentID.Equals(id)).FirstOrDefault();
         }
 
         public async Task UpdateAsSync(Payment payment)
@@ -48,7 +48,7 @@ namespace Service.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateById(int id)
+        public async Task UpdateById(string id)
         {
             var payment = GetById(id);
             _context.Payment.Update(payment);

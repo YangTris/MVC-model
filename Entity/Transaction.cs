@@ -16,7 +16,7 @@ namespace Entity
         public string userID { get; set; }
         public string email { get; set; }
         public string address { get; set; }
-        public int paymentID { get; set; }
+        public string paymentID { get; set; }
         public string method { get; set; }
         public string nameOnCard { get; set; }
         public int cardNumber { get; set; }
