@@ -60,7 +60,7 @@ namespace MVC_model.Models
 
         [ScaffoldColumn(false)]
         [ForeignKey("Payment")]
-        public int paymentID { get; set; }
+        public string paymentID { get; set; }
         public Payment? payment { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
     }
