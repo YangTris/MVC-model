@@ -63,7 +63,7 @@ namespace MVC_model.Controllers
                     CVV = model.CVV,
                     listItem = model.listItem
                 };              
-                //await _paymentService.CreateAsSync(payment);
+                await _paymentService.CreateAsSync(payment);
                 return RedirectToAction("Index");
             }
             return View(model);

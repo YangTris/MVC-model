@@ -1,10 +1,12 @@
 ﻿using Entity;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace MVC_model.Models
 {
     public class TransactionViewModel
     {
+        public string phoneNumber { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string userID { get; set; }

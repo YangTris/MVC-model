@@ -83,7 +83,7 @@ namespace MVC_model.Areas.Identity.Pages.Account
 			public string LastName { get; set; }
 			
             [Required]
-			[Display(Name = "Phone Numbeer")]
+			[Display(Name = "Phone Number")]
 			public string Phone { get; set; }
 			
             [Required]
