@@ -34,12 +34,12 @@ namespace DataAccess
                 new Product()
                 {
                     productID = 1,
-                    productName= "Adidas shoes",
-                    price=200,
-                    brand="Adidas",
-                    category= Category.Shoes,
-                    discountPercentage=20,
-                    imgURL= "~/images/adidas_shoes.jpg",
+                    productName = "Adidas shoes",
+                    price = 200,
+                    brand = "Adidas",
+                    category = Category.Shoes,
+                    discountPercentage = 20,
+                    imgURL = "~/images/adidas_shoes.jpg",
                 },
                 new Product()
                 {
@@ -63,7 +63,7 @@ namespace DataAccess
                 },
                 new Product()
                 {
-                productID = 4,
+                    productID = 4,
                     productName = "Nike Combo",
                     price = 400,
                     brand = "Nike",
@@ -74,16 +74,6 @@ namespace DataAccess
                 new Product()
                 {
                     productID = 5,
-                    productName = "Uniqlo",
-                    price = 100,
-                    brand = "Other",
-                    category = Category.Shirt,
-                    discountPercentage = 30,
-                    imgURL = "~/images/Uniqlo.jpg",
-                },
-                new Product()
-                {
-                    productID = 6,
                     productName = "No name",
                     price = 150,
                     brand = "Other",
@@ -93,7 +83,7 @@ namespace DataAccess
                 },
                 new Product()
                 {
-                productID = 7,
+                    productID = 6,
                     productName = "1842 T-shirt",
                     price = 200,
                     brand = "Other",
@@ -103,15 +93,15 @@ namespace DataAccess
                 },
                 new Product()
                 {
-                    productID = 8,
+                    productID = 7,
                     productName = "Hunter shoes",
                     price = 100,
                     brand = "Other",
                     category = Category.Shoes,
                     discountPercentage = 30,
                     imgURL = "~/images/giay.jpg",
-                }
-            );
+                });
+            
             /*modelBuilder.Entity<Payment>()*/
             modelBuilder.Entity<OrderDetail>().HasKey(x => new {x.productID, x.orderID});
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.UserId, x.RoleId });
