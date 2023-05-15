@@ -13,7 +13,8 @@ namespace MVC_model.Models
         public string email { get; set; }
         public string address { get; set; }
         public string paymentID { get; set; }
-        public string method { get; set; }
+        [BindProperty]
+        public string method { get; set; } = "Cash";
         public string nameOnCard { get; set; }
         public int cardNumber { get; set; }
         public DateTime expiration { get; set; }
