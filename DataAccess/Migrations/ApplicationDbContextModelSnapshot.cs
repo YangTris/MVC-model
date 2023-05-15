@@ -439,15 +439,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ea5ea69f-8244-416d-b545-9b09e0d68334",
+                            ConcurrencyStamp = "01b0d257-6189-49a8-abce-c0eae44b593e",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEK4V7QSL625Qwq5/HCe8eKAQnCnhE49m04IeMN3aCpkpMF3TXoU+zynmgHHQs09LIA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB5GHr1XijeqfgXqolezECDou+ALkah/N/lfNOZrwK2FDaVFjtKWQvhqXNpnbGdxMw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d47917e2-7816-4978-bfc2-cbaa0a24dfb8",
+                            SecurityStamp = "ab7b2e71-033b-4136-adee-c47c9f2d7317",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin"
                         });
