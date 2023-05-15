@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
