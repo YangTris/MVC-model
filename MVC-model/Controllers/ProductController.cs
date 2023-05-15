@@ -145,11 +145,6 @@ namespace MVC_model.Controllers
             {
                 itemID = Guid.NewGuid().ToString(),
                 productID = productTemp.productID,
-                productName=productTemp.productName,
-                brand = productTemp.brand,
-                price = productTemp.price,
-                category = productTemp.category,
-                imgURL = productTemp.imgURL,
                 quantity = 1,
                 userID = user,
             };
