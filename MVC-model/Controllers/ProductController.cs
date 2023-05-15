@@ -147,6 +147,12 @@ namespace MVC_model.Controllers
                 productID = productTemp.productID,
                 quantity = 1,
                 userID = user,
+                /*productName = productTemp.productName,
+                discountPercentage=productTemp.discountPercentage,
+                brand=productTemp.brand,
+                imgURL=productTemp.imgURL,
+                category = productTemp.category,
+                price= productTemp.price,*/
             };
             return View(model);
         }

@@ -7,21 +7,21 @@
                 <aside class="col-6">
                     <div class="rounded-4 mb-3 d-flex justify-content-center">
                         <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="#">
-                        <img style="max-width: 100%; height:20rem ;max-height: 100vh; margin: auto;" class="rounded-4 fit" src="@Url.Content(Model.imgURL)">
+                        @*<img style="max-width: 100%; height:20rem ;max-height: 100vh; margin: auto;" class="rounded-4 fit" src="@Url.Content(Model.imgURL)">*@
                         </a>
                     </div>
                 </aside>
 
                 <main class="col-6" style="text-align: center;">
                     <div class="ps-lg-3">
-                    <h5 class="title text-dark">@Model.productName</h5>
+                    @*<h5 class="title text-dark">@Model.productName</h5>
                         <br />
                         <h4>@Model.brand</h4>
                         <br />
                         <h4>@Model.category</h4>
                         <br />
                         <h4>@Model.price</h4>
-                        <br />
+                        <br />*@
                         
                         <div class="buttons_added">
                             <input class="minus is-form" type="button" value="-">
@@ -49,8 +49,8 @@
                             <div class="col-3 form-group">
                                 <input type="hidden" asp-for="@Model.quantity" class="form-control" />
                                 <span asp-validation-for="@Model.quantity" class="text-danger"></span>
-                            </div
-                            <div class="col-3 form-group">
+                            </div>
+                            @*<div class="col-3 form-group">
                                 <input type="hidden" asp-for="@Model.brand" class="form-control" />
                                 <span asp-validation-for="@Model.brand" class="text-danger"></span>
                             </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="col-3 form-group">
                                 <input type="hidden" asp-for="@Model.price" class="form-control" />
-                                <span asp-validation-for="@Model.price" class="text-danger"></span>
+                                <span asp-validation-for="@Model.price" class="text-danger"></span> 
                             </div>
                             <div class="col-3 form-group">
                                 <input type="hidden" asp-for="@Model.imgURL" class="form-control" />
@@ -68,7 +68,7 @@
                             </div>
                             <div class="col-3 form-group">
                                 <input type="hidden" asp-for="@Model.productName" class="form-control" />
-                                <span asp-validation-for="@Model.productName" class="text-danger"></span>
+                                <span asp-validation-for="@Model.productName" class="text-danger"></span>*@
                             </div>
                             <button type="submit" class="btn btn-rounded btn-primary float-left"><i class="fas fa-plus-square" style="margin-right:0.7em"></i>Save</button>
                             <a asp-action="Product" class="btn btn-rounded btn-success float-right"><i class="fas fa-caret-square-left" style="margin-right:0.7em"></i>Back</a>
