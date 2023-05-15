@@ -19,10 +19,10 @@ namespace Entity
         public string paymentID { get; set; }
         public string method { get; set; }
         public string nameOnCard { get; set; }
-        public int cardNumber { get; set; }
+        public int? cardNumber { get; set; }
         public DateTime expiration { get; set; }
-        public string CVV { get; set; }
-        public int CartId { get; set; }
+        public string? CVV { get; set; }
+        public int? CartId { get; set; }
         public IEnumerable<Item> items { get; set; }
     }
 }
