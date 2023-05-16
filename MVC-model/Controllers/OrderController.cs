@@ -62,7 +62,7 @@ namespace MVC_model.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Detail(string id)
+        public IActionResult Detail(int id)
         {
 
             var order = _orderService.GetById(id);

@@ -19,11 +19,12 @@
 
                     <thead>
                         <tr>
+
+                            <th>Order id</th>
                             <th>Payment id</th>
                             <th>First name</th>
                             <th>Last name</th>
                             <th>Phone number</th>
-                            @*<th>Method</th>*@
                             <th>Total price</th>
                             <th class="text-warning">Action</th>
                         </tr>
@@ -32,17 +33,17 @@
                         @foreach (var item in Model)
                         {
                             <tr>
+                                <td>@item.orderID</td>
                                 <td>@item.paymentID</td>
                                 <td>@item.FirstName</td>
                                 <td>@item.LastName</td>
                                 <td>@item.Phone</td>
-                                @*<td>@item.payment.method</td>*@
                                 <td>@item.Total</td>
                                 <td>
-                                    <a class="text-success" asp-action="Detail" asp-route-id="@item.paymentID">
+                                    <a class="text-success" asp-action="Detail" asp-route-id="@item.orderID">
                                         <i class="fas fa-bars"></i> Detail
                                     </a>
-                                    <a class="text-danger" asp-action="Delete" asp-route-id="@item.paymentID">
+                                    <a class="text-danger" asp-action="Delete" asp-route-id="@item.orderID">
                                         <i class="far fa-trash-alt"></i> Delete
                                     </a>
                                 </td>

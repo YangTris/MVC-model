@@ -10,10 +10,10 @@ namespace Service
     public interface IOrderService
     {
         IEnumerable<Order> GetAll();
-        Order GetById(string id);
+        Order GetById(int id);
         Task CreateAsSync(Order order);
         Task UpdateAsSync(Order order);
-        Task UpdateById(string id);
-        Task DeleteAsSync(string id);
+        Task UpdateById(int id);
+        Task DeleteAsSync(int id);
     }
 }

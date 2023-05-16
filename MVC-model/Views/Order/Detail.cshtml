@@ -53,7 +53,7 @@
                         <strong>$20</strong>
                         </li>*@
 
-                        @foreach (var item in Model.listItem)
+                        @*@foreach (var item in Model.listItem)
                         {
                             <li class="list-group-item d-flex justify-content-between lh-sm">
                                 <div>
@@ -66,7 +66,7 @@
                         <li class="list-group-item d-flex justify-content-between">
                             <span>Total: </span>
                             <strong>$@Model.Total</strong>
-                        </li>
+                        </li>*@
                     </ul>
 
                     <form class="card p-2">
@@ -86,7 +86,7 @@
 
                             <div class="col-sm-6">
                                 <label asp-for="@Model.FirstName" class="form-label">First name</label>
-                                <input asp-for="@Model.FirstName" type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                                <input asp-for="@Model.FirstName" type="text" readonly="readonly" class="form-control" id="firstName" placeholder="" value="" required>
 
                                 <div class="invalid-feedback">
                                     Valid first name is required.
@@ -95,7 +95,7 @@
 
                             <div class="col-sm-6">
                                 <label asp-for="@Model.LastName" class="form-label">Last name</label>
-                                <input asp-for="@Model.LastName" type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                                <input asp-for="@Model.LastName" type="text" readonly="readonly" class="form-control" id="lastName" placeholder="" value="" required>
 
                                 <div class="invalid-feedback">
                                     Valid last name is required.
@@ -105,9 +105,7 @@
                             <div class="col-12">
                                 <label asp-for="@Model.Phone" class="form-label">Phone number</label>
                                 <div class="input-group has-validation">
-                                    <input asp-for="@Model.Phone" type="text" class="form-control" required>
-
-
+                                    <input asp-for="@Model.Phone" readonly="readonly" type="text" class="form-control" required>
                                     <div class="invalid-feedback">
                                         Your username is required.
                                     </div>
@@ -116,7 +114,7 @@
 
                             <div class="col-12">
                                 <label asp-for="@Model.Email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
-                                <input asp-for="@Model.Email" type="email" class="form-control" id="email" placeholder="you@example.com">
+                                <input asp-for="@Model.Email" type="email" readonly="readonly" class="form-control" id="email" placeholder="you@example.com">
 
 
                                 <div class="invalid-feedback">
@@ -126,7 +124,7 @@
 
                             <div class="col-12">
                                 <label asp-for="@Model.Address" class="form-label">Address</label>
-                                <input asp-for="@Model.Address" type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                                <input asp-for="@Model.Address" type="text" readonly="readonly" class="form-control" id="address" placeholder="1234 Main St" required>
 
 
                                 <div class="invalid-feedback">
@@ -139,15 +137,15 @@
 
                         <div class="my-3">
                             <div class="form-check">
-                                <input asp-for="@Model.payment.method" value="Cash" id="Cash" type="radio" onclick="show1()" class="form-check-input" checked>Cash
+                                <input asp-for="@Model.payment.method" onclick="return false;" value="Cash" id="Cash" type="radio" onclick="show1()" class="form-check-input" checked>Cash
                                 @*<label asp-for="@Model.method" class="form-check-label" for="cash">Cash</label>*@
                             </div>
                             <div class="form-check">
-                                <input asp-for="@Model.payment.method" value="Credit" id="Credit" type="radio" onclick="show2()" class="form-check-input">Credit
+                                <input asp-for="@Model.payment.method" onclick="return false;" value="Credit" id="Credit" type="radio" onclick="show2()" class="form-check-input">Credit
                                 @*<label asp-for="@Model.method" class="form-check-label" for="credit">Credit card</label>*@
                             </div>
                             <div class="form-check">
-                                <input asp-for="@Model.payment.method" value="Visa" id="Visa" type="radio" onclick="show3()" class="form-check-input">Visa
+                                <input asp-for="@Model.payment.method" onclick="return false;" value="Visa" id="Visa" type="radio" onclick="show3()" class="form-check-input">Visa
                                 @*<label asp-for="@Model.method" class="form-check-label" for="visa">Visa</label>*@
                             </div>
                         </div>
@@ -155,7 +153,7 @@
                         <div class="row gy-3" id="showCredit" style="display:none">
                             <div class="col-md-6">
                                 <label asp-for="@Model.payment.nameOnCard" class="form-label">Name on card</label>
-                                <input asp-for="@Model.payment.nameOnCard" type="text" class="form-control" id="cc-name" placeholder="" required>
+                                <input asp-for="@Model.payment.nameOnCard" readonly="readonly" type="text" class="form-control" id="cc-name" placeholder="" required>
                                 @*<small class="text-body-secondary" style="color: red;">Full name as displayed on card</small>*@
                                 <div class="invalid-feedback">
                                     Name on card is required
@@ -164,7 +162,7 @@
 
                             <div class="col-md-6">
                                 <label asp-for="@Model.payment.cardNumber" class="form-label">Card number</label>
-                                <input asp-for="@Model.payment.cardNumber" type="text" class="form-control" id="cc-number" placeholder="" required>
+                                <input asp-for="@Model.payment.cardNumber" readonly="readonly" type="text" class="form-control" id="cc-number" placeholder="" required>
                                 @*<small class="text-body-secondary" style="color: red;">Number as displayed on card</small>*@
 
                                 <div class="invalid-feedback">
@@ -174,7 +172,7 @@
 
                             <div class="col-md-3">
                                 <label asp-for="@Model.payment.expiration" class="form-label">Expiration</label>
-                                <input asp-for="@Model.payment.expiration" type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                                <input asp-for="@Model.payment.expiration" readonly="readonly" type="text" class="form-control" id="cc-expiration" placeholder="" required>
                                 @*<small class="text-body-secondary" style="color: red;">Expiration as displayed on card</small>*@
 
                                 <div class="invalid-feedback">
@@ -184,7 +182,7 @@
 
                             <div class="col-md-3">
                                 <label asp-for="@Model.payment.CVV" class="form-label">CVV</label>
-                                <input asp-for="@Model.payment.CVV" type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                                <input asp-for="@Model.payment.CVV" readonly="readonly" type="text" class="form-control" id="cc-cvv" placeholder="" required>
                                 @*<small class="text-body-secondary" style="color: red;">CVV as displayed on card</small>*@
 
                                 <div class="invalid-feedback">
