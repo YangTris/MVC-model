@@ -114,15 +114,21 @@ namespace MVC_model.Controllers
             {
                 return NotFound();
             }
-            var model = new DetailPaymentViewModel
+            var model = new DetailTransactionViewModel
             {
                 paymentID = payment.paymentID,
                 userID = payment.userID,
+                firstName = payment.firstName,
+                lastName = payment.lastName,
+                email = payment.email,
+                address = payment.address,
+                phoneNumber = payment.phone,
                 method = payment.method,
                 nameOnCard = payment.nameOnCard,
-                //cardNumber = payment.cardNumber,
+                cardNumber = payment.cardNumber,
                 expiration = payment.expiration,
                 CVV = payment.CVV,
+                totalPrice = payment.totalPrice,
             };
             return View(model);
         }
