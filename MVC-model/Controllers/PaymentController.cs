@@ -22,13 +22,31 @@ namespace MVC_model.Controllers
             _productService = productService;
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public IActionResult Index()
         {
             var model = _paymentService.GetAll().Select(payment => new IndexPaymentViewModel
             {
                 paymentID = payment.paymentID,
                 userID = payment.userID,
+                method = payment.method,
+                nameOnCard = payment.nameOnCard,
+                cardNumber = payment.cardNumber,
+                expiration = payment.expiration,
+                CVV = payment.CVV,
+            }).ToList();
+            return View(model);
+        }*/
+        [HttpGet]
+        public IActionResult Index()
+        {
+            var model = _paymentService.GetAll().Select(payment => new TransactionViewModel
+            {
+                paymentID = payment.paymentID,
+                firstName = payment.firstName,
+                lastName = payment.lastName,
+                phoneNumber= payment.phone,
+                totalPrice= payment.totalPrice,
                 method = payment.method,
                 nameOnCard = payment.nameOnCard,
                 cardNumber = payment.cardNumber,

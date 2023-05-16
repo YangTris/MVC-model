@@ -4,6 +4,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@model IEnumerable<TransactionViewModel>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,6 +102,16 @@
                                         <strong>$20</strong>
                                     </li>
                                 }*@
+                                @*@foreach (var item in Model)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                                        <div>
+                                            <h6 class="my-0">@item.productName</h6>
+                                            <small class="text-body-secondary">Quantity: @item.quantity</small>
+                                        </div>
+                                        <span class="text-body-secondary">$@item.productPrice</span>
+                                    </li>
+                                }*@
                             </ul>
                             <button class="w-100 btn btn-primary btn-lg" type="submit">
                                 <a class="nav-link" asp-controller="Payment" asp-action="Create" style="color: white">Continue to checkout</a>      
@@ -145,8 +156,7 @@
                 <p> &copy; @DateTime.UtcNow.Year - MVC_model - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
                 <ul class="list-unstyled d-flex">
                     <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="fa-brands fa-facebook fa-xl" style="color: #000000;"></i></a></li>
-                    <li class="ms-3"><a class="link-body-emphasis" href="#"><i class="fa-brands fa-github fa-xl" style="color: #000000;"></i></a></li>
-                    <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook" /></svg></a></li>
+                    <li class="ms-3"><a class="link-body-emphasis" href="https://github.com/YangTris/MVC-model"><i class="fa-brands fa-github fa-xl" style="color: #000000;"></i></a></li>
                 </ul>
             </div>
         </footer>

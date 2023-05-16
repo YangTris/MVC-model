@@ -21,6 +21,6 @@ namespace MVC_model.Models
         public string? CVV { get; set; }
         public int CartId { get; set; }
         public IEnumerable<Item>? listItem { get; set; }
-        public double totalPrice { get; set; }
+        public double? totalPrice { get; set; }
     }
 }
