@@ -14,12 +14,19 @@ namespace MVC_model.Controllers
         private IWebHostEnvironment _webHostEnvironment;
         private IItemService _itemService;
         private IProductService _productService;
-        public PaymentController(IPaymentService paymentService, IWebHostEnvironment webHostEnvironment, IItemService itemService, IProductService productService)
+        private IOrderService _orderService;
+        public PaymentController(
+            IPaymentService paymentService,
+            IWebHostEnvironment webHostEnvironment, 
+            IItemService itemService, 
+            IProductService productService,
+            IOrderService orderService)
         {
             _paymentService = paymentService;
             _webHostEnvironment = webHostEnvironment;
             _itemService = itemService;
             _productService = productService;
+            _orderService = orderService;
         }
 
         /*[HttpGet]
@@ -42,10 +49,10 @@ namespace MVC_model.Controllers
         {
             var model = _paymentService.GetAll().Select(payment => new TransactionViewModel
             {
-                paymentID = payment.paymentID,
-                firstName = payment.firstName,
-                lastName = payment.lastName,
-                phoneNumber= payment.phone,
+                //paymentID = payment.paymentID,
+                //firstName = payment.firstName,
+                //lastName = payment.lastName,
+                //phoneNumber= payment.phone,
                 totalPrice= payment.totalPrice,
                 method = payment.method,
                 nameOnCard = payment.nameOnCard,
@@ -89,19 +96,26 @@ namespace MVC_model.Controllers
                 {
                     paymentID = model.paymentID,
                     userID = model.userID,
-                    firstName = model.firstName,
-                    lastName = model.lastName,
-                    email = model.email,
-                    address = model.address,
-                    phone = model.phoneNumber,
                     method = model.method,
                     nameOnCard = model.nameOnCard,
                     cardNumber = model.cardNumber,
                     expiration = model.expiration,
                     CVV = model.CVV,
                     totalPrice = model.totalPrice,
-                };              
+                }; 
+                var order = new Order
+                {
+                    FirstName = model.firstName,
+                    LastName = model.lastName,
+                    Email = model.email,
+                    Address = model.address,
+                    Phone = model.phoneNumber,
+                    paymentID = model.paymentID,
+                    listItem = _itemService.getUserItem(model.userID),
+                    Total = model.totalPrice,
+                };
                 await _paymentService.CreateAsSync(payment);
+                await _orderService.CreateAsSync(order);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -118,17 +132,18 @@ namespace MVC_model.Controllers
             {
                 paymentID = payment.paymentID,
                 userID = payment.userID,
-                firstName = payment.firstName,
-                lastName = payment.lastName,
-                email = payment.email,
-                address = payment.address,
-                phoneNumber = payment.phone,
+                //firstName = payment.firstName,
+                //lastName = payment.lastName,
+                //email = payment.email,
+                //address = payment.address,
+                //phoneNumber = payment.phone,
                 method = payment.method,
                 nameOnCard = payment.nameOnCard,
                 cardNumber = payment.cardNumber,
                 expiration = payment.expiration,
                 CVV = payment.CVV,
                 totalPrice = payment.totalPrice,
+                listItem = _itemService.getUserItem(payment.userID),
             };
             return View(model);
         }

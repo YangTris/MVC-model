@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230516072331_test")]
-    partial class test
+    [Migration("20230516085315_order")]
+    partial class order
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,9 @@ namespace DataAccess.Migrations
                 {
                     b.Property<string>("itemID")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("orderID")
+                        .HasColumnType("int");
 
                     b.Property<int>("productID")
                         .HasColumnType("int");
@@ -49,6 +52,8 @@ namespace DataAccess.Migrations
 
                     b.HasKey("itemID");
 
+                    b.HasIndex("orderID");
+
                     b.HasIndex("productID");
 
                     b.HasIndex("userID");
@@ -68,16 +73,6 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -101,22 +96,8 @@ namespace DataAccess.Migrations
                         .HasMaxLength(24)
                         .HasColumnType("nvarchar(24)");
 
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<decimal>("Total")
+                    b.Property<decimal?>("Total")
                         .HasColumnType("money");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("paymentID")
                         .IsRequired()
@@ -137,37 +118,17 @@ namespace DataAccess.Migrations
                     b.Property<string>("CVV")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("cardNumber")
                         .HasColumnType("int");
 
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("expiration")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("firstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("lastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("method")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nameOnCard")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("totalPrice")
@@ -425,15 +386,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "be1bb093-9828-455f-9961-1e7f5f7b9ef8",
+                            ConcurrencyStamp = "7febd581-4234-4b47-9809-5fcf5f20acce",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOEbW7ifskU62PgJTmxb8mw2KLjz5OT5x7I9Gd0Mw0P4qNtqfFzKx4x7eLw/k+y/BQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENaUOC43/YGCGIAXnYKQdG5M75IdN6wABOPgSsDnYZN1rS9/GznXi70cOB0dXc78pA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3a5c4480-59ba-4ad0-b9be-351e07eb41bd",
+                            SecurityStamp = "4196f66d-e134-4c48-9295-87db0f4d7426",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin"
                         });
@@ -538,6 +499,10 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Item", b =>
                 {
+                    b.HasOne("Entity.Order", null)
+                        .WithMany("listItem")
+                        .HasForeignKey("orderID");
+
                     b.HasOne("Entity.Product", "product")
                         .WithMany()
                         .HasForeignKey("productID")
@@ -626,6 +591,11 @@ namespace DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Entity.Order", b =>
+                {
+                    b.Navigation("listItem");
                 });
 #pragma warning restore 612, 618
         }

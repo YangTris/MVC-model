@@ -9,10 +9,7 @@ namespace MVC_model.Models
     {
         [Key]
         public int orderID { get; set; }
-
-        public DateTime OrderDate { get; set; }
-
-        public string Username { get; set; }
+        public DateTime OrderDate { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "First Name is required")]
         [DisplayName("First Name")]
@@ -28,23 +25,6 @@ namespace MVC_model.Models
         [StringLength(70)]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "City is required")]
-        [StringLength(40)]
-        public string City { get; set; }
-
-        [Required(ErrorMessage = "State is required")]
-        [StringLength(40)]
-        public string State { get; set; }
-
-        [Required(ErrorMessage = "Postal Code is required")]
-        [DisplayName("Postal Code")]
-        [StringLength(10)]
-        public string PostalCode { get; set; }
-
-        [Required(ErrorMessage = "Country is required")]
-        [StringLength(40)]
-        public string Country { get; set; }
-
         [StringLength(24)]
         public string Phone { get; set; }
 
@@ -56,12 +36,13 @@ namespace MVC_model.Models
         public string Email { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal Total { get; set; }
+        public double? Total { get; set; }
 
         [ScaffoldColumn(false)]
+
         [ForeignKey("Payment")]
         public string paymentID { get; set; }
-        public Payment? payment { get; set; }
-        //public List<OrderDetail> OrderDetails { get; set; }
+        public virtual Payment? payment { get; set; }
+        public IEnumerable<Item> listItem { get; set; }
     }
  }

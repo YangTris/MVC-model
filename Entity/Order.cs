@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -12,10 +13,7 @@ namespace Entity
     public class Order
     {
         public int orderID { get; set; }
-
-        public DateTime OrderDate { get; set; }
-
-        public string Username { get; set; }
+        public DateTime OrderDate { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "First Name is required")]
         [DisplayName("First Name")]
@@ -29,24 +27,7 @@ namespace Entity
 
         [Required(ErrorMessage = "Address is required")]
         [StringLength(70)]
-        public string Address { get; set; }
-
-        [Required(ErrorMessage = "City is required")]
-        [StringLength(40)]
-        public string City { get; set; }
-
-        [Required(ErrorMessage = "State is required")]
-        [StringLength(40)]
-        public string State { get; set; }
-
-        [Required(ErrorMessage = "Postal Code is required")]
-        [DisplayName("Postal Code")]
-        [StringLength(10)]
-        public string PostalCode { get; set; }
-
-        [Required(ErrorMessage = "Country is required")]
-        [StringLength(40)]
-        public string Country { get; set; }
+        public string Address { get; set; }   
 
         [StringLength(24)]
         public string Phone { get; set; }
@@ -59,13 +40,13 @@ namespace Entity
         public string Email { get; set; }
 
         [Column(TypeName ="money")]
-        public decimal Total { get; set; }
+        public double? Total { get; set; }
 
         [ScaffoldColumn(false)]
 
         [ForeignKey("Payment")]
         public string paymentID { get; set; }
-        public Payment? payment { get; set; }
-        //public List<OrderDetail> OrderDetails { get; set; }
+        public virtual Payment? payment { get; set; }
+        public IEnumerable<Item> listItem { get; set; }
     }
 }

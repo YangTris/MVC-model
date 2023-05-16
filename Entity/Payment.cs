@@ -18,11 +18,6 @@ namespace Entity
         public string userID { get; set; }
         public IdentityUser IdentityUser { get; set; }
         /*public ApplicationUser? ApplicationUser { get; set; }*/
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string email { get; set; }
-        public string phone { get; set; }
-        public string address { get; set; }
         public string method { get; set; }
         public string? nameOnCard { get; set; }
         public int? cardNumber { get; set; }
