@@ -53,7 +53,7 @@ namespace MVC_model.Controllers
                     paymentID = _paymentService.GetByUserID(model.userID).paymentID,
                     method = _paymentService.GetByUserID(model.userID).method,
                     nameOnCard = _paymentService.GetByUserID(model.userID).nameOnCard,
-                    cardNumber = _paymentService.GetByUserID(model.userID).cardNumber,
+                    //cardNumber = _paymentService.GetByUserID(model.userID).cardNumber,
                     expiration = _paymentService.GetByUserID(model.userID).expiration,
                     CVV = _paymentService.GetByUserID(model.userID).CVV,
                     CartId = _cartService.GetByUserId(model.userID).shoppingCartID,

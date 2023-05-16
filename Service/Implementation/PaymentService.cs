@@ -11,6 +11,8 @@ namespace Service.Implementation
     public class PaymentService : IPaymentService
     {
         private ApplicationDbContext _context;
+        private IProductService _productService;
+        private decimal totalPrice;
         public PaymentService(ApplicationDbContext context)
         {
             _context = context;
@@ -58,5 +60,13 @@ namespace Service.Implementation
         {
             return _context.Payment.Where(x => x.userID.Equals(userId)).FirstOrDefault();
         }
+        //public decimal totalPriceCal(IEnumerable<Item> listItem)
+        //{
+        //    foreach (Item item in listItem)
+        //    {
+        //        totalPrice +=(decimal)(_productService.GetById(item.productID).price*item.quantity);
+        //    }
+        //    return totalPrice;
+        //}
     }
 }

@@ -16,5 +16,6 @@ namespace Service
         Task UpdateById(string id);
         Task DeleteAsSync(string id);
         Payment GetByUserID(string userId);
+        //decimal totalPriceCal(IEnumerable<Item> listItem);
     }
 }

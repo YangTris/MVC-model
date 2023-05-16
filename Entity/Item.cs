@@ -13,7 +13,9 @@ namespace Entity
     {
         [Key]
         public string itemID { get; set; }
-        public Product product { get; set; }
+        [ForeignKey("Product")]
+        public int productID { get; set; }
+        public virtual Product product { get; set; }
         public int quantity { get; set; }
         [ForeignKey("IdentityUser")]
         public string userID { get; set; }

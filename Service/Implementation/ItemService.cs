@@ -64,9 +64,9 @@ namespace Service.Implementation
 
         public IEnumerable<Item> getUserItem(string userID)
         {
-            var check = _context.Item.SingleOrDefault(c => c.userID == userID);
+            IEnumerable<Item> check = _context.Item.Where(x => x.userID == userID).ToList();
             if(check == null) return Enumerable.Empty<Item>();
-            return _context.Item.Where(x=>x.userID == userID).ToList();
+            return check;
         }
     }
 }

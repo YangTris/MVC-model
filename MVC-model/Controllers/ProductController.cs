@@ -168,7 +168,7 @@ namespace MVC_model.Controllers
                     Item item = new Item
                     {
                         itemID = model.itemID,
-                        product = _productService.GetById(model.productID),
+                        productID = model.productID,
                         quantity = model.quantity,
                         userID=model.userID,
                     };

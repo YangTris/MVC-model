@@ -1,7 +1,9 @@
 ﻿using Entity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MVC_model.Models;
 using Service;
+using Service.Implementation;
 using System.Security.Claims;
 
 namespace MVC_model.Controllers
@@ -11,11 +13,13 @@ namespace MVC_model.Controllers
         private IPaymentService _paymentService;
         private IWebHostEnvironment _webHostEnvironment;
         private IItemService _itemService;
-        public PaymentController(IPaymentService paymentService, IWebHostEnvironment webHostEnvironment, IItemService itemService)
+        private IProductService _productService;
+        public PaymentController(IPaymentService paymentService, IWebHostEnvironment webHostEnvironment, IItemService itemService, IProductService productService)
         {
             _paymentService = paymentService;
             _webHostEnvironment = webHostEnvironment;
             _itemService = itemService;
+            _productService = productService;
         }
 
         [HttpGet]
@@ -42,10 +46,20 @@ namespace MVC_model.Controllers
             {
                 paymentID = Guid.NewGuid().ToString(),
                 userID = user,
-                //listItem = _itemService.getUserItem(user),
+                listItem = _itemService.getUserItem(user),
             };
             return View(model);
         }
+        public double totalPriceCal(IEnumerable<Item> listItem)
+        {
+            double totalPrice = 0;
+            foreach (Item item in listItem)
+            {
+                totalPrice += _productService.GetById(item.productID).price * item.quantity;
+            }
+            return totalPrice;
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TransactionViewModel model)
@@ -56,12 +70,17 @@ namespace MVC_model.Controllers
                 {
                     paymentID = model.paymentID,
                     userID = model.userID,
+                    firstName = model.firstName,
+                    lastName = model.lastName,
+                    email = model.email,
+                    address = model.address,
+                    phone = model.phoneNumber,
                     method = model.method,
                     nameOnCard = model.nameOnCard,
                     cardNumber = model.cardNumber,
                     expiration = model.expiration,
                     CVV = model.CVV,
-                    listItem = model.listItem
+                    totalPrice = totalPriceCal(_itemService.getUserItem(model.userID)),
                 };              
                 await _paymentService.CreateAsSync(payment);
                 return RedirectToAction("Index");
@@ -82,7 +101,7 @@ namespace MVC_model.Controllers
                 userID = payment.userID,
                 method = payment.method,
                 nameOnCard = payment.nameOnCard,
-                cardNumber = payment.cardNumber,
+                //cardNumber = payment.cardNumber,
                 expiration = payment.expiration,
                 CVV = payment.CVV,
             };
