@@ -1,0 +1,56 @@
+﻿@model IEnumerable<IndexOrderViewModel>
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="card">
+    <div class="card-body" style="background: white">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">All Payment</li>
+            </ol>
+        </nav>
+        <div class="row">
+            <div class="col-md-12 table-responsive-md">
+                @*<a class="btn btn-xs btn-outline-success float-md-right" asp-action="Create"> New Employee</a>*@
+                <table class="table table-strip table" style="color: black;">
+
+                    <thead>
+                        <tr>
+                            <th>Payment id</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Phone number</th>
+                            @*<th>Method</th>*@
+                            <th>Total price</th>
+                            <th class="text-warning">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.paymentID</td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.Phone</td>
+                                @*<td>@item.payment.method</td>*@
+                                <td>@item.Total</td>
+                                <td>
+                                    <a class="text-success" asp-action="Detail" asp-route-id="@item.paymentID">
+                                        <i class="fas fa-bars"></i> Detail
+                                    </a>
+                                    <a class="text-danger" asp-action="Delete" asp-route-id="@item.paymentID">
+                                        <i class="far fa-trash-alt"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

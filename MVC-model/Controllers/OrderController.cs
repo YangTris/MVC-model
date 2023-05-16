@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MVC_model.Models;
 using Service;
+using Service.Implementation;
 
 namespace MVC_model.Controllers
 {
@@ -61,8 +62,9 @@ namespace MVC_model.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Details(int id)
+        public IActionResult Detail(string id)
         {
+
             var order = _orderService.GetById(id);
             if (order == null)
             {
