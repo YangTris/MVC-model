@@ -20,5 +20,7 @@ namespace Entity
         [ForeignKey("IdentityUser")]
         public string userID { get; set; }
         public virtual IdentityUser user { get; set; }
+        public string productName { get; set; }
+        public double? productPrice { get; set; }
     }
 }

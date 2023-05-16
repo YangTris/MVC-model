@@ -63,12 +63,25 @@ namespace DataAccess.Migrations
                 type: "float",
                 nullable: true);
 
+            migrationBuilder.AddColumn<string>(
+                name: "productName",
+                table: "Item",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
+
+            migrationBuilder.AddColumn<double>(
+                name: "productPrice",
+                table: "Item",
+                type: "float",
+                nullable: true);
+
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "c28305c3-93f5-4490-ae59-05d0401bcee3",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "442a699f-d591-40d6-ac8f-16461ab0fdb3", "AQAAAAIAAYagAAAAEOoqTf4boS8UpKFHXoc95gDYR4Cdesj7D8NXy/ai1zYW4J3g+D3dvGOkHotssfgceQ==", "227c51cb-df49-4b8b-8a91-2b9aa480f30c" });
+                values: new object[] { "1901f392-16d7-48b3-a53d-d722c4463c42", "AQAAAAIAAYagAAAAEFyTLjBoq52uoxYHD2/Ad8tzEmmbLnEA5GipdLzvI7rD1Je8aRWlNcm0CEhStm1BqA==", "413c684a-4af4-490f-b9ab-917f26602018" });
         }
 
         /// <inheritdoc />
@@ -97,6 +110,14 @@ namespace DataAccess.Migrations
             migrationBuilder.DropColumn(
                 name: "totalPrice",
                 table: "Payment");
+
+            migrationBuilder.DropColumn(
+                name: "productName",
+                table: "Item");
+
+            migrationBuilder.DropColumn(
+                name: "productPrice",
+                table: "Item");
 
             migrationBuilder.AddColumn<string>(
                 name: "paymentID",

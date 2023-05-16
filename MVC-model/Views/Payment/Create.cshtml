@@ -19,7 +19,7 @@
                     <span class="badge bg-primary rounded-pill">3</span>
                 </h4>
                 <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                    @*<li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
                             <h6 class="my-0">Product name</h6>
                             <small class="text-body-secondary">Brief description</small>
@@ -50,16 +50,16 @@
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (USD)</span>
                         <strong>$20</strong>
-                    </li>
+                    </li>*@
 
-                    @*@foreach (var item in Model.listItem)
+                    @foreach (var item in Model.listItem)
                     {
                         <li class="list-group-item d-flex justify-content-between lh-sm">
                             <div>
-                                <h6 class="my-0">@item.product.productName</h6>
+                                <h6 class="my-0">@item.productName</h6>
                                 <small class="text-body-secondary">quantity: @item.quantity</small>
                             </div>
-                            <span class="text-body-secondary">$@item.product.price</span>
+                            <span class="text-body-secondary">$@item.productPrice</span>
                         </li>
                     }
                     <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
@@ -71,8 +71,8 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (USD)</span>
-                        @*<strong>@Order.total</strong>
-                    </li>*@
+                        <strong>@Model.totalPrice</strong>
+                    </li>
                 </ul>
 
                 <form class="card p-2">
@@ -88,6 +88,7 @@
                 <h4 class="mb-3">Billing address</h4>
                 <form method="post" asp-action="Create" enctype="multipart/form-data" class="needs-validation" novalidate>
                     <div class="row g-3">
+
                         <div class="col-sm-6">
                             <label asp-for="@Model.firstName" class="form-label">First name</label>
                             <input asp-for="@Model.firstName" type="text" class="form-control" id="firstName" placeholder="" value="" required>
@@ -197,6 +198,7 @@
                         </div>
                         <input asp-for="@Model.paymentID" type="hidden" />
                         <input asp-for="@Model.userID" type="hidden" />
+                        <input asp-for="@Model.totalPrice" type="hidden"/>
 
                     </div>
 

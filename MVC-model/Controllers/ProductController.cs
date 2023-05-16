@@ -171,6 +171,8 @@ namespace MVC_model.Controllers
                         productID = model.productID,
                         quantity = model.quantity,
                         userID=model.userID,
+                        productName = model.productName,
+                        productPrice = model.price,
                     };
                     await _itemService.CreateAsSync(item);
                 }

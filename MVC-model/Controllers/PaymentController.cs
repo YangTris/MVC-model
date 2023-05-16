@@ -47,6 +47,7 @@ namespace MVC_model.Controllers
                 paymentID = Guid.NewGuid().ToString(),
                 userID = user,
                 listItem = _itemService.getUserItem(user),
+                totalPrice = totalPriceCal(_itemService.getUserItem(user)),
             };
             return View(model);
         }
@@ -80,7 +81,7 @@ namespace MVC_model.Controllers
                     cardNumber = model.cardNumber,
                     expiration = model.expiration,
                     CVV = model.CVV,
-                    totalPrice = totalPriceCal(_itemService.getUserItem(model.userID)),
+                    totalPrice = model.totalPrice,
                 };              
                 await _paymentService.CreateAsSync(payment);
                 return RedirectToAction("Index");
