@@ -57,14 +57,5 @@ namespace Service.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public decimal Total(List<OrderDetail> orderDetails)
-        {
-            double sum = 0;
-            foreach (OrderDetail detail in orderDetails)
-            {
-                sum += productService.GetById(detail.productID).price * detail.Quantity;
-            }
-            return (decimal)sum;
-        }
     }
 }

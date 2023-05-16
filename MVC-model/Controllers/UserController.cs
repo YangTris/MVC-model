@@ -43,15 +43,13 @@ namespace MVC_model.Controllers
         }*/
 
 
-        private ICartService _cartService;
         private IItemService _itemService;
         private IProductService _productService;
         private IWebHostEnvironment _webHostEnvironment;
-        public UserController(IProductService productService, ICartService cartService, IItemService itemService, IWebHostEnvironment webHostEnvironment)
+        public UserController(IProductService productService, IItemService itemService, IWebHostEnvironment webHostEnvironment)
         {
             _productService = productService;
             _webHostEnvironment = webHostEnvironment;
-            _cartService = cartService;
             _itemService = itemService;
         }
 

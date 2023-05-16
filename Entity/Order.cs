@@ -66,6 +66,6 @@ namespace Entity
         [ForeignKey("Payment")]
         public string paymentID { get; set; }
         public Payment? payment { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
+        //public List<OrderDetail> OrderDetails { get; set; }
     }
 }

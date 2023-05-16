@@ -21,11 +21,9 @@ namespace DataAccess
         }
         
         public DbSet<Order> Order { get; set; }
-        public DbSet<OrderDetail> OrderDetail { get; set; }
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Item> Item { get; set; }
-        public DbSet<ShoppingCart> ShoppingCart { get; set; }
        /* public DbSet<IdentityUser> IdentityUsers { get; set; }*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -103,7 +101,6 @@ namespace DataAccess
                 });
             
             /*modelBuilder.Entity<Payment>()*/
-            modelBuilder.Entity<OrderDetail>().HasKey(x => new {x.productID, x.orderID});
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.UserId, x.RoleId });
   
             modelBuilder.Entity<IdentityRole>().HasData(

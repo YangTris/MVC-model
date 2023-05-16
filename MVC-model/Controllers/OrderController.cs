@@ -32,7 +32,7 @@ namespace MVC_model.Controllers
                 Email = order.Email,
                 Total = order.Total,
                 paymentID = order.paymentID,
-                OrderDetails = order.OrderDetails,
+                //OrderDetails = order.OrderDetails,
             }).ToList();
             return View(model);
         }
@@ -65,7 +65,7 @@ namespace MVC_model.Controllers
                     Email = model.Email,
                     Total = model.Total,
                     paymentID = model.paymentID,
-                    OrderDetails = model.OrderDetails
+                    //OrderDetails = model.OrderDetails
                 };
             }
             return View();
@@ -94,7 +94,7 @@ namespace MVC_model.Controllers
                 Email = order.Email,
                 Total = order.Total,
                 paymentID = order.paymentID,
-                OrderDetails = order.OrderDetails
+                //OrderDetails = order.OrderDetails
             };
             return View(model);
         }

@@ -107,7 +107,7 @@ namespace MVC_model.Controllers
             return View(model);
         }
         [HttpGet]
-        public IActionResult Details(string id)
+        public IActionResult Detail(string id)
         {
             var payment = _paymentService.GetById(id);
             if (payment == null)
