@@ -51,8 +51,9 @@
                 
 
                 <div class="text-end">
-                    
-                    <button class="btn  me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></button>
+                    <a class="btn me-2" asp-action="CartItem" asp-controller="User"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></a>
+
+                    @*<button class="btn  me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></button>
                     <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                         <div class="offcanvas-header">
                             <h5>Shopping Cart</h5>
@@ -86,38 +87,12 @@
                                         <span>Total (USD)</span>
                                         <strong>$20</strong>
                                     </li>
-                                    
-                                @*@foreach (var product in Model)
-                                {
-                                    <li class="list-group-item d-flex justify-content-between lh-sm" style="text-align: justify;">
-                                        <div>
-                                            <h6 class="my-0">@product.productName</h6>
-                                            <small class="text-body-secondary">Quantity: @product.quantity</small>
-                                        </div>
-                                        <span class="text-body-secondary">@product.price</span>
-                                    </li>
-                                   
-                                    <li class="list-group-item d-flex justify-content-between" style="text-align: justify;">
-                                        <span>Total (USD)</span>
-                                        <strong>$20</strong>
-                                    </li>
-                                }*@
-                                @*@foreach (var item in Model)
-                                {
-                                    <li class="list-group-item d-flex justify-content-between lh-sm">
-                                        <div>
-                                            <h6 class="my-0">@item.productName</h6>
-                                            <small class="text-body-secondary">Quantity: @item.quantity</small>
-                                        </div>
-                                        <span class="text-body-secondary">$@item.productPrice</span>
-                                    </li>
-                                }*@
                             </ul>
                             <button class="w-100 btn btn-primary btn-lg" type="submit">
                                 <a class="nav-link" asp-controller="Payment" asp-action="Create" style="color: white">Continue to checkout</a>      
                             </button>  
                         </div>
-                    </div>
+                    </div>*@
 
                     @if (SignInManager.IsSignedIn(User))
                     {

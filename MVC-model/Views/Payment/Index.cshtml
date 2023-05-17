@@ -20,11 +20,11 @@
                     <thead>
                         <tr>
                             <th>Payment id</th>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Phone number</th>
                             <th>Method</th>
-                            <th>Total price</th>
+                            <th>Name on card</th>
+                            <th>Card number</th>
+                            <th>Expiration</th>
+                            <th>CVV</th>
                             <th class="text-warning">Action</th>
                         </tr>
                     </thead>
@@ -33,11 +33,11 @@
                         {
                             <tr>
                                 <td>@item.paymentID</td>
-                                <td>@item.firstName</td>
-                                <td>@item.lastName</td>
-                                <td>@item.phoneNumber</td>
                                 <td>@item.method</td>
-                                <td>@item.totalPrice</td>
+                                <td>@item.nameOnCard</td>
+                                <td>@item.cardNumber</td>
+                                <td>@item.expiration</td>
+                                <td>@item.CVV</td>
                                 <td>
                                     <a class="text-success" asp-action="Detail" asp-route-id="@item.paymentID">
                                         <i class="fas fa-bars"></i> Detail

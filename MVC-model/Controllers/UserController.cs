@@ -46,31 +46,38 @@ namespace MVC_model.Controllers
         private IItemService _itemService;
         private IProductService _productService;
         private IWebHostEnvironment _webHostEnvironment;
-        public UserController(IProductService productService, IItemService itemService, IWebHostEnvironment webHostEnvironment)
+        private IPaymentService _paymentService;
+        public UserController(IProductService productService, IItemService itemService, IWebHostEnvironment webHostEnvironment, IPaymentService paymentService)
         {
             _productService = productService;
             _webHostEnvironment = webHostEnvironment;
             _itemService = itemService;
+            _paymentService = paymentService;
+
         }
 
         [HttpGet]
-        public IActionResult Product()
+        public IActionResult CartItem()
         {
-            var model = _productService.GetAll().Select(product => new IndexProductViewModel
+            var user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var model = new UserCartIndex
             {
-                productID = product.productID,
-                productName = product.productName,
-                brand = product.brand,
-                price = product.price,
-                category = product.category,
-                imgURL = product.imgURL,
-                discountPercentage = product.discountPercentage,
-                /*created_at = product.created_at,
-                modified_at = product.modified_at,
-                deleted_at = product.deleted_at,
-                create_by = product.create_by,*/
-            }).ToList();
+                paymentID = Guid.NewGuid().ToString(),
+                userID = user,
+                listItem = _itemService.getUserItem(user),
+                totalPrice = totalPriceCal(_itemService.getUserItem(user)),
+            };
             return View(model);
+        }
+
+        public double totalPriceCal(IEnumerable<Item> listItem)
+        {
+            double totalPrice = 0;
+            foreach (Item item in listItem)
+            {
+                totalPrice += _productService.GetById(item.productID).price * item.quantity;
+            }
+            return totalPrice;
         }
 
         /*[HttpGet]
