@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-	[Keyless]
 	public class ApplicationUser : IdentityUser
 	{
 
@@ -17,6 +16,6 @@ namespace Entity
 		public string Address { get; set; }
 		public string Phone { get; set; }
 
-	/*	public ICollection<Payment> Payments { get; set; }*/
+		/*public ICollection<Payment> Payments { get; set; }*/
 	}
 }

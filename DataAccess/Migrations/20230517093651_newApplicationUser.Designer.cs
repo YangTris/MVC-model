@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230517093651_newApplicationUser")]
+    partial class newApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -273,20 +276,6 @@ namespace DataAccess.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "fff5caad-d740-48f7-abdc-03ae0635c08b",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "be3e451c-0914-443c-897e-cba2eb45b564",
-                            Name = "Manager",
-                            NormalizedName = "MANAGER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -449,18 +438,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "c28305c3-93f5-4490-ae59-05d0401bcee3",
-                            RoleId = "fff5caad-d740-48f7-abdc-03ae0635c08b"
-                        },
-                        new
-                        {
-                            UserId = "c28305c3-93f5-4490-ae59-05d0401bcee3",
-                            RoleId = "be3e451c-0914-443c-897e-cba2eb45b564"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -505,28 +482,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca9b97cd-d129-467b-abf9-74391cbe3975",
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@GMAIL.COM",
-                            NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELlJmlSvafcr8YO92gc/Og6WGPA2LfsuDDrZfh6ERkdniPSfCxCOd4A30ynn/DoQGQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "ca404668-2733-4560-9d33-cfdacff5b8ed",
-                            TwoFactorEnabled = false,
-                            UserName = "Super Admin",
-                            Address = "SGU",
-                            Fristname = "Duong",
-                            Lastname = "Van Tri",
-                            Phone = "123"
-                        });
                 });
 
             modelBuilder.Entity("Entity.Item", b =>

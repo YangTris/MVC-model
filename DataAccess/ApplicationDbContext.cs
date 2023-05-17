@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
@@ -24,7 +24,7 @@ namespace DataAccess
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Item> Item { get; set; }
-        /*public DbSet<ApplicationUser> ApplicationUser { get; set; }*/
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -99,10 +99,11 @@ namespace DataAccess
                     discountPercentage = 30,
                     imgURL = "~/images/giay.jpg",
                 });
-            
-            /*modelBuilder.Entity<Payment>()*/
+
+
+            modelBuilder.Entity<Payment>();
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.UserId, x.RoleId });
-  
+
             modelBuilder.Entity<IdentityRole>().HasData(
             new IdentityRole
             {
@@ -117,7 +118,7 @@ namespace DataAccess
                 NormalizedName = "MANAGER".ToUpper()
             }
             );
-            var hasher = new PasswordHasher<IdentityUser>();
+            /*var hasher = new PasswordHasher<IdentityUser>();
 
             modelBuilder.Entity<IdentityUser>().HasData(
                new IdentityUser
@@ -128,11 +129,11 @@ namespace DataAccess
                    Email = "admin@gmail.com",
                    NormalizedEmail = "ADMIN@GMAIL.COM".ToUpper(),
                    PasswordHash = hasher.HashPassword(null, "Admin@123")
-               }
+               }*/
 
-               /*var hasher = new PasswordHasher<ApplicationUser>();
+            var hasher = new PasswordHasher<ApplicationUser>();
 
-                modelBuilder.Entity<ApplicationUser>().HasData(
+            modelBuilder.Entity<ApplicationUser>().HasData(
                new ApplicationUser
                {
                    Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
@@ -140,9 +141,14 @@ namespace DataAccess
                    NormalizedUserName = "SUPER ADMIN".ToUpper(),
                    Email = "admin@gmail.com",
                    NormalizedEmail = "ADMIN@GMAIL.COM".ToUpper(),
-                   PasswordHash = hasher.HashPassword(null, "Admin@123")
-               }*/
-            );
+                   PasswordHash = hasher.HashPassword(null, "Admin@123"),
+                   Address="SGU",
+                   Fristname="Duong",
+                   Lastname="Van Tri",
+                   Phone="123"
+               }
+               );
+
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(
 

@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230517092410_ApplicationUser")]
+    partial class ApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,10 +329,6 @@ namespace DataAccess.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -382,9 +381,23 @@ namespace DataAccess.Migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
-
-                    b.UseTphMappingStrategy();
+                    b.HasData(
+                        new
+                        {
+                            Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2e443133-554b-445d-ad13-4d5b02c202d5",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "SUPER ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB8yms92VwA+vHHcu1hjFtPxbmmyZaRv0turzTxj1Duslkd6/tafJgOMmWs0cGCEHg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "5b41609b-2073-4636-b602-876b232c15eb",
+                            TwoFactorEnabled = false,
+                            UserName = "Super Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -482,51 +495,6 @@ namespace DataAccess.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Entity.ApplicationUser", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Fristname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Lastname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("ApplicationUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca9b97cd-d129-467b-abf9-74391cbe3975",
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@GMAIL.COM",
-                            NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELlJmlSvafcr8YO92gc/Og6WGPA2LfsuDDrZfh6ERkdniPSfCxCOd4A30ynn/DoQGQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "ca404668-2733-4560-9d33-cfdacff5b8ed",
-                            TwoFactorEnabled = false,
-                            UserName = "Super Admin",
-                            Address = "SGU",
-                            Fristname = "Duong",
-                            Lastname = "Van Tri",
-                            Phone = "123"
-                        });
                 });
 
             modelBuilder.Entity("Entity.Item", b =>
