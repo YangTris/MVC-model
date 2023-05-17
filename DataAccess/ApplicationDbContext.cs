@@ -24,9 +24,9 @@ namespace DataAccess
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Item> Item { get; set; }
-        public DbSet<ApplicationUser> ApplicationUser { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
-        /*public DbSet<ApplicationUser> ApplicationUser { get; set; }*/
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -103,7 +103,7 @@ namespace DataAccess
                 });
 
 
-            /*modelBuilder.Entity<Payment>();
+            modelBuilder.Entity<Payment>();
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.UserId, x.RoleId });
 
             modelBuilder.Entity<IdentityRole>().HasData(
@@ -118,8 +118,14 @@ namespace DataAccess
                 Id = "be3e451c-0914-443c-897e-cba2eb45b564",
                 Name = "Manager",
                 NormalizedName = "MANAGER".ToUpper()
+            },
+            new IdentityRole
+            {
+                Id = "6bc135f7-455c-4b04-b301-f32642221dea",
+                Name = "Customer",
+                NormalizedName = "CUSTOMER".ToUpper()
             }
-            );*/
+            );
 
 
             /*var hasher = new PasswordHasher<IdentityUser>();
@@ -136,7 +142,7 @@ namespace DataAccess
                }*/
 
 
-            /*var hasher = new PasswordHasher<ApplicationUser>();
+            var hasher = new PasswordHasher<ApplicationUser>();
 
             modelBuilder.Entity<ApplicationUser>().HasData(
                new ApplicationUser
@@ -147,10 +153,10 @@ namespace DataAccess
                    Email = "admin@gmail.com",
                    NormalizedEmail = "ADMIN@GMAIL.COM".ToUpper(),
                    PasswordHash = hasher.HashPassword(null, "Admin@123"),
-                   Address="SGU",
-                   Fristname="Duong",
-                   Lastname="Van Tri",
-                   Phone="123"
+                   Address = "SGU",
+                   Fristname = "Duong",
+                   Lastname = "Van Tri",
+                   Phone = "123"
                }
                );
 
@@ -167,7 +173,7 @@ namespace DataAccess
                     UserId = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                     RoleId = "be3e451c-0914-443c-897e-cba2eb45b564"
                 }
-            );*/
+            );
         }
     }
 }

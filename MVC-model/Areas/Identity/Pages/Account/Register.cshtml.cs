@@ -32,14 +32,14 @@ namespace MVC_model.Areas.Identity.Pages.Account
         //private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         //private readonly IEmailSender _emailSender;
-        /*private readonly RoleManager<IdentityRole> _roleManager;*/
+        private readonly RoleManager<IdentityRole> _roleManager;
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger
+            ILogger<RegisterModel> logger,
             //IEmailSender emailSender
-            /*RoleManager<IdentityRole> roleManager*/)
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -47,7 +47,7 @@ namespace MVC_model.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             //_emailSender = emailSender;
-            /*_roleManager = roleManager;*/
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -75,28 +75,28 @@ namespace MVC_model.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-			/*[Required]
-			[Display(Name = "Frist Name")]
-			public string FirstName { get; set; }
-			
             [Required]
-			[Display(Name = "Last Name")]
-			public string LastName { get; set; }
-			
+            [Display(Name = "Frist Name")]
+            public string FirstName { get; set; }
+
             [Required]
-			[Display(Name = "Phone Number")]
-			public string Phone { get; set; }
-			
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+
             [Required]
-			[Display(Name = "Address")]
-			public string Address { get; set; }*/
+            [Display(Name = "Phone Number")]
+            public string Phone { get; set; }
+
+            [Required]
+            [Display(Name = "Address")]
+            public string Address { get; set; }
 
 
-			/// <summary>
-			///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-			///     directly from your code. This API may change or be removed in future releases.
-			/// </summary>
-			[Required]
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -120,11 +120,11 @@ namespace MVC_model.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            /*[Required]
-            public string? Role { get;set; }
+            [Required]
+            public string Role { get; set; } = "Customer";
 
             [ValidateNever]
-            public IEnumerable<SelectListItem> RoleList { get; set; }*/
+            public IEnumerable<SelectListItem> RoleList { get; set; }
         }
 
 
@@ -133,14 +133,14 @@ namespace MVC_model.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            /*Input = new InputModel()
+            Input = new InputModel()
             {
                 RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
                 {
                     Text = i,
                     Value = i
                 })
-            };*/
+            };
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

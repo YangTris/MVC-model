@@ -4,6 +4,7 @@ using DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230517143054_seedingAdmin")]
+    partial class seedingAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,12 +315,6 @@ namespace DataAccess.Migrations
                             Id = "be3e451c-0914-443c-897e-cba2eb45b564",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
-                        },
-                        new
-                        {
-                            Id = "6bc135f7-455c-4b04-b301-f32642221dea",
-                            Name = "Customer",
-                            NormalizedName = "CUSTOMER"
                         });
                 });
 
@@ -543,15 +540,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8d8a7406-ff34-4ca5-80bc-8183127f8333",
+                            ConcurrencyStamp = "44b930f9-2564-4248-baea-eb1e282060f0",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEP/pJPEBB54un9u1yVdagr8Z9gbLEKJf/YVHqAJvylxbN2F98TUgdcPvFst191276A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMZCMVDilSZci+A9f6IzRbZuHw4WOMH3eay9jYOzB78//68MgwtFZS8RKeCSoSyusQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a56db444-9ab3-4172-95fb-c41fb580d096",
+                            SecurityStamp = "559124b1-8cd6-43cc-adf0-3e923c0b2279",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin",
                             Address = "SGU",
