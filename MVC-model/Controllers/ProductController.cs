@@ -7,9 +7,11 @@ using Newtonsoft.Json;
 using Service;
 using System.Security.Claims;
 using PagedList;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MVC_model.Controllers
 {
+    
     public class ProductController : Controller
     {
         private IProductService _productService;

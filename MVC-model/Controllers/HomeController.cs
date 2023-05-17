@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MVC_model.Models;
 using Service;
 using System.Diagnostics;
 
 namespace MVC_model.Controllers
 {
+    [Authorize(Roles = "Admin, Manager")]
     public class HomeController : Controller
     {
         /*private readonly ILogger<HomeController> _logger;

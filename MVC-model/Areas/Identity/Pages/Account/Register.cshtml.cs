@@ -160,6 +160,12 @@ namespace MVC_model.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);
+
+                    user.Address = Input.Address;
+                    user.Fristname = Input.FirstName;
+                    user.Lastname = Input.LastName;
+                    user.Phone = Input.Phone;
+
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     //var callbackUrl = Url.Page(
@@ -180,7 +186,8 @@ namespace MVC_model.Areas.Identity.Pages.Account
                     //    await _signInManager.SignInAsync(user, isPersistent: false);
                     //    return LocalRedirect(returnUrl);
                     //}
-					await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _userManager.AddToRoleAsync(user, Input.Role);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
 					return LocalRedirect(returnUrl);
 				}
                 foreach (var error in result.Errors)
