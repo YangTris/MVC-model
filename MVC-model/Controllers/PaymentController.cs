@@ -15,18 +15,21 @@ namespace MVC_model.Controllers
         private IItemService _itemService;
         private IProductService _productService;
         private IOrderService _orderService;
+        private IOrderDetailService _orderDetailService;
         public PaymentController(
             IPaymentService paymentService,
             IWebHostEnvironment webHostEnvironment, 
             IItemService itemService, 
             IProductService productService,
-            IOrderService orderService)
+            IOrderService orderService,
+            IOrderDetailService orderDetailService)
         {
             _paymentService = paymentService;
             _webHostEnvironment = webHostEnvironment;
             _itemService = itemService;
             _productService = productService;
             _orderService = orderService;
+            _orderDetailService = orderDetailService;
         }
 
         /*[HttpGet]
@@ -73,6 +76,7 @@ namespace MVC_model.Controllers
                 userID = user,
                 listItem = _itemService.getUserItem(user),
                 totalPrice = totalPriceCal(_itemService.getUserItem(user)),
+                orderID = Guid.NewGuid().ToString(),
             };
             return View(model);
         }
@@ -103,19 +107,34 @@ namespace MVC_model.Controllers
                     CVV = model.CVV,
                     totalPrice = model.totalPrice,
                 }; 
+
                 var order = new Order
                 {
+                    orderID = model.orderID,
                     FirstName = model.firstName,
                     LastName = model.lastName,
                     Email = model.email,
                     Address = model.address,
                     Phone = model.phoneNumber,
                     paymentID = model.paymentID,
-                    listItem = _itemService.getUserItem(model.userID),
+                    //listItem = _itemService.getUserItem(model.userID),
                     Total = model.totalPrice,
                 };
                 await _paymentService.CreateAsSync(payment);
                 await _orderService.CreateAsSync(order);
+                IEnumerable<Item> listItem = _itemService.getUserItem(model.userID);
+                foreach (var item in listItem)
+                {
+                    var detail = new OrderDetail
+                    {
+                        orderID = model.orderID,
+                        productID = item.productID,
+                        productName = item.productName,
+                        productPrice = item.productPrice,
+                        quantity = item.quantity
+                    };
+                    await _orderDetailService.CreateAsSync(detail);
+                }
                 await _itemService.DeleteUserItem(model.userID);
                 return RedirectToAction("Product","Product");
             }
@@ -144,7 +163,7 @@ namespace MVC_model.Controllers
                 expiration = payment.expiration,
                 CVV = payment.CVV,
                 totalPrice = payment.totalPrice,
-                listItem = _itemService.getUserItem(payment.userID),
+                //listItem = _itemService.getUserItem(payment.userID),
             };
             return View(model);
         }

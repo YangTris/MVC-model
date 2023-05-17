@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class initDB_1 : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -183,35 +183,17 @@ namespace DataAccess.Migrations
                     paymentID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     userID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     method = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    nameOnCard = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cardNumber = table.Column<int>(type: "int", nullable: false),
+                    nameOnCard = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    cardNumber = table.Column<int>(type: "int", nullable: true),
                     expiration = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CVV = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CVV = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    totalPrice = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payment", x => x.paymentID);
                     table.ForeignKey(
                         name: "FK_Payment_AspNetUsers_userID",
-                        column: x => x.userID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ShoppingCart",
-                columns: table => new
-                {
-                    shoppingCartID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    userID = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShoppingCart", x => x.shoppingCartID);
-                    table.ForeignKey(
-                        name: "FK_ShoppingCart_AspNetUsers_userID",
                         column: x => x.userID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -226,7 +208,8 @@ namespace DataAccess.Migrations
                     productID = table.Column<int>(type: "int", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
                     userID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    paymentID = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    productName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    productPrice = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -237,11 +220,6 @@ namespace DataAccess.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Item_Payment_paymentID",
-                        column: x => x.paymentID,
-                        principalTable: "Payment",
-                        principalColumn: "paymentID");
                     table.ForeignKey(
                         name: "FK_Item_Product_productID",
                         column: x => x.productID,
@@ -254,20 +232,14 @@ namespace DataAccess.Migrations
                 name: "Order",
                 columns: table => new
                 {
-                    orderID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    orderID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(160)", maxLength: 160, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(160)", maxLength: 160, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    State = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Total = table.Column<decimal>(type: "money", nullable: false),
+                    Total = table.Column<decimal>(type: "money", nullable: true),
                     paymentID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -285,14 +257,17 @@ namespace DataAccess.Migrations
                 name: "OrderDetail",
                 columns: table => new
                 {
-                    orderID = table.Column<int>(type: "int", nullable: false),
+                    orderDetailID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     productID = table.Column<int>(type: "int", nullable: false),
-                    OrderDetailId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    quantity = table.Column<int>(type: "int", nullable: false),
+                    productName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    productPrice = table.Column<double>(type: "float", nullable: true),
+                    orderID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetail", x => new { x.productID, x.orderID });
+                    table.PrimaryKey("PK_OrderDetail", x => x.orderDetailID);
                     table.ForeignKey(
                         name: "FK_OrderDetail_Order_orderID",
                         column: x => x.orderID,
@@ -319,7 +294,7 @@ namespace DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "c28305c3-93f5-4490-ae59-05d0401bcee3", 0, "01b0d257-6189-49a8-abce-c0eae44b593e", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "SUPER ADMIN", "AQAAAAIAAYagAAAAEB5GHr1XijeqfgXqolezECDou+ALkah/N/lfNOZrwK2FDaVFjtKWQvhqXNpnbGdxMw==", null, false, "ab7b2e71-033b-4136-adee-c47c9f2d7317", false, "Super Admin" });
+                values: new object[] { "c28305c3-93f5-4490-ae59-05d0401bcee3", 0, "395507ee-52ba-457a-af8c-6f8ec08f6272", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "SUPER ADMIN", "AQAAAAIAAYagAAAAEI9jYZWLMYUG+TYWSLe9/qMGMJ0q/xBqTx8e3JhOXOX2+mdTdfWOIptZz552NZ0Jhg==", null, false, "f0e960c5-ab19-4bc8-a8b9-d7d91d2b39f5", false, "Super Admin" });
 
             migrationBuilder.InsertData(
                 table: "Product",
@@ -384,11 +359,6 @@ namespace DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Item_paymentID",
-                table: "Item",
-                column: "paymentID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Item_productID",
                 table: "Item",
                 column: "productID");
@@ -409,13 +379,13 @@ namespace DataAccess.Migrations
                 column: "orderID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payment_userID",
-                table: "Payment",
-                column: "userID");
+                name: "IX_OrderDetail_productID",
+                table: "OrderDetail",
+                column: "productID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ShoppingCart_userID",
-                table: "ShoppingCart",
+                name: "IX_Payment_userID",
+                table: "Payment",
                 column: "userID");
         }
 
@@ -442,9 +412,6 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderDetail");
-
-            migrationBuilder.DropTable(
-                name: "ShoppingCart");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -27,9 +27,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("itemID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("orderID")
-                        .HasColumnType("int");
-
                     b.Property<int>("productID")
                         .HasColumnType("int");
 
@@ -49,8 +46,6 @@ namespace DataAccess.Migrations
 
                     b.HasKey("itemID");
 
-                    b.HasIndex("orderID");
-
                     b.HasIndex("productID");
 
                     b.HasIndex("userID");
@@ -60,11 +55,8 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Order", b =>
                 {
-                    b.Property<int>("orderID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("orderID"));
+                    b.Property<string>("orderID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -105,6 +97,40 @@ namespace DataAccess.Migrations
                     b.HasIndex("paymentID");
 
                     b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("Entity.OrderDetail", b =>
+                {
+                    b.Property<int>("orderDetailID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("orderDetailID"));
+
+                    b.Property<string>("orderID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("productID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("productName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("productPrice")
+                        .HasColumnType("float");
+
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("orderDetailID");
+
+                    b.HasIndex("orderID");
+
+                    b.HasIndex("productID");
+
+                    b.ToTable("OrderDetail");
                 });
 
             modelBuilder.Entity("Entity.Payment", b =>
@@ -382,6 +408,24 @@ namespace DataAccess.Migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
+                    b.HasData(
+                        new
+                        {
+                            Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "395507ee-52ba-457a-af8c-6f8ec08f6272",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "SUPER ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI9jYZWLMYUG+TYWSLe9/qMGMJ0q/xBqTx8e3JhOXOX2+mdTdfWOIptZz552NZ0Jhg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f0e960c5-ab19-4bc8-a8b9-d7d91d2b39f5",
+                            TwoFactorEnabled = false,
+                            UserName = "Super Admin"
+                        });
+                });
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
 
                     b.UseTphMappingStrategy();
@@ -531,10 +575,6 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Item", b =>
                 {
-                    b.HasOne("Entity.Order", null)
-                        .WithMany("listItem")
-                        .HasForeignKey("orderID");
-
                     b.HasOne("Entity.Product", "product")
                         .WithMany()
                         .HasForeignKey("productID")
@@ -561,6 +601,25 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("payment");
+                });
+
+            modelBuilder.Entity("Entity.OrderDetail", b =>
+                {
+                    b.HasOne("Entity.Order", "order")
+                        .WithMany()
+                        .HasForeignKey("orderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("productID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("order");
+
+                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("Entity.Payment", b =>
@@ -623,11 +682,6 @@ namespace DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Entity.Order", b =>
-                {
-                    b.Navigation("listItem");
                 });
 #pragma warning restore 612, 618
         }

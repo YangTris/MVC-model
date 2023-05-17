@@ -8,7 +8,7 @@ namespace MVC_model.Models
     public class DetailOrderViewModel
     {
         [Key]
-        public int orderID { get; set; }
+        public string orderID { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "First Name is required")]
@@ -43,6 +43,6 @@ namespace MVC_model.Models
         [ForeignKey("Payment")]
         public string paymentID { get; set; }
         public virtual Payment? payment { get; set; }
-        public IEnumerable<Item> listItem { get; set; }
+        public IEnumerable<OrderDetail> listItem { get; set; }
     }
  }

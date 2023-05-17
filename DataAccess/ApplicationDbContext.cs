@@ -25,6 +25,8 @@ namespace DataAccess
         public DbSet<Product> Product { get; set; }
         public DbSet<Item> Item { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
+        /*public DbSet<ApplicationUser> ApplicationUser { get; set; }*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
