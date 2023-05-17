@@ -116,6 +116,7 @@ namespace MVC_model.Controllers
                 };
                 await _paymentService.CreateAsSync(payment);
                 await _orderService.CreateAsSync(order);
+                await _itemService.DeleteUserItem(model.userID);
                 return RedirectToAction("Product","Product");
             }
             return View(model);

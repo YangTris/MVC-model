@@ -31,7 +31,21 @@ namespace Service.Implementation
                 await _context.SaveChangesAsync();
             }
         }
-
+        public async Task DeleteUserItem(string userID)
+        {
+            IEnumerable<Item> listItem = getUserItem(userID);
+            if (listItem != null)
+            {
+                foreach (var item in listItem)
+                {
+                    if (item != null)
+                    {
+                        _context.Remove(item);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            }
+        }
         public Item GetById(int id)
         {
             return _context.Item.Where(x => x.itemID.Equals(id)).FirstOrDefault();

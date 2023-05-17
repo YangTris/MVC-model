@@ -17,5 +17,6 @@ namespace Service
         // IEnumerable<Item> GetCart(int id);
         bool CheckItem(string userID, int productID);
         public IEnumerable<Item> getUserItem(string userID);
+        Task DeleteUserItem(string userID);
     }
 }
