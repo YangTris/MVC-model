@@ -24,7 +24,7 @@ namespace DataAccess
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Item> Item { get; set; }
-       /* public DbSet<IdentityUser> IdentityUsers { get; set; }*/
+        /*public DbSet<ApplicationUser> ApplicationUser { get; set; }*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -129,6 +129,19 @@ namespace DataAccess
                    NormalizedEmail = "ADMIN@GMAIL.COM".ToUpper(),
                    PasswordHash = hasher.HashPassword(null, "Admin@123")
                }
+
+               /*var hasher = new PasswordHasher<ApplicationUser>();
+
+                modelBuilder.Entity<ApplicationUser>().HasData(
+               new ApplicationUser
+               {
+                   Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
+                   UserName = "Super Admin",
+                   NormalizedUserName = "SUPER ADMIN".ToUpper(),
+                   Email = "admin@gmail.com",
+                   NormalizedEmail = "ADMIN@GMAIL.COM".ToUpper(),
+                   PasswordHash = hasher.HashPassword(null, "Admin@123")
+               }*/
             );
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(
