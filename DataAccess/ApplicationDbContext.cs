@@ -103,7 +103,7 @@ namespace DataAccess
                 });
 
 
-            modelBuilder.Entity<Payment>();
+            /*modelBuilder.Entity<Payment>();
             modelBuilder.Entity<IdentityUserRole<string>>().HasKey(x => new { x.UserId, x.RoleId });
 
             modelBuilder.Entity<IdentityRole>().HasData(
@@ -119,7 +119,9 @@ namespace DataAccess
                 Name = "Manager",
                 NormalizedName = "MANAGER".ToUpper()
             }
-            );
+            );*/
+
+
             /*var hasher = new PasswordHasher<IdentityUser>();
 
             modelBuilder.Entity<IdentityUser>().HasData(
@@ -133,7 +135,8 @@ namespace DataAccess
                    PasswordHash = hasher.HashPassword(null, "Admin@123")
                }*/
 
-            var hasher = new PasswordHasher<ApplicationUser>();
+
+            /*var hasher = new PasswordHasher<ApplicationUser>();
 
             modelBuilder.Entity<ApplicationUser>().HasData(
                new ApplicationUser
@@ -164,7 +167,7 @@ namespace DataAccess
                     UserId = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                     RoleId = "be3e451c-0914-443c-897e-cba2eb45b564"
                 }
-            );
+            );*/
         }
     }
 }

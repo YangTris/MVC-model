@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class mergeDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,6 +32,11 @@ namespace DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fristname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -283,20 +288,6 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[,]
-                {
-                    { "be3e451c-0914-443c-897e-cba2eb45b564", null, "Manager", "MANAGER" },
-                    { "fff5caad-d740-48f7-abdc-03ae0635c08b", null, "Admin", "ADMIN" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "c28305c3-93f5-4490-ae59-05d0401bcee3", 0, "395507ee-52ba-457a-af8c-6f8ec08f6272", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "SUPER ADMIN", "AQAAAAIAAYagAAAAEI9jYZWLMYUG+TYWSLe9/qMGMJ0q/xBqTx8e3JhOXOX2+mdTdfWOIptZz552NZ0Jhg==", null, false, "f0e960c5-ab19-4bc8-a8b9-d7d91d2b39f5", false, "Super Admin" });
-
-            migrationBuilder.InsertData(
                 table: "Product",
                 columns: new[] { "productID", "brand", "category", "discountPercentage", "imgURL", "price", "productName" },
                 values: new object[,]
@@ -308,15 +299,6 @@ namespace DataAccess.Migrations
                     { 5, "Other", 2, 30, "~/images/OIP.jpg", 150.0, "No name" },
                     { 6, "Other", 1, 20, "~/images/T-shirt.jpg", 200.0, "1842 T-shirt" },
                     { 7, "Other", 0, 30, "~/images/giay.jpg", 100.0, "Hunter shoes" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[,]
-                {
-                    { "be3e451c-0914-443c-897e-cba2eb45b564", "c28305c3-93f5-4490-ae59-05d0401bcee3" },
-                    { "fff5caad-d740-48f7-abdc-03ae0635c08b", "c28305c3-93f5-4490-ae59-05d0401bcee3" }
                 });
 
             migrationBuilder.CreateIndex(

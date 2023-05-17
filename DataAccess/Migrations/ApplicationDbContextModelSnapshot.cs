@@ -299,20 +299,6 @@ namespace DataAccess.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "fff5caad-d740-48f7-abdc-03ae0635c08b",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "be3e451c-0914-443c-897e-cba2eb45b564",
-                            Name = "Manager",
-                            NormalizedName = "MANAGER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -408,24 +394,6 @@ namespace DataAccess.Migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasData(
-                        new
-                        {
-                            Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "395507ee-52ba-457a-af8c-6f8ec08f6272",
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@GMAIL.COM",
-                            NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEI9jYZWLMYUG+TYWSLe9/qMGMJ0q/xBqTx8e3JhOXOX2+mdTdfWOIptZz552NZ0Jhg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "f0e960c5-ab19-4bc8-a8b9-d7d91d2b39f5",
-                            TwoFactorEnabled = false,
-                            UserName = "Super Admin"
-                        });
-                });
                     b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
 
                     b.UseTphMappingStrategy();
@@ -493,18 +461,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "c28305c3-93f5-4490-ae59-05d0401bcee3",
-                            RoleId = "fff5caad-d740-48f7-abdc-03ae0635c08b"
-                        },
-                        new
-                        {
-                            UserId = "c28305c3-93f5-4490-ae59-05d0401bcee3",
-                            RoleId = "be3e451c-0914-443c-897e-cba2eb45b564"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -549,28 +505,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "ca9b97cd-d129-467b-abf9-74391cbe3975",
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@GMAIL.COM",
-                            NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAELlJmlSvafcr8YO92gc/Og6WGPA2LfsuDDrZfh6ERkdniPSfCxCOd4A30ynn/DoQGQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "ca404668-2733-4560-9d33-cfdacff5b8ed",
-                            TwoFactorEnabled = false,
-                            UserName = "Super Admin",
-                            Address = "SGU",
-                            Fristname = "Duong",
-                            Lastname = "Van Tri",
-                            Phone = "123"
-                        });
                 });
 
             modelBuilder.Entity("Entity.Item", b =>

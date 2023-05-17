@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230517093651_newApplicationUser")]
-    partial class newApplicationUser
+    [Migration("20230517142208_mergeDB")]
+    partial class mergeDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,9 +29,6 @@ namespace DataAccess.Migrations
                 {
                     b.Property<string>("itemID")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int?>("orderID")
-                        .HasColumnType("int");
 
                     b.Property<int>("productID")
                         .HasColumnType("int");
@@ -52,8 +49,6 @@ namespace DataAccess.Migrations
 
                     b.HasKey("itemID");
 
-                    b.HasIndex("orderID");
-
                     b.HasIndex("productID");
 
                     b.HasIndex("userID");
@@ -63,11 +58,8 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Order", b =>
                 {
-                    b.Property<int>("orderID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("orderID"));
+                    b.Property<string>("orderID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -108,6 +100,40 @@ namespace DataAccess.Migrations
                     b.HasIndex("paymentID");
 
                     b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("Entity.OrderDetail", b =>
+                {
+                    b.Property<int>("orderDetailID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("orderDetailID"));
+
+                    b.Property<string>("orderID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("productID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("productName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("productPrice")
+                        .HasColumnType("float");
+
+                    b.Property<int>("quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("orderDetailID");
+
+                    b.HasIndex("orderID");
+
+                    b.HasIndex("productID");
+
+                    b.ToTable("OrderDetail");
                 });
 
             modelBuilder.Entity("Entity.Payment", b =>
@@ -486,10 +512,6 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Item", b =>
                 {
-                    b.HasOne("Entity.Order", null)
-                        .WithMany("listItem")
-                        .HasForeignKey("orderID");
-
                     b.HasOne("Entity.Product", "product")
                         .WithMany()
                         .HasForeignKey("productID")
@@ -516,6 +538,25 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("payment");
+                });
+
+            modelBuilder.Entity("Entity.OrderDetail", b =>
+                {
+                    b.HasOne("Entity.Order", "order")
+                        .WithMany()
+                        .HasForeignKey("orderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entity.Product", "product")
+                        .WithMany()
+                        .HasForeignKey("productID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("order");
+
+                    b.Navigation("product");
                 });
 
             modelBuilder.Entity("Entity.Payment", b =>
@@ -578,11 +619,6 @@ namespace DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Entity.Order", b =>
-                {
-                    b.Navigation("listItem");
                 });
 #pragma warning restore 612, 618
         }
