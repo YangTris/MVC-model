@@ -24,7 +24,7 @@ namespace Service.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsSync(int id)
+        public async Task DeleteAsSync(string id)
         {
             var order = GetById(id);
             if (order != null)
@@ -39,7 +39,7 @@ namespace Service.Implementation
             return _context.Order.ToList();
         }
 
-        public Order GetById(int id)
+        public Order GetById(string id)
         {
             return _context.Order.Where(x => x.orderID == id).FirstOrDefault();
         }
@@ -50,7 +50,7 @@ namespace Service.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateById(int id)
+        public async Task UpdateById(string id)
         {
             var order = GetById(id);
             _context.Order.Update(order);

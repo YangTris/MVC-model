@@ -97,13 +97,13 @@
 
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        @*<a class="btn me-2" asp-action="CartItem" asp-controller="User"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></a>*@
+                        <a class="btn me-2" asp-action="CartItem" asp-controller="User"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></a>
                      
-                            <button class="btn btn-ouline-dark" type="submit">
+                            @*<button class="btn btn-ouline-dark" type="submit">
                                 <i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i>
                                 Cart
                                 <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                            </button>
+                            </button>*@
                     
 
                         <button type="button" class="btn btn-outline-light me-2">

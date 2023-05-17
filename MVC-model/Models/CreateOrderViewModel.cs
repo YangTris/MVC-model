@@ -8,7 +8,7 @@ namespace MVC_model.Models
     public class CreateOrderViewModel
     {
         [Key]
-        public int orderID { get; set; }
+        public string orderID { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "First Name is required")]

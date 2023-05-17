@@ -9,9 +9,11 @@ namespace MVC_model.Controllers
     public class OrderController : Controller
     {
         private IOrderService _orderService;
-        public OrderController(IOrderService orderService)
+        private IOrderDetailService _orderDetailService;
+        public OrderController(IOrderService orderService, IOrderDetailService orderDetailService)
         {
             _orderService = orderService;
+            _orderDetailService = orderDetailService;
         }
 
         [HttpGet]
@@ -62,9 +64,9 @@ namespace MVC_model.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Detail(int id)
+        public IActionResult Detail(string id)
         {
-
+            
             var order = _orderService.GetById(id);
             if (order == null)
             {
@@ -81,7 +83,7 @@ namespace MVC_model.Controllers
                 Email = order.Email,
                 Total = order.Total,
                 paymentID = order.paymentID,
-                //OrderDetails = order.OrderDetails
+                listItem = _orderDetailService.getOrderDetail(order.orderID),
             };
             return View(model);
         }

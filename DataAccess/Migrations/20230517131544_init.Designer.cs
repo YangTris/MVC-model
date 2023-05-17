@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230515150752_initDB_1")]
-    partial class initDB_1
+    [Migration("20230517131544_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,11 +30,15 @@ namespace DataAccess.Migrations
                     b.Property<string>("itemID")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("paymentID")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("productID")
                         .HasColumnType("int");
+
+                    b.Property<string>("productName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("productPrice")
+                        .HasColumnType("float");
 
                     b.Property<int>("quantity")
                         .HasColumnType("int");
@@ -45,8 +49,6 @@ namespace DataAccess.Migrations
 
                     b.HasKey("itemID");
 
-                    b.HasIndex("paymentID");
-
                     b.HasIndex("productID");
 
                     b.HasIndex("userID");
@@ -56,26 +58,13 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Order", b =>
                 {
-                    b.Property<int>("orderID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("orderID"));
+                    b.Property<string>("orderID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -99,22 +88,8 @@ namespace DataAccess.Migrations
                         .HasMaxLength(24)
                         .HasColumnType("nvarchar(24)");
 
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<decimal>("Total")
+                    b.Property<decimal?>("Total")
                         .HasColumnType("money");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("paymentID")
                         .IsRequired()
@@ -129,21 +104,34 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.OrderDetail", b =>
                 {
+                    b.Property<int>("orderDetailID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("orderDetailID"));
+
+                    b.Property<string>("orderID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("productID")
                         .HasColumnType("int");
 
-                    b.Property<int>("orderID")
+                    b.Property<string>("productName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("productPrice")
+                        .HasColumnType("float");
+
+                    b.Property<int>("quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderDetailId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("productID", "orderID");
+                    b.HasKey("orderDetailID");
 
                     b.HasIndex("orderID");
+
+                    b.HasIndex("productID");
 
                     b.ToTable("OrderDetail");
                 });
@@ -154,10 +142,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CVV")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("cardNumber")
+                    b.Property<int?>("cardNumber")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("expiration")
@@ -168,8 +155,10 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nameOnCard")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("totalPrice")
+                        .HasColumnType("float");
 
                     b.Property<string>("userID")
                         .IsRequired()
@@ -286,25 +275,6 @@ namespace DataAccess.Migrations
                             price = 100.0,
                             productName = "Hunter shoes"
                         });
-                });
-
-            modelBuilder.Entity("Entity.ShoppingCart", b =>
-                {
-                    b.Property<int>("shoppingCartID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("shoppingCartID"));
-
-                    b.Property<string>("userID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("shoppingCartID");
-
-                    b.HasIndex("userID");
-
-                    b.ToTable("ShoppingCart");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -442,15 +412,15 @@ namespace DataAccess.Migrations
                         {
                             Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "01b0d257-6189-49a8-abce-c0eae44b593e",
+                            ConcurrencyStamp = "395507ee-52ba-457a-af8c-6f8ec08f6272",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "SUPER ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEB5GHr1XijeqfgXqolezECDou+ALkah/N/lfNOZrwK2FDaVFjtKWQvhqXNpnbGdxMw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEI9jYZWLMYUG+TYWSLe9/qMGMJ0q/xBqTx8e3JhOXOX2+mdTdfWOIptZz552NZ0Jhg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ab7b2e71-033b-4136-adee-c47c9f2d7317",
+                            SecurityStamp = "f0e960c5-ab19-4bc8-a8b9-d7d91d2b39f5",
                             TwoFactorEnabled = false,
                             UserName = "Super Admin"
                         });
@@ -555,10 +525,6 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entity.Item", b =>
                 {
-                    b.HasOne("Entity.Payment", null)
-                        .WithMany("listItem")
-                        .HasForeignKey("paymentID");
-
                     b.HasOne("Entity.Product", "product")
                         .WithMany()
                         .HasForeignKey("productID")
@@ -590,7 +556,7 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Entity.OrderDetail", b =>
                 {
                     b.HasOne("Entity.Order", "order")
-                        .WithMany("OrderDetails")
+                        .WithMany()
                         .HasForeignKey("orderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -615,17 +581,6 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("IdentityUser");
-                });
-
-            modelBuilder.Entity("Entity.ShoppingCart", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("userID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -677,16 +632,6 @@ namespace DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Entity.Order", b =>
-                {
-                    b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("Entity.Payment", b =>
-                {
-                    b.Navigation("listItem");
                 });
 #pragma warning restore 612, 618
         }
