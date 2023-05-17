@@ -51,7 +51,7 @@
                 
 
                 <div class="text-end">
-                    <a class="btn me-2" asp-action="CartItem" asp-controller="User"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></a>
+                    @*<a class="btn me-2" asp-action="CartItem" asp-controller="User"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></a>*@
 
                     @*<button class="btn  me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></button>
                     <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -96,6 +96,8 @@
 
                     @if (SignInManager.IsSignedIn(User))
                     {
+                        <a class="btn me-2" asp-action="CartItem" asp-controller="User"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></a>
+
                         <button type="button" class="btn btn-outline-light me-2">
                             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i></a>
                         </button>
