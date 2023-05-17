@@ -49,7 +49,7 @@ namespace MVC_model.Controllers
         {
             var model = _paymentService.GetAll().Select(payment => new TransactionViewModel
             {
-                //paymentID = payment.paymentID,
+                paymentID = payment.paymentID,
                 //firstName = payment.firstName,
                 //lastName = payment.lastName,
                 //phoneNumber= payment.phone,
@@ -116,7 +116,7 @@ namespace MVC_model.Controllers
                 };
                 await _paymentService.CreateAsSync(payment);
                 await _orderService.CreateAsSync(order);
-                return RedirectToAction("Index");
+                return RedirectToAction("Product","Product");
             }
             return View(model);
         }

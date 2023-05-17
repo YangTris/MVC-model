@@ -86,7 +86,7 @@
 
                             <div class="col-sm-6">
                                 <label asp-for="@Model.FirstName" class="form-label">First name</label>
-                                <input asp-for="@Model.FirstName" type="text" readonly="readonly" class="form-control" id="firstName" placeholder="" value="" required>
+                                <input asp-for="@Model.FirstName" type="text" readonly="readonly" class="form-control" id="firstName" required>
 
                                 <div class="invalid-feedback">
                                     Valid first name is required.
@@ -95,8 +95,7 @@
 
                             <div class="col-sm-6">
                                 <label asp-for="@Model.LastName" class="form-label">Last name</label>
-                                <input asp-for="@Model.LastName" type="text" readonly="readonly" class="form-control" id="lastName" placeholder="" value="" required>
-
+                                <input asp-for="@Model.LastName" type="text" readonly="readonly" class="form-control" id="lastName" required>
                                 <div class="invalid-feedback">
                                     Valid last name is required.
                                 </div>

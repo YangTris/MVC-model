@@ -25,6 +25,8 @@
                             <th>Card number</th>
                             <th>Expiration</th>
                             <th>CVV</th>
+                            <th>Total price</th>
+
                             <th class="text-warning">Action</th>
                         </tr>
                     </thead>
@@ -38,6 +40,7 @@
                                 <td>@item.cardNumber</td>
                                 <td>@item.expiration</td>
                                 <td>@item.CVV</td>
+                                <td>@item.totalPrice</td>
                                 <td>
                                     <a class="text-success" asp-action="Detail" asp-route-id="@item.paymentID">
                                         <i class="fas fa-bars"></i> Detail
