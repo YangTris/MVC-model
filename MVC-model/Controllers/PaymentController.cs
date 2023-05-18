@@ -16,13 +16,15 @@ namespace MVC_model.Controllers
         private IProductService _productService;
         private IOrderService _orderService;
         private IOrderDetailService _orderDetailService;
+        private IUserService _userService;
         public PaymentController(
             IPaymentService paymentService,
             IWebHostEnvironment webHostEnvironment, 
             IItemService itemService, 
             IProductService productService,
             IOrderService orderService,
-            IOrderDetailService orderDetailService)
+            IOrderDetailService orderDetailService,
+            IUserService userService)
         {
             _paymentService = paymentService;
             _webHostEnvironment = webHostEnvironment;
@@ -30,6 +32,7 @@ namespace MVC_model.Controllers
             _productService = productService;
             _orderService = orderService;
             _orderDetailService = orderDetailService;
+            _userService = userService;
         }
 
         /*[HttpGet]
@@ -70,6 +73,7 @@ namespace MVC_model.Controllers
         public IActionResult Create()
         {
             var user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            ApplicationUser tempUser = _userService.getbyID(user);
             var model = new TransactionViewModel
             {
                 paymentID = Guid.NewGuid().ToString(),
@@ -77,6 +81,11 @@ namespace MVC_model.Controllers
                 listItem = _itemService.getUserItem(user),
                 totalPrice = totalPriceCal(_itemService.getUserItem(user)),
                 orderID = Guid.NewGuid().ToString(),
+                firstName = tempUser.Fristname,
+                lastName = tempUser.Lastname,
+                address = tempUser.Address,
+                phoneNumber = tempUser.Phone,
+                email = tempUser.UserName,
             };
             return View(model);
         }

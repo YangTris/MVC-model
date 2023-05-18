@@ -32,6 +32,7 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(cfg =>
 {
