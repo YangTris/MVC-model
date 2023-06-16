@@ -132,71 +132,9 @@
                             </div>
                         </div>
                         <br />
-                        <h4 class="mb-3">Payment</h4>
+                        
 
-                        <div class="my-3">
-                            <div class="form-check">
-                                <input asp-for="@Model.payment.method" onclick="return false;" value="Cash" id="Cash" type="radio" onclick="show1()" class="form-check-input" checked>Cash
-                                @*<label asp-for="@Model.method" class="form-check-label" for="cash">Cash</label>*@
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="@Model.payment.method" onclick="return false;" value="Credit" id="Credit" type="radio" onclick="show2()" class="form-check-input">Credit
-                                @*<label asp-for="@Model.method" class="form-check-label" for="credit">Credit card</label>*@
-                            </div>
-                            <div class="form-check">
-                                <input asp-for="@Model.payment.method" onclick="return false;" value="Visa" id="Visa" type="radio" onclick="show3()" class="form-check-input">Visa
-                                @*<label asp-for="@Model.method" class="form-check-label" for="visa">Visa</label>*@
-                            </div>
-                        </div>
-
-                        <div class="row gy-3" id="showCredit" style="display:none">
-                            <div class="col-md-6">
-                                <label asp-for="@Model.payment.nameOnCard" class="form-label">Name on card</label>
-                                <input asp-for="@Model.payment.nameOnCard" readonly="readonly" type="text" class="form-control" id="cc-name" placeholder="" required>
-                                @*<small class="text-body-secondary" style="color: red;">Full name as displayed on card</small>*@
-                                <div class="invalid-feedback">
-                                    Name on card is required
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label asp-for="@Model.payment.cardNumber" class="form-label">Card number</label>
-                                <input asp-for="@Model.payment.cardNumber" readonly="readonly" type="text" class="form-control" id="cc-number" placeholder="" required>
-                                @*<small class="text-body-secondary" style="color: red;">Number as displayed on card</small>*@
-
-                                <div class="invalid-feedback">
-                                    Credit card number is required
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label asp-for="@Model.payment.expiration" class="form-label">Expiration</label>
-                                <input asp-for="@Model.payment.expiration" readonly="readonly" type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                @*<small class="text-body-secondary" style="color: red;">Expiration as displayed on card</small>*@
-
-                                <div class="invalid-feedback">
-                                    Expiration date required
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label asp-for="@Model.payment.CVV" class="form-label">CVV</label>
-                                <input asp-for="@Model.payment.CVV" readonly="readonly" type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                @*<small class="text-body-secondary" style="color: red;">CVV as displayed on card</small>*@
-
-                                <div class="invalid-feedback">
-                                    Security code required
-                                </div>
-                            </div>
-                            <input asp-for="@Model.paymentID" type="hidden" />
-                            <input asp-for="@Model.payment.userID" type="hidden" />
-                            <input asp-for="@Model.payment.totalPrice" type="hidden" />
-
-                        </div>
-
-                        <hr class="my-4">
-
-                        <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+                        <button asp-action="Index" class="w-100 btn btn-primary btn-lg" type="submit">Back</button>
                     </form>
                 </div>
             </div>
