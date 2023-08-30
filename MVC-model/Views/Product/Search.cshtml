@@ -80,8 +80,8 @@
 
         @*@Html.PagedListPager(Model, pageNumber => Url.Action("Product","Search",
         new { pageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
-        @Html.PagedListPager(Model, pageNumber => Url.Action("Search",
-        new { pageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        @*@Html.PagedListPager(Model, pageNumber => Url.Action("Search",
+        new { pageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
 
 
        @* <nav aria-label="Page navigation example">
