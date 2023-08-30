@@ -27,19 +27,12 @@
                     <li><a asp-controller="User" asp-action="Home" class="nav-link px-2 text-white">Home</a></li>
                     <li><a href="#carouselExampleInterval" class="nav-link px-2 text-white">Introduce</a></li>
                     <li><a href="#about" class="nav-link px-2 text-white">About</a></li>
-                    <li><a asp-controller="Product" asp-action="Product" class="nav-link px-2 text-white">Product</a></li>
+                    <li><a asp-controller="Product" asp-action="Search" class="nav-link px-2 text-white">Product</a></li>
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li><a class="nav-link px-2 text-white" asp-controller="Home" asp-action="Index">Admin</a></li>
                     }
-                    @*<form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit" style="color: snow;border: 1px solid #dee2e6;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                            </svg>
-                        </button>
-                    </form>*@
+                    
                     @*@using (Html.BeginForm())
                     {
                         <p>
@@ -47,10 +40,27 @@
                             <input type="submit" value="Search" />
                         </p>
                     }*@
+                    
+                    
                 </ul>
                 
-
+                @*<form>
+                    <div class="col-md-3" style="margin-left: 2rem; margin-right: 6rem;">
+                        <input type="text" class="form-control" value="@ViewData["CurrentFilter"]" id="inputZip">
+                    </div>
+                </form>*@
+                <form class="d-flex" role="search" asp-action="Search" method="get" asp-controller="Product" style="margin-right: 2rem;">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="@ViewData["CurrentFilter"]" name="searchString" >
+                    <button class="btn btn-outline-success" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" type="submit" style="color: snow;border: 1px solid #dee2e6;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                    </button>
+                </form>
+                
                 <div class="text-end">
+
+                    @*----------------------------------------------------Don't delete this--------------------------------------------*@
                     
                     @*<a class="btn me-2" asp-action="CartItem" asp-controller="User"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></a>*@
 
@@ -94,6 +104,7 @@
                             </button>  
                         </div>
                     </div>*@
+                    
 
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -102,7 +113,7 @@
                             <a asp-action="CartItem" asp-controller="User" class="btn btn-ouline-dark" type="submit">
                                 <i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i>
                                 Cart
-                                <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span id="badge" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                             </a>
                     
 
@@ -152,6 +163,33 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+
+    <script>
+        $('input.input-qty').each(function () {
+            var $this = $(this),
+                qty = $this.parent().find('.is-form'),
+                min = Number($this.attr('min')),
+                max = Number($this.attr('max'))
+            if (min == 0) {
+                var d = 0
+            } else d = min
+            $(qty).on('click', function () {
+                if ($(this).hasClass('minus')) {
+                    if (d > min) d += -1
+                } else if ($(this).hasClass('plus')) {
+                    var x = Number($this.val()) + 1
+                    if (x <= max) d += 1
+                }
+                $this.attr('value', d).val(d)
+            })
+        })
+
+        $(".alertLogin").click(function () {
+            alert("please login before purchase")
+        });
+
+    </script>
 </body>
 </html>
 

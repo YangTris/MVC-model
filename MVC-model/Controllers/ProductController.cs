@@ -9,6 +9,8 @@ using System.Security.Claims;
 using PagedList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace MVC_model.Controllers
 {
     
@@ -267,7 +269,52 @@ namespace MVC_model.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Search(string sortOrder, string currentFilter, int? pageNumber, string searchString)
+        {
+            int pageSize = 8;
+            /*int pageNumber = (page ?? 1);*/
+            int page = (pageNumber ?? 1);
+
+            /*ViewData["CurrentGroup"] = categoryId;*/
+
+            /*ViewData["CurrentSort"] = sortOrder;*/
+            /*ViewData["SortParm"] = sortOrder;*/
+
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "ID_asc" : "";
+            ViewData["PriceSortParm"] = sortOrder == "price_asc" ? "price_desc" : "price_asc";
 
 
+            ViewData["SortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : sortOrder == "price_asc" ? "price_asc" : "price_desc" ;
+
+            /*if (searchString == null) searchString = currentFilter;     // Check later*/
+            if (searchString != null)
+            {
+                /*page = 1;*/
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewData["CurrentFilter"] = searchString;
+            ViewData["CurrentSort"] = sortOrder;
+
+            var products= await _productService.Search(sortOrder, currentFilter, page, searchString);   
+            var model = products.Select(product => new SearchViewModel
+            {
+                productID = product.productID,
+                productName = product.productName,
+                brand = product.brand,
+                price = product.price,
+                category = product.category,
+                imgURL = product.imgURL,
+                discountPercentage = product.discountPercentage,
+
+            })/*.ToPagedList(pageNumber, pageSize);*/
+                .ToPagedList(page, pageSize);
+
+            return View(model);
+        }
     }
 }

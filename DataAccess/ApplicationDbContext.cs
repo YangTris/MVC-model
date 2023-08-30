@@ -100,7 +100,28 @@ namespace DataAccess
                     category = Category.Shoes,
                     discountPercentage = 30,
                     imgURL = "~/images/giay.jpg",
-                });
+                },
+                new Product()
+                {
+                    productID = 8,
+                    productName = "giay Hunter",
+                    price = 100,
+                    brand = "Other",
+                    category = Category.Shoes,
+                    discountPercentage = 30,
+                    imgURL = "~/images/giay.jpg",
+                },
+                new Product()
+                {
+                    productID = 9,
+                    productName = "Hunter shoesssss",
+                    price = 100,
+                    brand = "Other",
+                    category = Category.Shoes,
+                    discountPercentage = 30,
+                    imgURL = "~/images/giay.jpg",
+                }
+                );
 
 
             modelBuilder.Entity<Payment>();
@@ -148,11 +169,11 @@ namespace DataAccess
                new ApplicationUser
                {
                    Id = "c28305c3-93f5-4490-ae59-05d0401bcee3",
-                   UserName = "Super Admin",
-                   NormalizedUserName = "SUPER ADMIN".ToUpper(),
-                   Email = "admin@gmail.com",
-                   NormalizedEmail = "ADMIN@GMAIL.COM".ToUpper(),
-                   PasswordHash = hasher.HashPassword(null, "Admin@123"),
+                   UserName = "admin@gmail.com",
+                   NormalizedUserName = "admin@gmail.com".ToUpper(),
+                   /*Email = "admin@gmail.com",
+                   NormalizedEmail = "ADMIN@GMAIL.COM".ToUpper(),*/
+                   PasswordHash = hasher.HashPassword(null, "P@ssw0rd"),
                    Address = "SGU",
                    Fristname = "Duong",
                    Lastname = "Van Tri",

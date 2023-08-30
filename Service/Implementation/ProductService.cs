@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,5 +55,74 @@ namespace Service.Implementation
             _context.Product.Update(product);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Product>> Search(string sortOrder, string currentFilter, int? pageNumber, string searchString)
+        {
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            IQueryable<Product> query = _context.Product;
+
+            /*if (!string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(nhomId.ToString()))
+            {
+                query = query.Where(e => e.TEN_THUATNGU.Contains(searchString));
+            }
+            if (!string.IsNullOrEmpty(nhomId.ToString()) && searchString == null)
+            {
+                query = query.Where(e => e.NHOM_ID == nhomId);
+            }
+
+            if (!string.IsNullOrEmpty(nhomId.ToString()) && !string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(e => e.NHOM_ID == nhomId && e.TEN_THUATNGU.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(s => s.TEN_THUATNGU.Contains(searchString));
+            }*/
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                query=query.Where(e=> e.productName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "price_desc":
+                    query = query.OrderByDescending(x => x.price);
+                    break;
+                case "ID_desc":
+                    query = query.OrderByDescending(x => x.productID);
+                    break;
+                case "name_desc":
+                    query = query.OrderByDescending(x => x.productName);
+                    break;
+                case "ID_asc":
+                    query = query.OrderBy(s => s.productID);
+                    break;
+                case "name_asc":
+                    query = query.OrderBy(s => s.productName);
+                    break;
+                case "price_asc":
+                    query=query.OrderBy(s=> s.price);
+                    break;
+                default:
+                    query = query.OrderByDescending(s => s.productID);
+                    break;
+            }
+
+            return await query
+/*                .Include("NHOM")
+                .Include("TIEUNHOM")*/
+                .ToListAsync();
+        }
+
+        
     }
 }

@@ -15,5 +15,9 @@ namespace Service
         Task UpdateAsSync(Product product);
         Task UpdateById(int id);
         Task DeleteAsSync(int id);
+        Task <IEnumerable<Product>> Search(string sortOrder,
+            string currentFilter,
+            int? pageNumber,
+            string searchString);
     }
 }

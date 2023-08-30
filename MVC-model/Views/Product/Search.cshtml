@@ -1,19 +1,40 @@
 ﻿@{
     Layout = "_LayoutUser";
 }
-@model IEnumerable<IndexProductViewModel>
-@*@model PagedList.IPagedList<SearchViewModel>
-@using PagedList.Mvc;*@
+@*@model IEnumerable<IndexProductViewModel>*@
+@model PagedList.IPagedList<SearchViewModel>
+@using System.Web.Mvc.Html;
 @*@model  SearchViewModel*@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 <body>
     <section class="py-5">
+        <form asp-action="Search" asp-route-currentFilter="@ViewData["CurrentFilter"]" method="get">
+        <div style="float:right;padding-right: 3rem!important;">
+            <span>Sort by: </span>
+                <select class="form-select" onchange="this.form.submit()" name="sortOrder" asp-for="@ViewData["SortParm"]" aria-label="Default select example" style="display: unset;width: auto;">
+                <option value="">Newest</option>
+                <option value="price_desc">Price: High-Low</option>
+                <option value="price_asc">Price: Low-High</option>
+            </select>
+
+        </div>
+        </form>
+
+        <a asp-route-sortOrder="@ViewData["DateSortParm"]"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           asp-action="Search">date</a>
+        <a asp-route-sortOrder="@ViewData["PriceSortParm"]"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           asp-action="Search">price</a>
+
         <div class="container px-4 px-lg-5 mt-5">
+            
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                
                 @foreach (var item in Model)
-                @*@foreach(var item in ViewBag.products)*@
                 {
                     @*<form asp-action="AddToCart" method="post">*@
                     <div class="col mb-5">
@@ -55,10 +76,12 @@
             </div>
         </div>
         <br />
-       @* Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-        @*@Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+        @*@Html.PagedListPager(Model, pageNumber => Url.Action("Product","Search",
+        new { pageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+        @Html.PagedListPager(Model, pageNumber => Url.Action("Search",
+        new { pageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 
 
        @* <nav aria-label="Page navigation example">
