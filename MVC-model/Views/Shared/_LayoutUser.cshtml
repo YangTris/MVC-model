@@ -49,9 +49,9 @@
                         <input type="text" class="form-control" value="@ViewData["CurrentFilter"]" id="inputZip">
                     </div>
                 </form>*@
-                <form class="d-flex" role="search" asp-action="Search" method="get" asp-controller="Product" style="margin-right: 2rem;">
+                <form class="d-flex" role="search" asp-action="Search" method="get" asp-controller="Product" style="margin-right: 2rem;" >
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="@ViewData["CurrentFilter"]" name="searchString" >
-                    <button class="btn btn-outline-success" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" type="submit" style="color: snow;border: 1px solid #dee2e6;">
+                    <button class="btn btn-outline-success" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]"  type="submit" style="color: snow;border: 1px solid #dee2e6;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                             </svg>
@@ -108,7 +108,7 @@
 
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        @*<a class="btn me-2" asp-action="CartItem" asp-controller="User"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></a>*@
+                        
 
                             <a asp-action="CartItem" asp-controller="User" class="btn btn-ouline-dark" type="submit">
                                 <i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i>
@@ -118,7 +118,9 @@
                     
 
                         <button type="button" class="btn btn-outline-light me-2">
-                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i></a>
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                                <i class="fa-solid fa-user fa-xl" style="color: #ffffff;"></i>
+                            </a>
                         </button>
                         
                         <a class="btn btn-warning btn-outline-light me-2">
@@ -188,7 +190,8 @@
         $(".alertLogin").click(function () {
             alert("please login before purchase")
         });
-
+        sessionStorage.setItem("searchString", @ViewData["CurrentFilter"])
+        let searchString = sessionStorage.getItem("searchString");
     </script>
 </body>
 </html>

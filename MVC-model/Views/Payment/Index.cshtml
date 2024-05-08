@@ -14,9 +14,7 @@
         </nav>
         <div class="row">
             <div class="col-md-12 table-responsive-md">
-                @*<a class="btn btn-xs btn-outline-success float-md-right" asp-action="Create"> New Employee</a>*@
                 <table class="table table-strip table" style="color: black;">
-
                     <thead>
                         <tr>
                             <th>Payment id</th>
@@ -26,9 +24,10 @@
                             <th>Expiration</th>
                             <th>CVV</th>
                             <th>Total price</th>
-
+                            <th class="text-warning">Action</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         @foreach (var item in Model)
                         {
@@ -40,7 +39,11 @@
                                 <td>@item.expiration</td>
                                 <td>@item.CVV</td>
                                 <td>@item.totalPrice</td>
-
+                                <td>
+                                    <a class="text-success" asp-action="Detail" asp-route-id="@item.orderID">
+                                        <i class="fas fa-bars"></i> Detail
+                                    </a>
+                                </td>
                             </tr>
                         }
                     </tbody>

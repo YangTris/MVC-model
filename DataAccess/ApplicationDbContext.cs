@@ -179,20 +179,20 @@ namespace DataAccess
                    Lastname = "Van Tri",
                    Phone = "123"
                },
-                new ApplicationUser
-                {
-                    Id = "c28305c3-93f5-4490-ae59-05d0401bcee4",
-                    UserName = "test@gmail.com",
-                    NormalizedUserName = "TEST@GMAIL.COM".ToUpper(),
-                    /*Email = "admin@gmail.com",
-                    NormalizedEmail = "ADMIN@GMAIL.COM".ToUpper(),*/
-                    PasswordHash = hasher.HashPassword(null, "P@ssw0rd"),
-                    Address = "test",
-                    Fristname = "Duong",
-                    Lastname = "Van Tri",
-                    Phone = "123"
-                }
-                   );
+               new ApplicationUser
+               {
+                   Id = "c28305c3-93f5-4490-ae59-05d0401bcee4",
+                   UserName = "test@gmail.com",
+                   NormalizedUserName = "TEST@GMAIL.COM".ToUpper(),
+                   /*Email = "admin@gmail.com",
+                   NormalizedEmail = "ADMIN@GMAIL.COM".ToUpper(),*/
+                   PasswordHash = hasher.HashPassword(null, "P@ssw0rd"),
+                   Address = "test",
+                   Fristname = "Duong",
+                   Lastname = "Van Tri",
+                   Phone = "123"
+               }
+               );
 
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(

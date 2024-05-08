@@ -136,17 +136,18 @@
                     <h4 class="mb-3">Payment</h4>
 
                     <div class="my-3">
+
                         <div class="form-check">
                             <input asp-for="@Model.method" value="Cash" id="Cash"  type="radio" onclick="show1()" class="form-check-input" checked>Cash
-                            @*<label asp-for="@Model.method" class="form-check-label" for="cash">Cash</label>*@
                         </div>
+
                         <div class="form-check">
                             <input asp-for="@Model.method" value="Credit" id="Credit"  type="radio" onclick="show2()" class="form-check-input">Credit
-                            @*<label asp-for="@Model.method" class="form-check-label" for="credit">Credit card</label>*@
                         </div>
+
                         <div class="form-check">
                             <input asp-for="@Model.method" value="Visa" id="Visa"  type="radio" onclick="show3()" class="form-check-input">Visa
-                            @*<label asp-for="@Model.method" class="form-check-label" for="visa">Visa</label>*@
+
                         </div>
                     </div>
                     
@@ -154,7 +155,7 @@
                         <div class="col-md-6">
                             <label asp-for="@Model.nameOnCard" class="form-label">Name on card</label>
                             <input asp-for="@Model.nameOnCard" type="text" class="form-control" id="cc-name" placeholder="" required>
-                            @*<small class="text-body-secondary" style="color: red;">Full name as displayed on card</small>*@
+
                             <div class="invalid-feedback">
                                 Name on card is required
                             </div>
@@ -163,7 +164,7 @@
                         <div class="col-md-6">
                             <label asp-for="@Model.cardNumber" class="form-label">Card number</label>
                             <input asp-for="@Model.cardNumber" type="text" class="form-control" id="cc-number" placeholder="" required>
-                             @*<small class="text-body-secondary" style="color: red;">Number as displayed on card</small>*@
+
 
                             <div class="invalid-feedback">
                                 Credit card number is required
@@ -173,7 +174,6 @@
                         <div class="col-md-3">
                             <label asp-for="@Model.expiration" class="form-label">Expiration</label>
                             <input asp-for="@Model.expiration" type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                            @*<small class="text-body-secondary" style="color: red;">Expiration as displayed on card</small>*@
 
                             <div class="invalid-feedback">
                                 Expiration date required
@@ -183,7 +183,6 @@
                         <div class="col-md-3">
                             <label asp-for="@Model.CVV" class="form-label">CVV</label>
                             <input asp-for="@Model.CVV" type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                             @*<small class="text-body-secondary" style="color: red;">CVV as displayed on card</small>*@
 
                             <div class="invalid-feedback">
                                 Security code required
