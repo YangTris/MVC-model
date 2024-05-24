@@ -1,10 +1,9 @@
 ﻿@{
     Layout = "_LayoutUser";
 }
-@*@model IEnumerable<IndexProductViewModel>*@
-@model PagedList.IPagedList<SearchViewModel>
-@using System.Web.Mvc.Html;
-@*@model  SearchViewModel*@
+
+@model PaginatedList<Product>
+
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
@@ -76,40 +75,24 @@
             </div>
         </div>
         <br />
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-        @*@Html.PagedListPager(Model, pageNumber => Url.Action("Product","Search",
-        new { pageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
-        @*@Html.PagedListPager(Model, pageNumber => Url.Action("Search",
-        new { pageNumber, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
-
-
-       @* <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center" style="padding-top: 2rem;">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>*@
-        @*<paging total-records="Model.Count()"
-                page-no="1"
-                page-size="5"
-                max-displayed-pages="(Model.Count()/5) + 1"
-                page-size-dropdown-items="5-15-30">
-        </paging>*@
-
-
         
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+        <a asp-action="Search"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-primary @prevDisabled">Previous
+       </a>
+        <a asp-action="Search"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-primary @nextDisabled">Next
+          </a>
+
     </section>
 </body>
 

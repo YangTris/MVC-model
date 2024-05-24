@@ -8,7 +8,7 @@
         <div class="card-body" style="background: white">
             <div class="row">
                 <div class="col-md-12 table-responsive-md">
-                    @*<a class="btn btn-xs btn-outline-success float-md-right" asp-action="Create"> New Employee</a>*@
+        
                     <table class="table table-strip table" style="color: black;">
 
                         <thead>
@@ -31,6 +31,12 @@
                     </table>
                 </div>
 
+                <div class="py-5" style="padding-bottom: 1rem !important;"
+                    <li class="list-group-item d-flex justify-content-between">
+                        <strong style="padding-left:1rem">Total </strong>
+                        <strong style="padding-left:50.7rem">$@Model.totalPrice</strong>
+                    </li>
+                </div>
                
                 <div class="container overflow-hidden text-center">
                     <div class="row gx-5">
@@ -38,22 +44,14 @@
                             <a class="nav-link  btn btn-primary btn-lg" asp-controller="Payment" asp-action="Create" style="color: white">Continue to checkout</a>
                         </div>
                         <div class="col">
-                            <a class="nav-link  btn btn-primary btn-lg" asp-controller="Product" asp-action="Product" style="color: white">Back</a>
+                            <a class="nav-link  btn btn-primary btn-lg" asp-controller="Product" asp-action="Search" style="color: white">Back</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        @*<div class="py-5"
-            <li class="list-group-item d-flex justify-content-between">
-                            <strong style="padding-left:1rem">Total </strong>
-                            <strong style="padding-left:58.3rem">$@Model.totalPrice</strong>
-                        </li>
-            <button class="w-100 btn btn-primary btn-lg" type="submit">
-                <a class="nav-link" asp-controller="Payment" asp-action="Create" style="color: white">Continue to checkout</a>
-            </button>
-        </div>*@
+        
 
     </div>
 </section>

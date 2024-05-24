@@ -15,33 +15,6 @@ namespace MVC_model.Controllers
         {
             return View();
         }
-        /*public ViewResult Index(string sortOrder, string searchString)
-        {
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.CategorySortParm = String.IsNullOrEmpty(sortOrder) ? "category_desc" : "";
-            var product = from s in db.Produt
-                          select s;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                product = product.Where(s => s.productName.Contains(searchString)
-                                       || s.FirstMidName.Contains(searchString));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    product = product.OrderByDescending(s => s.productName);
-                    break;
-                case "category_desc":
-                    product = product.OrderByDescending(s => s.EnrollmentDate);
-                    break;
-                default:
-                    product = product.OrderBy(s => s.productName);
-                    break;
-            }
-
-            return View(product.ToList());
-        }*/
-
 
         private IItemService _itemService;
         private IProductService _productService;
@@ -94,31 +67,6 @@ namespace MVC_model.Controllers
                 Quantity = cartItem.quantity
             }).ToList();
             return View(model);
-        }
-        [HttpGet]
-        public IActionResult AddtoCart()
-        {
-            var model = new CreateCartViewModel();
-            return View(model);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddtoCart(CreateCartViewModel model)
-        {
-            var user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if (ModelState.IsValid)
-            {
-                var item = new Item
-                {
-                    itemID = model.itemID,
-                    product = _productService.GetById(model.productID),
-                    quantity = model.quantity,
-                    cartID = _cartService.GetByUserId(user).shoppingCartID,
-                };
-                await _itemService.CreateAsSync(item);
-                return RedirectToAction("Index");
-            }
-            return View();
         }*/
 
         [HttpGet]

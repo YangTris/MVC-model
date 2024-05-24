@@ -1,10 +1,6 @@
-﻿@*@{
-    Layout = null;
-}*@
-
-@inject SignInManager<ApplicationUser> SignInManager
+﻿@inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@*@model IEnumerable<TransactionViewModel>*@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,39 +28,25 @@
                     {
                         <li><a class="nav-link px-2 text-white" asp-controller="Home" asp-action="Index">Admin</a></li>
                     }
-                    
-                    @*@using (Html.BeginForm())
-                    {
-                        <p>
-                            Find by name: @Html.TextBox("SearchString")
-                            <input type="submit" value="Search" />
-                        </p>
-                    }*@
-                    
-                    
+              
                 </ul>
                 
-                @*<form>
-                    <div class="col-md-3" style="margin-left: 2rem; margin-right: 6rem;">
-                        <input type="text" class="form-control" value="@ViewData["CurrentFilter"]" id="inputZip">
-                    </div>
-                </form>*@
-                <form class="d-flex" role="search" asp-action="Search" method="get" asp-controller="Product" style="margin-right: 2rem;" >
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="@ViewData["CurrentFilter"]" name="searchString" >
-                    <button class="btn btn-outline-success" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]"  type="submit" style="color: snow;border: 1px solid #dee2e6;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                            </svg>
+
+                <form class="d-flex" role="search" action="/Product/Search" method="get" style="margin-right: 2rem;">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="@ViewData["CurrentFilter"]" name="searchString">
+                    <button class="btn btn-outline-success" type="submit" style="color: snow;border: 1px solid #dee2e6;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
                     </button>
                 </form>
+
                 
                 <div class="text-end">
 
                     @*----------------------------------------------------Don't delete this--------------------------------------------*@
-                    
-                    @*<a class="btn me-2" asp-action="CartItem" asp-controller="User"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></a>*@
-
-                    @*<button class="btn  me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></button>
+                  
+                    <button class="btn  me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i></button>
                     <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                         <div class="offcanvas-header">
                             <h5>Shopping Cart</h5>
@@ -103,19 +85,16 @@
                                 <a class="nav-link" asp-controller="Payment" asp-action="Create" style="color: white">Continue to checkout</a>      
                             </button>  
                         </div>
-                    </div>*@
+                    </div>
                     
 
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        
-
-                            <a asp-action="CartItem" asp-controller="User" class="btn btn-ouline-dark" type="submit">
-                                <i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i>
-                                Cart
+                        <a asp-action="CartItem" asp-controller="User" class="btn btn-ouline-dark" type="submit">
+                            <i class="fa-solid fa-cart-shopping fa-2xl" style="color: #000000;"></i>
+                            Cart
                             <span id="badge" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                            </a>
-                    
+                        </a>
 
                         <button type="button" class="btn btn-outline-light me-2">
                             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">

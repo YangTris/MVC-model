@@ -56,7 +56,7 @@ namespace Service.Implementation
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Product>> Search(string sortOrder, string currentFilter, int? pageNumber, string searchString)
+        public async Task<IEnumerable<Product>> Search(string sortOrder, string currentFilter, int? pageNumber, string searchString )
         {
             if (searchString != null)
             {
@@ -69,24 +69,6 @@ namespace Service.Implementation
 
             IQueryable<Product> query = _context.Product;
 
-            /*if (!string.IsNullOrEmpty(searchString) && string.IsNullOrEmpty(nhomId.ToString()))
-            {
-                query = query.Where(e => e.TEN_THUATNGU.Contains(searchString));
-            }
-            if (!string.IsNullOrEmpty(nhomId.ToString()) && searchString == null)
-            {
-                query = query.Where(e => e.NHOM_ID == nhomId);
-            }
-
-            if (!string.IsNullOrEmpty(nhomId.ToString()) && !string.IsNullOrEmpty(searchString))
-            {
-                query = query.Where(e => e.NHOM_ID == nhomId && e.TEN_THUATNGU.Contains(searchString));
-            }
-
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                query = query.Where(s => s.TEN_THUATNGU.Contains(searchString));
-            }*/
             if (!String.IsNullOrEmpty(searchString))
             {
                 query=query.Where(e=> e.productName.Contains(searchString));
@@ -117,12 +99,13 @@ namespace Service.Implementation
                     break;
             }
 
-            return await query
-/*                .Include("NHOM")
-                .Include("TIEUNHOM")*/
-                .ToListAsync();
+            int pageSize=8;
+            return await PaginatedList<Product>.CreateAsync(query.AsNoTracking(), pageNumber ?? 1, pageSize);
         }
 
-        
+        public IQueryable<Product> GetProduct()
+        {
+            return _context.Product;
+        }
     }
 }

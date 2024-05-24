@@ -6,7 +6,6 @@ using MVC_model.Models;
 using Newtonsoft.Json;
 using Service;
 using System.Security.Claims;
-using PagedList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -186,7 +185,7 @@ namespace MVC_model.Controllers
                     };
                     await _itemService.CreateAsSync(item);
                 }
-                return RedirectToAction("Product");
+                return RedirectToAction("Search");
             }       
             return View(model);
         }
@@ -270,51 +269,53 @@ namespace MVC_model.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Search(string sortOrder, string currentFilter, int? pageNumber, string searchString)
+
+        public async Task<IActionResult> Search (string sortOrder,string currentFilter, string searchString, int? pageNumber)
         {
-            int pageSize = 8;
-            /*int pageNumber = (page ?? 1);*/
-            int page = (pageNumber ?? 1);
-
-            /*ViewData["CurrentGroup"] = categoryId;*/
-
-            /*ViewData["CurrentSort"] = sortOrder;*/
-            /*ViewData["SortParm"] = sortOrder;*/
-
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "ID_asc" : "";
             ViewData["PriceSortParm"] = sortOrder == "price_asc" ? "price_desc" : "price_asc";
+            
+            ViewData["SortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : sortOrder == "price_asc" ? "price_asc" : "price_desc";
 
-
-            ViewData["SortParm"] = String.IsNullOrEmpty(sortOrder) ? "" : sortOrder == "price_asc" ? "price_asc" : "price_desc" ;
-
-            /*if (searchString == null) searchString = currentFilter;     // Check later*/
             if (searchString != null)
             {
-                /*page = 1;*/
                 pageNumber = 1;
             }
             else
             {
                 searchString = currentFilter;
             }
+
             ViewData["CurrentFilter"] = searchString;
-            ViewData["CurrentSort"] = sortOrder;
 
-            var products= await _productService.Search(sortOrder, currentFilter, page, searchString);   
-            var model = products.Select(product => new SearchViewModel
+            var products = from product in _productService.GetProduct()
+                           select product;
+
+            if (!String.IsNullOrEmpty(searchString))
             {
-                productID = product.productID,
-                productName = product.productName,
-                brand = product.brand,
-                price = product.price,
-                category = product.category,
-                imgURL = product.imgURL,
-                discountPercentage = product.discountPercentage,
-
-            })/*.ToPagedList(pageNumber, pageSize);*/
-                .ToPagedList(page, pageSize);
-
-            return View(model);
+                products = products.Where(s => s.productName.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "price_desc":
+                    products = products.OrderByDescending(x => x.price);
+                    break;
+                case "ID_desc":
+                    products = products.OrderByDescending(x => x.productID);
+                    break;
+                case "name_desc":
+                    products = products.OrderByDescending(x => x.productName);
+                    break;
+                case "ID_asc":
+                    products = products.OrderBy(x => x.productID);
+                    break;
+                default:
+                    products = products.OrderBy(x => x.productName);
+                    break;
+            }
+            int pageSize = 8;
+            return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
     }
 }

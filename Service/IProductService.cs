@@ -19,5 +19,7 @@ namespace Service
             string currentFilter,
             int? pageNumber,
             string searchString);
+
+        IQueryable<Product> GetProduct();
     }
 }
